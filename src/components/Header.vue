@@ -48,7 +48,7 @@ export default {
   padding-bottom: rem(20px);
   position: absolute;
   width: 100%;
-  z-index: 10;
+  z-index: 20;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0) 100%);
 
   &__wrap {

@@ -1,3 +1,9 @@
+@import "~@/assets/scss/variables";
+@import "~@/assets/scss/fonts";
+@import "~@/assets/scss/buttons";
+@import "~sass-rem/rem";
+
+
 button {
     background-color: transparent;
     padding: 0;
@@ -10,6 +16,8 @@ input, button, a, textarea, select {
     }
 }
 
-@import "~@/assets/scss/variables";
-@import "~@/assets/scss/fonts";
-@import "~@/assets/scss/buttons";
+h1 {
+    font-size: rem(26px);
+    font-weight: 400;
+    text-shadow: 0px 0px 18px #000000;
+}
