@@ -328,6 +328,15 @@ export default {
 
         this.imgPosX = imgPosX;
         this.posX = posX;
+
+        var right_border = this.$el.getBoundingClientRect().right - (this.$el.getBoundingClientRect().right * 10 / 100);
+        var left_border = this.$el.getBoundingClientRect().left + (this.$el.getBoundingClientRect().right * 10 / 100)
+        
+        if (posX >= right_border) {
+          this.$emit('reachedRight');
+        } else if (posX <= left_border) {
+          this.$emit('reachedLeft');
+        }
       }
 
       if (this.isDraggingImage) {

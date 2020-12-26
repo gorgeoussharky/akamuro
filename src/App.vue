@@ -2,7 +2,9 @@
   <div id="app">
     <Header />
     <div class="content">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -20,7 +22,7 @@ export default {
       console.log("test");
     },
     colorize: function () {
-      this.$set(this, "greyed", false);
+      this.greyed = false;
     },
   },
 };
@@ -53,5 +55,4 @@ body {
 #app {
   height: 100vh;
 }
-
 </style>

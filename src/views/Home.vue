@@ -6,7 +6,7 @@
           text="This website uses <a href=''>cookies</a> and google adwords to ensure you receive the best experience"
         />
 
-        <div class="frontpage__content" @click="log()">
+        <div class="frontpage__content">
           <transition name="fade">
             <h1 class="frontpage__heading" v-if="content">
               Akamuro Affiliate Network
@@ -35,6 +35,8 @@
           :after="after"
           full
           @initiated="content = false"
+          @reachedRight="switchPage('advertiser')"
+          @reachedleft="switchPage('publisher')"
         >
         </Compare>
       </div>
@@ -63,8 +65,12 @@ export default {
   },
   methods: {
     log: function () {
-      router.push('home')
+      console.log("test");
+      /* router.push('home') */
     },
+    switchPage: function(page){
+      router.push(page)
+    }
   },
 };
 </script>
