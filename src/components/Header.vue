@@ -7,17 +7,29 @@
         <nav class="header__header-menu header-menu">
           <ul class="header-menu__list">
             <li class="header-menu__item">
-              <router-link to="/advertiser" class="header-menu__link">
+              <router-link
+                to="/advertiser"
+                active-class="header-menu__link--active"
+                class="header-menu__link"
+              >
                 Advertiser
               </router-link>
             </li>
             <li class="header-menu__item">
-              <router-link to="/pubisher" class="header-menu__link">
+              <router-link
+                to="/publisher"
+                active-class="header-menu__link--active"
+                class="header-menu__link"
+              >
                 Pubisher
               </router-link>
             </li>
             <li class="header-menu__item">
-              <router-link to="/about-us" class="header-menu__link">
+              <router-link
+                to="/about-us"
+                active-class="header-menu__link--active"
+                class="header-menu__link"
+              >
                 About us
               </router-link>
             </li>
@@ -25,7 +37,11 @@
         </nav>
 
         <div class="header__sign-in">
-          <router-link to="/auth" class="header__link">
+          <router-link
+            to="/register"
+            class="header__link"
+            active-class="header__link--active"
+          >
             Registration
           </router-link>
         </div>
@@ -49,11 +65,15 @@ export default {
   position: absolute;
   width: 100%;
   z-index: 20;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.94) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
 
   &__wrap {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
   &__logo {
@@ -62,56 +82,116 @@ export default {
     color: #fff;
 
     &:hover {
-        color: #fff;
-        text-decoration: none;
+      color: #fff;
+      text-decoration: none;
     }
   }
 
   &__header-menu {
-      margin: auto;
+    margin: auto;
   }
 
   &__link {
-      color: #fff;
+    color: #fff;
+    position: relative;
+    padding: rem(7px 10px);
 
-      &:hover {
-          text-decoration: none;
-          color: #fff;
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      background: linear-gradient(to right, #9f132c 2px, transparent 2px) 0 0,
+        linear-gradient(to right, #9f132c 2px, transparent 2px) 0 100%,
+        linear-gradient(to left, #9f132c 2px, transparent 2px) 100% 0,
+        linear-gradient(to left, #9f132c 2px, transparent 2px) 100% 100%,
+        linear-gradient(to bottom, #9f132c 2px, transparent 2px) 0 0,
+        linear-gradient(to bottom, #9f132c 2px, transparent 2px) 100% 0,
+        linear-gradient(to top, #9f132c 2px, transparent 2px) 0 100%,
+        linear-gradient(to top, #9f132c 2px, transparent 2px) 100% 100%;
+      background-size: 7px 7px;
+      transition: 750ms;
+      background-repeat: no-repeat;
+      opacity: 0;
+    }
+
+    &--active {
+      &::after {
+        opacity: 1;
+        transition: 750ms;
       }
-  }
+    }
 
+    &:hover {
+      text-decoration: none;
+      color: #fff;
+    }
+  }
 }
 
 .header-menu {
-    &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: center;
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    margin: rem(0 10px);
+
+    &:first-of-type {
+      margin-left: 0;
     }
 
-    &__item {
-        margin: rem(0 35px);
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
 
-        &:first-of-type {
-            margin-left: 0;
-        }
+  &__link {
+    color: rgba(#fff, 0.8);
+    font-size: rem(14px);
+    padding: rem(7px 32px);
+    position: relative;
+    transition: 250ms;
+    background: transparent;
 
-        &:last-of-type {
-            margin-right: 0;
-        }
+    &::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      background: linear-gradient(to right, #9f132c 2px, transparent 2px) 0 0,
+        linear-gradient(to right, #9f132c 2px, transparent 2px) 0 100%,
+        linear-gradient(to left, #9f132c 2px, transparent 2px) 100% 0,
+        linear-gradient(to left, #9f132c 2px, transparent 2px) 100% 100%,
+        linear-gradient(to bottom, #9f132c 2px, transparent 2px) 0 0,
+        linear-gradient(to bottom, #9f132c 2px, transparent 2px) 100% 0,
+        linear-gradient(to top, #9f132c 2px, transparent 2px) 0 100%,
+        linear-gradient(to top, #9f132c 2px, transparent 2px) 100% 100%;
+      background-size: 7px 7px;
+      transition: 750ms;
+      background-repeat: no-repeat;
+      opacity: 0;
     }
 
-    &__link {
-        color: rgba(#fff, 0.8);
-        font-size: rem(14px);
-
-        &:hover {
-            color: #fff;
-            text-decoration: none;
-        }
-
+    &:hover {
+      color: #fff;
+      text-decoration: none;
     }
+
+    &--active {
+      &::after {
+        opacity: 1;
+        transition: 750ms;
+      }
+    }
+  }
 }
 </style>

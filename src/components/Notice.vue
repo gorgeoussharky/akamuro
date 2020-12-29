@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <transition name="noticeFade">
     <div class="notice" v-if="show">
       <div class="notice__wrap">
         <div class="notice__text" v-html="text"></div>
@@ -21,7 +21,7 @@ export default {
   },
   data: function () {
     return {
-      show: false,
+      show: true,
     };
   },
 };
@@ -32,6 +32,7 @@ export default {
 @import "~@/assets/scss/base";
 
 .notice {
+  z-index: 100;
   &__wrap {
     padding: rem(18px);
     background-color: rgba(#000, 0.77);
@@ -40,6 +41,11 @@ export default {
     align-items: center;
     width: max-content;
     margin: auto;
+    position: absolute;
+    top: 60px;
+    z-index: 100;
+    left: 0;
+    right: 0;
   }
 
   &__text {
@@ -49,15 +55,17 @@ export default {
 
   &__btn {
     @extend %btn-accent;
+    font-size: 12px;
     margin-left: rem(30px);
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
+.noticeFade-enter-active,
+.noticeFade-leave-active {
   transition: opacity 1s;
 }
-.fade-enter, .fade-leave-to {
+.noticeFade-enter,
+.noticeFade-leave-to {
   opacity: 0;
 }
 </style>

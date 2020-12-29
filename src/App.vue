@@ -30,7 +30,6 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
-
 @import "~@/assets/scss/variables";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -38,12 +37,17 @@ export default {
 @import "~bootstrap/scss/grid";
 @import "~bootstrap/scss/reboot";
 @import "~sass-rem/rem";
+@import "~@/assets/scss/fonts";
+@import "~@/assets/scss/buttons";
+@import "~sass-rem/rem";
+
 @import "~@/assets/scss/base";
 
 body {
   font-family: "MyriadPro";
   font-weight: 400;
   overflow: hidden;
+  background-color: #000;
 }
 
 .content {

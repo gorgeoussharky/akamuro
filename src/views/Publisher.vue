@@ -1,43 +1,43 @@
 <template>
-  <main class="advertiser h-100">
+  <main class="publisher h-100">
     <div
-      class="advertiser__wrap h-100"
-      :class="zoomed ? 'advertiser__wrap--zoomed' : null"
+      class="publisher__wrap h-100"
+      :class="zoomed ? 'publisher__wrap--zoomed' : null"
     >
-      <div class="container advertiser__container h-100">
+      <div class="container publisher__container h-100">
         <div
-          class="advertiser__samurai"
-          :class="zoomed ? 'advertiser__samurai--zoomed' : null"
+          class="publisher__samurai"
+          :class="zoomed ? 'publisher__samurai--zoomed' : null"
         >
           <img
-            src="@/assets/img/samurai-advertiser.png"
+            src="@/assets/img/samurai-publisher.png"
             alt=""
-            class="advertiser__samurai-person"
+            class="publisher__samurai-person"
           />
           <img
-            src="@/assets/img/fireball.png"
+            src="@/assets/img/holocron.png"
             alt=""
-            class="advertiser__samurai-object"
+            class="publisher__samurai-object"
           />
         </div>
 
         <transition name="sectionFade">
           <div
             v-if="step == 1"
-            class="advertiser__advantages advantages"
-            :class="!zoomed ? 'advertiser__advantages--visible' : null"
+            class="publisher__advantages advantages"
+            :class="!zoomed ? 'publisher__advantages--visible' : null"
           >
             <Advantages :list="advantages" />
           </div>
         </transition>
 
         <transition name="sectionFade">
-          <div class="advertiser__how-to how-to h-100" v-if="step == 2">
-            <HowTo title="How to become Akamuro Advertiser" :list="steps" />
+          <div class="publisher__how-to how-to h-100" v-if="step == 2">
+            <HowTo title="How to become Akamuro Publisher" :list="steps" />
           </div>
         </transition>
 
-        <div class="advertiser__progress-bar progress-bar">
+        <div class="publisher__progress-bar progress-bar">
           <ProgressBar @change="step = $event" :step="step" />
         </div>
       </div>
@@ -58,56 +58,55 @@ export default {
       step: 1,
       advantages: [
         {
-          title: "New webmasters",
+          title: "Fast payouts",
+          description: "Выплаты по запросу от 2 раз в месяц",
+        },
+        {
+          title: "Wide target audience",
           description:
-            "Каждая сеть способна привести до 15% уникальных вебмастеров",
+            "Любой пол от 21 до 55 лет с минимальным уровнем зарплаты",
         },
         {
-          title: "New clients",
-          description: "Вебмастера приводят новых пользователей на ваш продукт",
+          title: "Flexible hold terms",
+          description: "Постоянные партнеры могут выводить деньги быстрее ",
         },
         {
-          title: "Lack of risks",
-          description: "Наши клиенты платят только за целевые действия",
-        },
-        {
-          title: "White traffic sources",
+          title: "Stable demand",
           description:
-            "Вебмастера используют только эффективные источники трафика",
+            "Финансовая тематика наименее чувствительна к сезонности и кризису",
         },
         {
           title: "Expert support",
           description: "Опыт работы нашей команды более 10 лет",
         },
         {
-          title: "No fraud",
+          title: "White theme",
           description:
-            "Мы внимательно проверяем качество предоставляемого трафика",
+            "Простая модерация и возможность работы с крупными площадками",
         },
         {
-          title: "Fast start",
-          description: "Интеграция к нашей системой занимает примерно 30 минут",
+          title: "Individual conditions",
+          description: "Каждый вебмастер имеет возможность зарабатывать больше",
         },
         {
-          title: "Scaling volumes",
-          description:
-            "Всегда есть возможность получать ещё больше качественного трафика",
+          title: "Low competition",
+          description: "Отсутствие высокой конкуренции",
         },
       ],
       steps: [
-        {
-          text: "Работать в финансовом сегменте - банки и микрофинансовые организации",
-        },
-        {
-          text: "Сформировать описание и условия работы оффера",
-        },
-        {
-          text: 'Отправить заявку на <a href="mailto:offers@akamuro.com">offers@akamuro.com</a>',
-        },
-        {
-          text: "Начать получать клиентов и платить только за результат",
-        },
-      ],
+          {
+              text: 'Иметь понимание с каким источником трафика работать'
+          },
+          {
+              text: 'Зарегистрироваться в Akamuro affiliate network'
+          },
+          {
+              text: 'Выбрать наиболее интересный оффер'
+          },
+          {
+              text: 'Приводить качественный трафик и получать самый лучший профит'
+          }
+      ]
     };
   },
   mounted() {
@@ -122,7 +121,7 @@ export default {
   watch: {
     step: function (val) {
       if (val == 3) {
-        router.push({ name: "Registration", params: { type: "advertiser" } });
+        router.push({ name: "Registration", params: { type: "publisher" } });
       }
     },
   },
@@ -156,7 +155,7 @@ export default {
   }
 }
 
-.advertiser {
+.publisher {
   &__container {
     display: flex;
     flex-direction: column;
@@ -173,7 +172,7 @@ export default {
       width: 100%;
       height: 100%;
       position: absolute;
-      background-image: url("~@/assets/img/bg/advertiser-bg.jpg");
+      background-image: url("~@/assets/img/bg/publisher-bg.jpg");
       background-size: 100%;
       transition: 2s;
       transform-origin: center;

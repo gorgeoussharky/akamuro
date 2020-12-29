@@ -36,7 +36,7 @@
           full
           @initiated="content = false"
           @reachedRight="switchPage('advertiser')"
-          @reachedleft="switchPage('publisher')"
+          @reachedLeft="switchPage('publisher')"
         >
         </Compare>
       </div>
