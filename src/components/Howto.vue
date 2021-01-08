@@ -1,14 +1,16 @@
 <template>
-  <div class="how-to__content h-100">
-    <h1 class="how-to__heading">{{ title }}</h1>
-    <div class="how-to__steps-wrap">
-      <ul class="how-to__steps">
-        <li class="how-to__step" v-for="(listItem, key) in list" :key="key">
-          <div class="how-to__step-number">0{{ key + 1 }}</div>
-          <div class="how-to__step-description" v-html="listItem.text"></div>
-        </li>
-      </ul>
-    </div>
+    <div class="how-to__content container h-100">
+      <h1 class="how-to__heading">
+        {{ title }}
+      </h1>
+      <div class="how-to__steps-wrap">
+        <ul class="how-to__steps">
+          <li class="how-to__step" v-for="(listItem, key) in list" :key="key">
+            <div class="how-to__step-number">0{{ key + 1 }}</div>
+            <div class="how-to__step-description" v-html="listItem.text"></div>
+          </li>
+        </ul>
+      </div>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ export default {
   data: function () {
     return {
       steps: false,
+      rendered: null,
     };
   },
   props: {
@@ -29,6 +32,28 @@ export default {
       type: Array || Object,
       reqired: true,
     },
+  },
+  mounted: function () {
+    setTimeout(() => {
+      document
+        .querySelector(".how-to__heading")
+        .classList.add("how-to__heading--slide-in");
+    }, 5000);
+  },
+  updated: function () {
+    setTimeout(() => {
+      document
+        .querySelector(".how-to__heading")
+        .classList.add("how-to__heading--slide-in");
+    }, 5000);
+  },
+  beforeDestroy: function () {
+    document
+      .querySelector(".how-to__heading")
+      .classList.remove("how-to__heading--slide-in");
+    document
+      .querySelector(".how-to__heading")
+      .classList.add("how-to__heading--slide-out");
   },
 };
 </script>
@@ -90,8 +115,23 @@ export default {
     line-height: rem(48px);
     margin-top: rem(-100px);
     opacity: 0;
-    animation: slideItemLeft 1.5s ease-out 5s;
-    animation-fill-mode: forwards;
+    transform: translateX(-50vw);
+    transition-duration: 1.5s;
+    transition-timing-function: ease-out;
+
+    &--slide-in {
+      transform: translateX(0);
+      opacity: 1;
+      transition-duration: 1.5s;
+      transition-timing-function: ease-out;
+    }
+
+    &--slide-out {
+      transform: translateX(0);
+      opacity: 0;
+      transition-duration: 1.5s;
+      transition-timing-function: ease-out;
+    }
   }
 
   &__content {

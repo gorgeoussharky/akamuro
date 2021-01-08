@@ -1,43 +1,43 @@
 <template>
-  <main class="advertiser h-100">
+  <main class="adpage h-100">
     <div
-      class="advertiser__wrap h-100"
-      :class="zoomed ? 'advertiser__wrap--zoomed' : null"
+      class="adpage__wrap h-100"
+      :class="zoomed ? 'adpage__wrap--zoomed' : null"
     >
-      <div class="container advertiser__container h-100">
+      <div class="adpage__container h-100">
         <div
-          class="advertiser__samurai"
-          :class="zoomed ? 'advertiser__samurai--zoomed' : null"
+          class="adpage__samurai"
+          :class="zoomed ? 'adpage__samurai--zoomed' : null"
         >
           <img
             src="@/assets/img/samurai-advertiser.png"
             alt=""
-            class="advertiser__samurai-person"
+            class="adpage__samurai-person"
           />
           <img
             src="@/assets/img/fireball.png"
             alt=""
-            class="advertiser__samurai-object"
+            class="adpage__samurai-object"
           />
         </div>
 
         <transition name="sectionFade">
           <div
             v-if="step == 1"
-            class="advertiser__advantages advantages"
-            :class="!zoomed ? 'advertiser__advantages--visible' : null"
+            class="adpage__advantages advantages"
+            :class="!zoomed ? 'adpage__advantages--visible' : null"
           >
             <Advantages :list="advantages" />
           </div>
         </transition>
 
         <transition name="sectionFade">
-          <div class="advertiser__how-to how-to h-100" v-if="step == 2">
-            <HowTo title="How to become Akamuro Advertiser" :list="steps" />
+          <div class="adpage__how-to how-to h-100" v-if="step == 2">
+            <HowTo title="How to become Akamuro advert" :list="steps" />
           </div>
         </transition>
 
-        <div class="advertiser__progress-bar progress-bar">
+        <div class="adpage__progress-bar progress-bar">
           <ProgressBar @change="step = $event" :step="step" />
         </div>
       </div>
@@ -96,13 +96,15 @@ export default {
       ],
       steps: [
         {
-          text: "Работать в финансовом сегменте - банки и микрофинансовые организации",
+          text:
+            "Работать в финансовом сегменте - банки и микрофинансовые организации",
         },
         {
           text: "Сформировать описание и условия работы оффера",
         },
         {
-          text: 'Отправить заявку на <a href="mailto:offers@akamuro.com">offers@akamuro.com</a>',
+          text:
+            'Отправить заявку на <a href="mailto:offers@akamuro.com">offers@akamuro.com</a>',
         },
         {
           text: "Начать получать клиентов и платить только за результат",
@@ -122,7 +124,7 @@ export default {
   watch: {
     step: function (val) {
       if (val == 3) {
-        router.push({ name: "Registration", params: { type: "advertiser" } });
+        router.push({ name: "Registration", params: { type: "advert" } });
       }
     },
   },
@@ -156,7 +158,7 @@ export default {
   }
 }
 
-.advertiser {
+.adpage {
   &__container {
     display: flex;
     flex-direction: column;
@@ -220,8 +222,8 @@ export default {
       top: -12%;
       transform: scale(0.35) rotate(-55deg);
       transform-origin: center;
-      animation: rotate 1.3s ease-in-out 1.5s;
-      animation-fill-mode: forwards;
+      animation: rotate 2.5s ease-in-out 1.5s infinite;
+      animation-direction: alternate;
     }
   }
 
@@ -231,6 +233,11 @@ export default {
     z-index: 100;
     width: 100%;
     margin: auto;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
 
     &::after {
       content: "";

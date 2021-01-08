@@ -2,7 +2,10 @@
   <transition name="noticeFade">
     <div class="notice" v-if="show">
       <div class="notice__wrap">
-        <div class="notice__text" v-html="text"></div>
+        <div class="notice__text">
+          This website uses <router-link to="/cookies">cookies</router-link> and
+          google adwords to ensure you receive the best experience
+        </div>
         <button class="notice__btn" @click="show = false">Accept</button>
       </div>
     </div>
@@ -12,13 +15,6 @@
 <script>
 export default {
   name: "Notice",
-  props: {
-    text: {
-      type: String,
-      required: true,
-      default: "",
-    },
-  },
   data: function () {
     return {
       show: true,

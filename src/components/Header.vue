@@ -21,7 +21,7 @@
                 active-class="header-menu__link--active"
                 class="header-menu__link"
               >
-                Pubisher
+                Publisher
               </router-link>
             </li>
             <li class="header-menu__item">

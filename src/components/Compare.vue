@@ -39,7 +39,11 @@
       @mousedown.prevent="onMouseDownHandle"
     >
       <template>
-        <span class="handle-icon" @click.prevent="initCompare()"></span>
+        <span
+          class="handle-icon"
+          :class="greyed ? 'handle-icon--pulsation' : null"
+          @mouseover="initCompare()"
+        ></span>
       </template>
     </div>
 
@@ -329,13 +333,17 @@ export default {
         this.imgPosX = imgPosX;
         this.posX = posX;
 
-        var right_border = this.$el.getBoundingClientRect().right - (this.$el.getBoundingClientRect().right * 10 / 100);
-        var left_border = this.$el.getBoundingClientRect().left + (this.$el.getBoundingClientRect().right * 10 / 100)
-        
+        var right_border =
+          this.$el.getBoundingClientRect().right -
+          (this.$el.getBoundingClientRect().right * 10) / 100;
+        var left_border =
+          this.$el.getBoundingClientRect().left +
+          (this.$el.getBoundingClientRect().right * 10) / 100;
+
         if (posX >= right_border) {
-          this.$emit('reachedRight');
+          this.$emit("reachedRight");
         } else if (posX <= left_border) {
-          this.$emit('reachedLeft');
+          this.$emit("reachedLeft");
         }
       }
 
@@ -350,8 +358,7 @@ export default {
       if (this.paddingTotal >= this.width) {
         return console.error("Sum of paddings is wider then parent element!");
       }
-
-      this.imgPosX = (this.width + this.padding.left - this.padding.right) / 3;
+      this.imgPosX = (this.width + this.padding.left - this.padding.right) / 2;
       this.posX = (this.width + this.padding.left - this.padding.right) / 2;
     },
 
@@ -491,6 +498,18 @@ export default {
 
 <style scoped lang="scss">
 @import "~sass-rem/rem";
+
+@keyframes pulsate {
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: #bf1f3c;
+  }
+}
+
 .image-compare {
   position: relative;
   overflow: hidden;
@@ -623,6 +642,10 @@ img {
     background-size: 80%;
     background-repeat: no-repeat;
     transform: translate(-50%, -50%);
+
+    &--pulsation {
+      animation: pulsate 1s ease-in-out infinite alternate-reverse;
+    }
   }
 }
 
@@ -647,7 +670,7 @@ img {
 }
 
 .image-compare__edge-blur {
- /*  position: absolute;
+  /*  position: absolute;
   width: 5px;
   height: 100%;
   z-index: 10;

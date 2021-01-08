@@ -2,9 +2,7 @@
   <main class="frontpage">
     <div class="frontpage__wrap">
       <div class="container frontpage__container">
-        <Notice
-          text="This website uses <a href=''>cookies</a> and google adwords to ensure you receive the best experience"
-        />
+        <Notice/>
 
         <div class="frontpage__content">
           <transition name="fade">
