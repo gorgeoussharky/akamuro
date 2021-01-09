@@ -30,7 +30,7 @@ const routes = [{
   },
   {
     path: '/about-us',
-    name: 'Registration',
+    name: 'About Us',
     component: () => import('../views/About.vue'),
     props: true
   },

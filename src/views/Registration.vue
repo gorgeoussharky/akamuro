@@ -5,7 +5,11 @@
         <div class="signup-form__bg" key="publisher" v-if="type == 'publisher'">
           <img src="@/assets/img/bg/publisher-form.jpg" alt="" />
         </div>
-        <div class="signup-form__bg" key="advertiser" v-if="type == 'advertiser'">
+        <div
+          class="signup-form__bg"
+          key="advertiser"
+          v-if="type == 'advertiser'"
+        >
           <img src="@/assets/img/bg/advertiser-form.jpg" alt="" />
         </div>
       </transition>
@@ -25,7 +29,7 @@
                     value="publisher"
                     class="type-switcher__control"
                     :checked="type == 'publisher'"
-                    @change="type = $event.target.value"
+                    @change="changeType($event.target.value)"
                   />
                   <label
                     for="publisher"
@@ -42,7 +46,7 @@
                     value="advertiser"
                     class="type-switcher__control"
                     :checked="type == 'advertiser'"
-                    @change="type = $event.target.value"
+                    @change="changeType($event.target.value)"
                   />
                   <label
                     for="advertiser"
@@ -136,6 +140,7 @@
 import FormGroup from "@/components/FormGroup";
 import FormGroupCheckbox from "@/components/FormGroupCheckbox";
 import ProgressBar from "@/components/ProgressBar";
+import { formType } from "@/global/registerFormType.js";
 
 export default {
   components: {
@@ -149,12 +154,29 @@ export default {
       default: "advertiser",
     },
   },
+  methods: {
+    changeType(type) {
+      this.type = type;
+      formType.$emit("typeChanged", type);
+    },
+  },
 };
 </script>
 
 <style lang="scss">
 @import "~sass-rem/rem";
 @import "~@/assets/scss/base";
+
+@keyframes rotate {
+  from {
+    transform: scale(0.35) rotate(-55deg);
+  }
+
+  to {
+    transform: scale(0.35) rotate(0);
+  }
+}
+
 .signup-form {
   &__wrap {
     padding-top: rem(65px);
@@ -199,8 +221,8 @@ export default {
       top: -12%;
       transform: scale(0.35) rotate(-55deg);
       transform-origin: center;
-      animation: rotate 1.3s ease-in-out 1.5s;
-      animation-fill-mode: forwards;
+      animation: rotate 2.5s ease-in-out 1.5s infinite;
+      animation-direction: alternate;
     }
   }
 

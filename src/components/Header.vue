@@ -36,19 +36,21 @@
           </ul>
         </nav>
 
-        <div class="header__sign-in">
-          {{ isAdvertiseForm }}
-          <a href="" class="header__link">Sign In</a>
-        </div>
+        <transition name="formfade">
+          <div class="header__sign-in" v-if="isAdvertiseForm">
+            <a href="" class="header__link">Sign In</a>
+          </div>
+        </transition>
 
         <div class="header__sign-up">
-          <router-link
-            to="/register"
+          <button
+            href="/register"
             class="header__link"
-            active-class="header__link--active"
+            :class="page == 'Registration' ? 'header__link--active' : null"
+            @click="toForm()"
           >
             Registration
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -56,18 +58,36 @@
 </template>
 
 <script>
+import { formType } from "@/global/registerFormType.js";
+import router from "@/router/index";
+
 export default {
   name: "Header",
   props: ["page"],
-  computed: {
-    isAdvertiseForm: function () {
-      var pageName = this.page.name;
-      var type = this.page.params.type;
-      console.log('type:' + type, 'name:' + pageName);
-      if (pageName == "Registration" && type == "advertiser") {
-        return true;
+  data() {
+    return {
+      isAdvertiseForm: false,
+    };
+  },
+  methods: {
+    toForm: function () {
+      formType.$emit("typeChanged", "advertiser");
+      router.push({ name: "Registration", params: { type: "advertiser" } });
+    },
+  },
+  mounted() {
+    formType.$on("typeChanged", (type) => {
+      if (type == "advertiser") {
+        this.isAdvertiseForm = true;
       } else {
-        return false;
+        this.isAdvertiseForm = false;
+      }
+    });
+  },
+  watch: {
+    page: function (val) {
+      if (val != "Registration") {
+        this.isAdvertiseForm = false;
       }
     },
   },
@@ -92,6 +112,7 @@ export default {
   &__wrap {
     display: flex;
     align-items: center;
+    position: relative;
   }
 
   &__logo {
@@ -146,6 +167,11 @@ export default {
       text-decoration: none;
       color: #fff;
     }
+  }
+
+  &__sign-in {
+    position: absolute;
+    right: 150px;
   }
 }
 

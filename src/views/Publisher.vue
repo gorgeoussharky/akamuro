@@ -4,7 +4,7 @@
       class="publisher__wrap h-100"
       :class="zoomed ? 'publisher__wrap--zoomed' : null"
     >
-      <div class="container publisher__container h-100">
+      <div class="publisher__container h-100">
         <div
           class="publisher__samurai"
           :class="zoomed ? 'publisher__samurai--zoomed' : null"
@@ -38,7 +38,7 @@
         </transition>
 
         <div class="publisher__progress-bar progress-bar">
-           <ProgressBar v-model="step" />
+          <ProgressBar v-model="step" />
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@ export default {
           text: "Приводить качественный трафик и получать самый лучший профит",
         },
       ],
-      step: this.currentStep
+      step: this.currentStep,
     };
   },
   props: {
@@ -225,8 +225,8 @@ export default {
       top: -12%;
       transform: scale(0.35) rotate(-55deg);
       transform-origin: center;
-      animation: rotate 1.3s ease-in-out 1.5s;
-      animation-fill-mode: forwards;
+      animation: rotate 2.5s ease-in-out 1.5s infinite;
+      animation-direction: alternate;
     }
   }
 
@@ -236,6 +236,11 @@ export default {
     z-index: 100;
     width: 100%;
     margin: auto;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
 
     &::after {
       content: "";
