@@ -37,6 +37,11 @@
         </nav>
 
         <div class="header__sign-in">
+          {{ isAdvertiseForm }}
+          <a href="" class="header__link">Sign In</a>
+        </div>
+
+        <div class="header__sign-up">
           <router-link
             to="/register"
             class="header__link"
@@ -53,6 +58,19 @@
 <script>
 export default {
   name: "Header",
+  props: ["page"],
+  computed: {
+    isAdvertiseForm: function () {
+      var pageName = this.page.name;
+      var type = this.page.params.type;
+      console.log('type:' + type, 'name:' + pageName);
+      if (pageName == "Registration" && type == "advertiser") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
 };
 </script>
 
