@@ -6,7 +6,7 @@
           This website uses <router-link to="/cookies">cookies</router-link> and
           google adwords to ensure you receive the best experience
         </div>
-        <button class="notice__btn" @click="show = false">Accept</button>
+        <button class="notice__btn" @click="acceptPolicy()">Accept</button>
       </div>
     </div>
   </transition>
@@ -19,6 +19,12 @@ export default {
     return {
       show: true,
     };
+  },
+  methods: {
+    acceptPolicy: function () {
+      this.show = false;
+      this.$emit('accepted');
+    },
   },
 };
 </script>

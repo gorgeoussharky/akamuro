@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :page="page" />
     <div class="content">
       <transition name="fade" mode="out-in">
         <router-view />
@@ -18,12 +18,14 @@ export default {
   components: { Header },
 
   methods: {
-    log: function () {
-      console.log("test");
-    },
     colorize: function () {
       this.greyed = false;
     },
+  },
+  computed: {
+    page: function(){
+      return this.$route
+    }
   },
 };
 </script>

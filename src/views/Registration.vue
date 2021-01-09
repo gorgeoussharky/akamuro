@@ -124,7 +124,7 @@
           </transition>
 
           <div class="signup-form__progress-bar progress-bar">
-            <ProgressBar @change="step = $event" :step="3" :type="type" />
+            <ProgressBar :step="3" :type="type" />
           </div>
         </div>
       </div>

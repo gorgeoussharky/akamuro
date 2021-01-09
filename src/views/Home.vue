@@ -2,7 +2,7 @@
   <main class="frontpage">
     <div class="frontpage__wrap">
       <div class="container frontpage__container">
-        <Notice/>
+        <Notice @accepted="cookies = false" />
 
         <div class="frontpage__content">
           <transition name="fade">
@@ -27,7 +27,7 @@
       </div>
 
       <div class="frontpage__bg">
-        <Compare
+        <Compare :disabled="cookies ? true : false"
           :preImg="greyed"
           :before="before"
           :after="after"
@@ -59,6 +59,7 @@ export default {
       after: require("@/assets/img/bg/publisher-bg-full.jpg"),
       greyed: require("@/assets/img/bg/greyed-bg.jpg"),
       content: true,
+      cookies: true,
     };
   },
   methods: {

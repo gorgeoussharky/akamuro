@@ -13,12 +13,14 @@ const routes = [{
   {
     path: '/publisher',
     name: 'Publisher',
-    component: () => import('../views/Publisher.vue')
+    component: () => import('../views/Publisher.vue'),
+    props: true
   },
   {
     path: '/advertiser',
     name: 'Advertiser',
-    component: () => import('../views/Advertiser.vue')
+    component: () => import('../views/Advertiser.vue'),
+    props: true
   },
   {
     path: '/register',

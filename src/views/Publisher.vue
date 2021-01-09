@@ -38,7 +38,7 @@
         </transition>
 
         <div class="publisher__progress-bar progress-bar">
-          <ProgressBar @change="step = $event" :step="step" />
+           <ProgressBar v-model="step" />
         </div>
       </div>
     </div>
@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       zoomed: true,
-      step: 1,
       advantages: [
         {
           title: "Fast payouts",
@@ -94,20 +93,27 @@ export default {
         },
       ],
       steps: [
-          {
-              text: 'Иметь понимание с каким источником трафика работать'
-          },
-          {
-              text: 'Зарегистрироваться в Akamuro affiliate network'
-          },
-          {
-              text: 'Выбрать наиболее интересный оффер'
-          },
-          {
-              text: 'Приводить качественный трафик и получать самый лучший профит'
-          }
-      ]
+        {
+          text: "Иметь понимание с каким источником трафика работать",
+        },
+        {
+          text: "Зарегистрироваться в Akamuro affiliate network",
+        },
+        {
+          text: "Выбрать наиболее интересный оффер",
+        },
+        {
+          text: "Приводить качественный трафик и получать самый лучший профит",
+        },
+      ],
+      step: this.currentStep
     };
+  },
+  props: {
+    currentStep: {
+      type: Number,
+      default: 1,
+    },
   },
   mounted() {
     if (this.step == 1) {

@@ -38,7 +38,7 @@
         </transition>
 
         <div class="adpage__progress-bar progress-bar">
-          <ProgressBar @change="step = $event" :step="step" />
+          <ProgressBar v-model="step" />
         </div>
       </div>
     </div>
@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       zoomed: true,
-      step: 1,
       advantages: [
         {
           title: "New webmasters",
@@ -110,7 +109,14 @@ export default {
           text: "Начать получать клиентов и платить только за результат",
         },
       ],
+      step: this.currentStep
     };
+  },
+  props: {
+    currentStep: {
+      type: Number,
+      default: 1,
+    }
   },
   mounted() {
     if (this.step == 1) {
@@ -124,7 +130,7 @@ export default {
   watch: {
     step: function (val) {
       if (val == 3) {
-        router.push({ name: "Registration", params: { type: "advert" } });
+        router.push({ name: "Registration", params: { type: "advertiser" } });
       }
     },
   },
@@ -132,6 +138,9 @@ export default {
     log: function (event) {
       console.log(event);
     },
+    /* changeStep: function(val){
+      this.$set(this, 'step', val);
+    } */
   },
   components: {
     ProgressBar,

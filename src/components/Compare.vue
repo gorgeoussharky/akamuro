@@ -3,8 +3,9 @@
     :class="{ full }"
     class="image-compare"
     @mousemove.prevent="onMouseMove"
-    @click.prevent="onMouseMove($event, true)"
+    
   >
+  <!-- @click.prevent="onMouseMove($event, true)" -->
     <transition name="fade">
       <img class="image-compare__pre-img" v-if="greyed" :src="preImg" alt="" />
     </transition>
@@ -36,6 +37,7 @@
       v-show="!hideAfter"
       :style="{ left: posX + 'px' }"
       class="handle"
+      :class="disabled ? 'disabled' : null"
       @mousedown.prevent="onMouseDownHandle"
     >
       <template>
@@ -47,7 +49,7 @@
       </template>
     </div>
 
-    <div class="image-compare__range range">
+    <div class="image-compare__range range" :class="disabled ? 'disabled' : null">
       <div class="range__left">
         Pubisher
         <svg
@@ -147,6 +149,10 @@ export default {
       default: "",
     },
     full: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -621,6 +627,18 @@ img {
   }
 }
 
+.disabled {
+  filter: grayscale(1);
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: 300ms;
+
+  .handle-icon {
+    animation-play-state: paused;
+  }
+}
+
 .handle {
   width: 10px;
   color: transparent;
@@ -628,6 +646,7 @@ img {
   z-index: 100;
   transform: translateX(-50%) translateZ(0);
   will-change: left;
+  transition: 300ms;
 
   &-icon {
     position: absolute;
@@ -658,6 +677,7 @@ img {
   align-items: center;
   left: 0;
   right: 0;
+  transition: 300ms;
 }
 
 .image-compare__pre-img {

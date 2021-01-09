@@ -2,8 +2,8 @@
   <div class="progress-bar__wrap">
     <button
       class="progress-bar__btn progress-bar__btn--prev"
-      :disabled="step < 2"
-      @click="step != 3 ? step-- : back()"
+      :disabled="currentStep < 2"
+      @click="currentStep != 3 ? currentStep-- : back()"
     >
       <svg
         width="8"
@@ -26,21 +26,21 @@
         <div
           class="progress-bar__step progress-bar__step--1"
           key="step1"
-          v-if="step == 1"
+          v-if="currentStep == 1"
         >
           01
         </div>
         <div
           class="progress-bar__step progress-bar__step--2"
           key="step2"
-          v-else-if="step == 2"
+          v-else-if="currentStep == 2"
         >
           02
         </div>
         <div
           class="progress-bar__step progress-bar__step--3"
           key="step3"
-          v-else-if="step == 3"
+          v-else-if="currentStep == 3"
         >
           03
         </div>
@@ -50,8 +50,8 @@
     </div>
     <button
       class="progress-bar__btn progress-bar__btn--next"
-      :disabled="step > 2"
-      @click="step < 3 ? step++ : null"
+      :disabled="currentStep > 2"
+      @click="currentStep < 3 ? currentStep++ : null"
     >
       <svg
         width="10"
@@ -77,6 +77,15 @@ import router from "@/router/index";
 
 export default {
   name: "ProgressBar",
+  model: {
+    prop: "step",
+    event: "change",
+  },
+  data() {
+    return {
+      currentStep: this.step
+    }
+  },
   props: {
     step: {
       type: Number,
@@ -90,20 +99,20 @@ export default {
   methods: {
     back: function () {
       switch (this.type) {
-        case 'advertiser':
-          router.push('advertiser');
+        case "advertiser":
+          router.push({ name: "Advertiser", params: { currentStep: 2 } });
           break;
-        case 'publisher':
-          router.push('publisher');
+        case "publisher":
+          router.push({ name: "Publisher", params: { currentStep: 2 } });
           break;
         default:
-          router.push('/')
+          router.push("/");
       }
     },
   },
   computed: {
     barWidth: function () {
-      switch (this.step) {
+      switch (this.currentStep) {
         case 1:
           return "33%";
         case 2:
@@ -116,8 +125,8 @@ export default {
     },
   },
   watch: {
-    step: function () {
-      this.$emit("change", this.step);
+    currentStep: function () {
+      this.$emit("change", this.currentStep);
     },
   },
 };
