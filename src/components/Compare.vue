@@ -3,9 +3,9 @@
     :class="{ full }"
     class="image-compare"
     @mousemove.prevent="onMouseMove"
-    
+    :style="isMobile() && disabled ? 'opacity: 0' : 'opacity: 1'"
   >
-  <!-- @click.prevent="onMouseMove($event, true)" -->
+    <!-- @click.prevent="onMouseMove($event, true)" -->
     <transition name="fade">
       <img class="image-compare__pre-img" v-if="greyed" :src="preImg" alt="" />
     </transition>
@@ -49,7 +49,10 @@
       </template>
     </div>
 
-    <div class="image-compare__range range" :class="disabled ? 'disabled' : null">
+    <div
+      class="image-compare__range range"
+      :class="disabled ? 'disabled' : null"
+    >
       <div class="range__left">
         Pubisher
         <svg
@@ -498,6 +501,13 @@ export default {
       };
       reader.readAsDataURL(file);
     },
+    isMobile: function () {
+      if (window.matchMedia("(max-width: 598px)").matches) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>
@@ -711,6 +721,10 @@ img {
     position: absolute;
     left: 0;
     right: 0;
+
+    @media (max-width: 598px) {
+      width: calc(80% - 30px);
+    }
   }
 
   &__left {
@@ -720,10 +734,20 @@ img {
     top: -40px;
     left: 5%;
 
+    @media (max-width: 598px) {
+      font-size: rem(18px);
+      left: 15px;
+    }
+
     svg {
       position: absolute;
       left: -40px;
       bottom: -9px;
+
+      @media (max-width: 598px) {
+        left: 0;
+        bottom: -18px;
+      }
     }
   }
 
@@ -734,10 +758,20 @@ img {
     top: -40px;
     right: 5%;
 
+    @media (max-width: 598px) {
+      font-size: rem(18px);
+      right: 15px;
+    }
+
     svg {
       position: absolute;
       right: -40px;
       bottom: -9px;
+
+      @media (max-width: 598px) {
+        right: 0;
+        bottom: -18px;
+      }
     }
   }
 }

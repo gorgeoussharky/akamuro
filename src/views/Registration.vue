@@ -165,7 +165,7 @@ export default {
 
 <style lang="scss">
 @import "~sass-rem/rem";
-@import "~@/assets/scss/base";
+@import "~@/assets/scss/variables";
 
 @keyframes rotate {
   from {

@@ -138,9 +138,6 @@ export default {
     log: function (event) {
       console.log(event);
     },
-    /* changeStep: function(val){
-      this.$set(this, 'step', val);
-    } */
   },
   components: {
     ProgressBar,
@@ -151,11 +148,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/grid";
+@import "~@/assets/scss/variables";
 
 @keyframes rotate {
   from {
@@ -176,6 +169,7 @@ export default {
   &__wrap {
     position: relative;
     padding: rem(80px 0);
+    min-height: 100vh;
 
     &::before {
       content: "";

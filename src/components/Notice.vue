@@ -23,18 +23,18 @@ export default {
   methods: {
     acceptPolicy: function () {
       this.show = false;
-      this.$emit('accepted');
+      this.$emit("accepted");
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
-@import "~@/assets/scss/base";
+@import "~@/assets/scss/variables";
 
 .notice {
   z-index: 100;
+
   &__wrap {
     padding: rem(18px);
     background-color: rgba(#000, 0.77);
@@ -48,6 +48,13 @@ export default {
     z-index: 100;
     left: 0;
     right: 0;
+
+    @media (max-width: 598px) {
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      padding: rem(15px);
+    }
   }
 
   &__text {
@@ -59,6 +66,11 @@ export default {
     @extend %btn-accent;
     font-size: 12px;
     margin-left: rem(30px);
+
+    @media (max-width: 598px) {
+      margin-top: rem(14px);
+      margin-left: 0;
+    }
   }
 }
 

@@ -1,2 +1,8 @@
 $primary: #528edb;
 $accent: #9F132C;
+
+@import "~sass-rem/rem";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~@/assets/scss/buttons";

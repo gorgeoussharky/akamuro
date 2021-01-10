@@ -80,14 +80,46 @@
         </svg>
       </div>
 
-      <ul class="advantages__list">
-        <li class="advantages__item" :key="key" v-for="(listItem, key) in list">
-          <h2 class="advantages__item-title">{{ listItem.title }}</h2>
-          <p class="advantages__item-description">
-            {{ listItem.description }}
-          </p>
-        </li>
-      </ul>
+      <template v-if="!isMobile()">
+        <ul class="advantages__list">
+          <li
+            class="advantages__item"
+            :key="key"
+            v-for="(listItem, key) in list"
+          >
+            <h2 class="advantages__item-title">{{ listItem.title }}</h2>
+            <p class="advantages__item-description">
+              {{ listItem.description }}
+            </p>
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <ul class="advantages__list">
+          <li
+            class="advantages__item"
+            :key="key"
+            v-for="(listItem, key) in list.slice(0, 4)"
+          >
+            <h2 class="advantages__item-title">{{ listItem.title }}</h2>
+            <p class="advantages__item-description">
+              {{ listItem.description }}
+            </p>
+          </li>
+        </ul>
+        <ul class="advantages__list">
+          <li
+            class="advantages__item"
+            :key="key"
+            v-for="(listItem, key) in list.slice(4, 7)"
+          >
+            <h2 class="advantages__item-title">{{ listItem.title }}</h2>
+            <p class="advantages__item-description">
+              {{ listItem.description }}
+            </p>
+          </li>
+        </ul>
+      </template>
     </div>
   </div>
 </template>
@@ -105,7 +137,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
 
 .advantages {
   &__list {
@@ -123,6 +155,10 @@ export default {
     width: 100%;
     margin: auto;
     height: 530px;
+
+    @include media-breakpoint-down(sm) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 
   &__wrap {
@@ -146,8 +182,16 @@ export default {
     &:nth-of-type(even) {
       text-align: right;
 
+      @include media-breakpoint-down(sm) {
+        text-align: left;
+      }
+
       .advantages__item-description {
         margin-left: auto;
+
+        @include media-breakpoint-down(sm) {
+          margin: 0;
+        }
       }
     }
 

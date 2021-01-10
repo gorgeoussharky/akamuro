@@ -2,7 +2,7 @@
   <main class="frontpage">
     <div class="frontpage__wrap">
       <div class="container frontpage__container">
-        <Notice @accepted="cookies = false" />
+        <Notice @accepted="acceptCookies()" />
 
         <div class="frontpage__content">
           <transition name="fade">
@@ -27,7 +27,9 @@
       </div>
 
       <div class="frontpage__bg">
-        <Compare :disabled="cookies ? true : false"
+        <Compare
+          class="frontpage__img-compare"
+          :disabled="cookies ? true : false"
           :preImg="greyed"
           :before="before"
           :after="after"
@@ -63,27 +65,43 @@ export default {
     };
   },
   methods: {
+    isMobile: function () {
+      if (window.matchMedia("(max-width: 598px)").matches) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    acceptCookies: function () {
+      if (this.isMobile()) {
+        this.cookies = false;
+        this.content = false;
+      } else {
+        this.cookies = false;
+      }
+    },
     log: function () {
       console.log("test");
       /* router.push('home') */
     },
-    switchPage: function(page){
-      router.push(page)
-    }
+    switchPage: function (page) {
+      router.push(page);
+    },
   },
 };
 </script>
 
 <style lang="scss">
 @import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
 
 .frontpage {
-  height: 100%;
-
   &__wrap {
-    height: 100%;
+    min-height: 100vh;
     background-size: cover;
     padding-top: rem(45px);
+    display: flex;
+    align-items: center;
   }
 
   &__bg {
@@ -93,6 +111,16 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 1;
+
+    @include media-breakpoint-down(xs) {
+      background-image: url("~@/assets/img/bg/greyed-bg-empty.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  &__img-compare {
+    transition: 1s;
   }
 
   &__container {

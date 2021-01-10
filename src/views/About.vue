@@ -20,7 +20,7 @@
                 </p>
               </div>
 
-              <ul class="about__links">
+              <ul class="about__links" v-if="!isMobile()">
                 <li class="about__link-item">
                   <router-link to="/cookies" class="about__link"
                     >Cookie policy</router-link
@@ -178,6 +178,26 @@
                     </li>
                   </ul>
                 </div>
+
+                <ul class="about__links" v-if="isMobile()">
+                  <li class="about__link-item">
+                    <router-link to="/cookies" class="about__link"
+                      >Cookie policy</router-link
+                    >
+                  </li>
+
+                  <li class="about__link-item">
+                    <router-link to="/policy" class="about__link"
+                      >Privacy policy</router-link
+                    >
+                  </li>
+
+                  <li class="about__link-item">
+                    <router-link to="/public" class="about__link"
+                      >Public offer</router-link
+                    >
+                  </li>
+                </ul>
               </div>
             </section>
           </div>
@@ -187,14 +207,19 @@
   </div>
 </template>
 
+
 <style lang="scss">
 @import "~sass-rem/rem";
-@import "~@/assets/scss/base";
+@import "~@/assets/scss/variables";
 .about {
   &__wrap {
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(sm) {
+      padding-top: rem(60px);
+    }
 
     &::before {
       content: "";
@@ -205,8 +230,12 @@
       position: absolute;
       right: 0;
 
-      @media (max-width: 1199px) {
+      @include media-breakpoint-down(lg) {
         width: calc(50% + 120px);
+      }
+
+      @include media-breakpoint-down(sm) {
+        content: none;
       }
     }
   }
@@ -214,9 +243,22 @@
   &__block {
     color: rgba(255, 255, 255, 0.8);
 
+    @include media-breakpoint-down(sm) {
+      padding: rem(60px 15px);
+      margin: rem(0 -15px);
+      background: #1c1c1c;
+    }
+
     &--left {
       max-width: 305px;
       position: relative;
+
+      @include media-breakpoint-down(sm) {
+        max-width: unset;
+        background-color: #000;
+        background-image: url("~@/assets/img/bg/bg-deco.png");
+        background-position: right;
+      }
     }
   }
 
@@ -247,6 +289,11 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: rem(40px);
+
+    @media (max-width: 598px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 0;
+    }
   }
 
   &__links {
@@ -259,6 +306,11 @@
     bottom: rem(-200px);
     width: 100%;
     margin-bottom: 0;
+
+    @include media-breakpoint-down(sm) {
+      position: static;
+      margin-top: rem(32px);
+    }
   }
 
   &__link {
@@ -283,10 +335,22 @@
     padding: 0;
     margin-bottom: 0;
     margin-top: rem(20px);
+
+    @include media-breakpoint-down(xs) {
+      margin-top: rem(32px);
+    }
   }
 
   &__item {
     margin-bottom: rem(42px);
+
+    @include media-breakpoint-down(xs) {
+      margin-bottom: rem(32px);
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
   }
 
   &__link {
