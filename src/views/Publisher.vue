@@ -212,12 +212,13 @@ export default {
       transition: 2s;
       transform-origin: center;
       background-position: center;
-      background-size: cover;
+      background-size: 100%;
       z-index: -1;
       filter: grayscale(0.85) sepia(0.1);
 
       @include media-breakpoint-down(md) {
         filter: none;
+        background-size: cover;
       }
     }
 
@@ -226,7 +227,10 @@ export default {
         background-size: 150%;
         transition: 2s;
         filter: none;
-        background-size: cover;
+        
+        @include media-breakpoint-down(md) {
+          background-size: cover;
+        }
       }
     }
 
