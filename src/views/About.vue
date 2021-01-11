@@ -209,7 +209,6 @@
 
 
 <style lang="scss">
-@import "~sass-rem/rem";
 @import "~@/assets/scss/variables";
 .about {
   &__wrap {
@@ -217,7 +216,7 @@
     display: flex;
     align-items: center;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       padding-top: rem(60px);
     }
 
@@ -234,7 +233,7 @@
         width: calc(50% + 120px);
       }
 
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         content: none;
       }
     }
@@ -243,7 +242,7 @@
   &__block {
     color: rgba(255, 255, 255, 0.8);
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       padding: rem(60px 15px);
       margin: rem(0 -15px);
       background: #1c1c1c;
@@ -253,7 +252,7 @@
       max-width: 305px;
       position: relative;
 
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         max-width: unset;
         background-color: #000;
         background-image: url("~@/assets/img/bg/bg-deco.png");
@@ -307,7 +306,7 @@
     width: 100%;
     margin-bottom: 0;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       position: static;
       margin-top: rem(32px);
     }

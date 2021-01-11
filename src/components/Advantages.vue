@@ -80,7 +80,7 @@
         </svg>
       </div>
 
-      <template v-if="!isMobile()">
+      <template>
         <ul class="advantages__list">
           <li
             class="advantages__item"
@@ -94,8 +94,8 @@
           </li>
         </ul>
       </template>
-      <template v-else>
-        <ul class="advantages__list">
+      <!-- <template v-else>
+        <ul class="advantages__list" v-if="advantagesStep == 1">
           <li
             class="advantages__item"
             :key="key"
@@ -107,7 +107,7 @@
             </p>
           </li>
         </ul>
-        <ul class="advantages__list">
+        <ul class="advantages__list"  v-if="advantagesStep == 1.5">
           <li
             class="advantages__item"
             :key="key"
@@ -119,7 +119,7 @@
             </p>
           </li>
         </ul>
-      </template>
+      </template> -->
     </div>
   </div>
 </template>
@@ -156,8 +156,11 @@ export default {
     margin: auto;
     height: 530px;
 
-    @include media-breakpoint-down(sm) {
-      grid-template-columns: repeat(1, 1fr);
+    @include media-breakpoint-down(md) {
+      height: 407px;
+      padding-top: 0;
+      grid-row-gap: 18px;
+      transform: translateY(-5px);
     }
   }
 
@@ -169,6 +172,14 @@ export default {
     position: absolute;
     top: 52px;
     left: 0px;
+
+    @include media-breakpoint-down(md) {
+      top: 25px;
+      left: -180px;
+      svg {
+        height: 350px;
+      }
+    }
 
     rect {
       transform: scale(0.05);
@@ -182,21 +193,17 @@ export default {
     &:nth-of-type(even) {
       text-align: right;
 
-      @include media-breakpoint-down(sm) {
-        text-align: left;
-      }
-
       .advantages__item-description {
         margin-left: auto;
-
-        @include media-breakpoint-down(sm) {
-          margin: 0;
-        }
       }
     }
 
     &-title {
       margin-bottom: rem(20px);
+
+      @include media-breakpoint-down(md) {
+        margin-bottom: rem(8px);
+      }
     }
 
     &-description {
@@ -204,6 +211,10 @@ export default {
       opacity: 0.8;
       margin-bottom: 0;
       max-width: 285px;
+
+      @include media-breakpoint-down(md) {
+        max-width: 170px;
+      }
     }
   }
 }

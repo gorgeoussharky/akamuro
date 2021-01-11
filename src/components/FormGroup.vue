@@ -32,12 +32,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
 
 .form {
   &__group {
     position: relative;
     margin-bottom: rem(42px);
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: rem(28px);
+    }
 
     &::before {
       content: "";
@@ -87,6 +91,10 @@ export default {
     border: none;
     width: 100%;
     color: rgba(255, 255, 255, 0.9);
+
+    @include media-breakpoint-down(md) {
+      padding: rem(12px 16px);
+    }
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.9);

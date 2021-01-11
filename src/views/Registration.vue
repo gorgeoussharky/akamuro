@@ -1,6 +1,6 @@
 <template>
   <main class="signup-form h-100">
-    <div class="signup-form__wrap h-100">
+    <div class="signup-form__wrap">
       <transition name="formfade">
         <div class="signup-form__bg" key="publisher" v-if="type == 'publisher'">
           <img src="@/assets/img/bg/publisher-form.jpg" alt="" />
@@ -14,8 +14,8 @@
         </div>
       </transition>
 
-      <div class="container h-100">
-        <div class="signup-form__content h-100">
+      <div class="container">
+        <div class="signup-form__content">
           <form class="signup-form__form form">
             <div class="signup-form__header">
               <h1 class="signup-form__heading">Registration</h1>
@@ -127,7 +127,10 @@
             </div>
           </transition>
 
-          <div class="signup-form__progress-bar progress-bar">
+          <div
+            class="signup-form__progress-bar progress-bar"
+            v-if="!isMobile()"
+          >
             <ProgressBar :step="3" :type="type" />
           </div>
         </div>
@@ -164,7 +167,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
 @import "~@/assets/scss/variables";
 
 @keyframes rotate {
@@ -182,6 +184,27 @@ export default {
     padding-top: rem(65px);
     background-size: cover;
     background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-down(md) {
+      padding-bottom: rem(70px);
+    }
+  }
+
+  &__progress-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: 1s;
+
+    @include media-breakpoint-down(md) {
+      margin: 0;
+      bottom: 60px;
+    }
   }
 
   &__bg {
@@ -210,6 +233,10 @@ export default {
     z-index: 2;
     transform: scale(1.9);
 
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+
     img {
       width: auto;
       height: 100%;
@@ -231,24 +258,43 @@ export default {
     display: flex;
     align-items: center;
     margin-top: -40px;
+
+    @include media-breakpoint-down(md) {
+      margin-top: 0;
+    }
   }
 
   &__header {
     display: flex;
     align-items: center;
     margin-bottom: rem(32px);
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      margin-bottom: rem(22px);
+      align-items: flex-start;
+    }
   }
 
   &__heading {
     font-size: rem(48px);
     color: #fff;
     margin-bottom: 0;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(26px);
+      margin-bottom: rem(14px);
+    }
   }
 
   &__type-switcher {
     display: flex;
     align-items: center;
     margin-left: auto;
+
+    @include media-breakpoint-down(md) {
+      margin-left: 0;
+    }
   }
 
   &__form {
@@ -258,12 +304,22 @@ export default {
       @extend %btn-accent;
       padding: rem(12px 55px);
       margin-left: auto;
+
+      @include media-breakpoint-down(md) {
+        margin-left: 0;
+        margin-top: rem(50px);
+      }
     }
   }
 
   &__footer {
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     .form__group {
       margin-bottom: 0;
@@ -330,6 +386,10 @@ export default {
     background: rgba(#fff, 0.5);
     letter-spacing: 0.05em;
     transition: 250ms;
+
+    @include media-breakpoint-down(md) {
+      padding: rem(8px 25px);
+    }
 
     &::after {
       content: "";

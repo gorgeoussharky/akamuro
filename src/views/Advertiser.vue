@@ -1,14 +1,8 @@
 <template>
   <main class="adpage h-100">
-    <div
-      class="adpage__wrap h-100"
-      :class="zoomed ? 'adpage__wrap--zoomed' : null"
-    >
+    <div class="adpage__wrap h-100" :class="wrapClasses">
       <div class="adpage__container h-100">
-        <div
-          class="adpage__samurai"
-          :class="zoomed ? 'adpage__samurai--zoomed' : null"
-        >
+        <div class="adpage__samurai" :class="samuraiClasses">
           <img
             src="@/assets/img/samurai-advertiser.png"
             alt=""
@@ -23,7 +17,7 @@
 
         <transition name="sectionFade">
           <div
-            v-if="step == 1"
+            v-if="step == 1 || step == 1.5"
             class="adpage__advantages advantages"
             :class="!zoomed ? 'adpage__advantages--visible' : null"
           >
@@ -37,7 +31,10 @@
           </div>
         </transition>
 
-        <div class="adpage__progress-bar progress-bar">
+        <div
+          class="adpage__progress-bar progress-bar"
+          :style="step == 1.5 ? 'transform : translateX(100%)' : null"
+        >
           <ProgressBar v-model="step" />
         </div>
       </div>
@@ -50,6 +47,7 @@ import Advantages from "@/components/Advantages";
 import ProgressBar from "@/components/ProgressBar";
 import HowTo from "@/components/Howto";
 import router from "@/router/index";
+import { formType } from "@/global/registerFormType.js";
 
 export default {
   data() {
@@ -109,14 +107,14 @@ export default {
           text: "Начать получать клиентов и платить только за результат",
         },
       ],
-      step: this.currentStep
+      step: this.currentStep,
     };
   },
   props: {
     currentStep: {
       type: Number,
       default: 1,
-    }
+    },
   },
   mounted() {
     if (this.step == 1) {
@@ -130,13 +128,25 @@ export default {
   watch: {
     step: function (val) {
       if (val == 3) {
+        formType.$emit("typeChanged", "advertiser");
         router.push({ name: "Registration", params: { type: "advertiser" } });
       }
     },
   },
-  methods: {
-    log: function (event) {
-      console.log(event);
+  computed: {
+    wrapClasses: function () {
+      return {
+        "adpage__wrap--zoomed": this.zoomed,
+        "adpage__wrap--shifted": this.step == 1.5,
+      };
+    },
+    samuraiClasses: function () {
+      return {
+        "adpage__samurai--zoomed": this.zoomed,
+        "adpage__samurai--hidden":
+          (this.isMobile() && this.step == 2) ||
+          (this.isTablet() && this.step == 2),
+      };
     },
   },
   components: {
@@ -166,10 +176,34 @@ export default {
     flex-direction: column;
   }
 
+  &__progress-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: 1s;
+
+    @include media-breakpoint-down(md) {
+      bottom: 40px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 50%;
+      margin: 0;
+      bottom: 60px;
+    }
+  }
+
   &__wrap {
     position: relative;
     padding: rem(80px 0);
     min-height: 100vh;
+
+    @include media-breakpoint-down(sm) {
+      width: 200%;
+      transition: 1s;
+    }
 
     &::before {
       content: "";
@@ -183,8 +217,14 @@ export default {
       transition: 2s;
       transform-origin: center;
       background-position: center;
+      background-size: cover;
       z-index: -1;
       filter: grayscale(0.85) sepia(0.1);
+
+      @include media-breakpoint-down(md) {
+        background-position: right;
+        filter: none;
+      }
     }
 
     &--zoomed {
@@ -192,7 +232,13 @@ export default {
         background-size: 150%;
         transition: 2s;
         filter: none;
+        background-size: cover;
       }
+    }
+
+    &--shifted {
+      transform: translateX(-50%);
+      transition: 1s;
     }
   }
 
@@ -212,6 +258,15 @@ export default {
     &--zoomed {
       transform: scale(1.7);
       transition: 2s;
+
+      @include media-breakpoint-down(sm) {
+        transform: scale(1.3) translateX(-33%);
+      }
+    }
+
+    &--hidden {
+      opacity: 0;
+      transition: 2s;
     }
 
     img {
@@ -228,6 +283,10 @@ export default {
       animation: rotate 2.5s ease-in-out 1.5s infinite;
       animation-direction: alternate;
     }
+
+    @include media-breakpoint-down(sm) {
+      left: -20px;
+    }
   }
 
   &__advantages {
@@ -242,11 +301,19 @@ export default {
     top: 0;
     bottom: 0;
 
+    @media (min-width: 1440px) {
+      bottom: 60px;
+    }
+
+    @include media-breakpoint-only(md) {
+      bottom: 110px;
+    }
+
     &::after {
       content: "";
       left: 0;
       top: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       position: absolute;
       transition: 2s;
@@ -282,7 +349,7 @@ export default {
       content: "";
       left: 0;
       top: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       position: absolute;
       transition: 2s;
@@ -293,6 +360,11 @@ export default {
         rgba(0, 0, 0, 0.5) 25%,
         rgba(0, 0, 0, 0) 100%
       );
+
+      @include media-breakpoint-down(md) {
+        background: rgba(0, 0, 0, 0.8);
+        transition: 1s;
+      }
     }
   }
 }

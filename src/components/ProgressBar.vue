@@ -2,8 +2,8 @@
   <div class="progress-bar__wrap">
     <button
       class="progress-bar__btn progress-bar__btn--prev"
-      :disabled="currentStep < 2"
-      @click="currentStep != 3 ? currentStep-- : back()"
+      :disabled="currentStep < 1.5"
+      @click="decrementStep()"
     >
       <svg
         width="8"
@@ -22,11 +22,11 @@
       </svg>
     </button>
     <div class="progress-bar__bar">
-      <transition name="fade">
+      <transition name="fade" v-if="!isMobile()">
         <div
           class="progress-bar__step progress-bar__step--1"
           key="step1"
-          v-if="currentStep == 1"
+          v-if="currentStep == 1 || currentStep == 1.5"
         >
           01
         </div>
@@ -51,7 +51,7 @@
     <button
       class="progress-bar__btn progress-bar__btn--next"
       :disabled="currentStep > 2"
-      @click="currentStep < 3 ? currentStep++ : null"
+      @click="incrementStep()"
     >
       <svg
         width="10"
@@ -83,8 +83,8 @@ export default {
   },
   data() {
     return {
-      currentStep: this.step
-    }
+      currentStep: this.step,
+    };
   },
   props: {
     step: {
@@ -96,8 +96,35 @@ export default {
       default: "",
     },
   },
+  mounted: function () {
+    if (!this.isMobile()) {
+      let timeout;
+      window.addEventListener("wheel", (event) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          if (event.deltaY > 0) {
+            this.incrementStep();
+          } else if (event.deltaY < 0) {
+            this.decrementStep();
+          }
+        }, 550);
+      });
+    } else {
+      let timeout;
+      window.addEventListener("touchmove", (event) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          if (event.touches[0].screenY > 0) {
+            this.incrementStep();
+          } else if (event.touches[0].screenY < 0) {
+            this.decrementStep();
+          }
+        }, 550);
+      });
+    }
+  },
   methods: {
-    back: function () {
+    returnToPage: function () {
       switch (this.type) {
         case "advertiser":
           router.push({ name: "Advertiser", params: { currentStep: 2 } });
@@ -109,11 +136,49 @@ export default {
           router.push("/");
       }
     },
+    incrementStep: function () {
+      if (this.isMobile()) {
+        if (this.currentStep == 1) {
+          this.currentStep = 1.5;
+        } else if (this.currentStep == 1.5) {
+          this.currentStep = 2;
+        } else {
+          this.currentStep++;
+        }
+      } else {
+        if (this.currentStep != 3) {
+          this.currentStep++;
+        }
+      }
+    },
+    decrementStep: function () {
+      if (this.isMobile()) {
+        if (this.currentStep == 2) {
+          this.currentStep = 1.5;
+        } else if (this.currentStep == 1.5) {
+          this.currentStep = 1;
+        } else if (this.currentStep == 3) {
+          this.returnToPage();
+        } else {
+          this.currentStep--;
+        }
+      } else {
+        if (this.currentStep == 3) {
+          this.returnToPage();
+        } else if (this.currentStep < 2) {
+          router.push("/");
+        } else {
+          this.currentStep--;
+        }
+      }
+    },
   },
   computed: {
     barWidth: function () {
       switch (this.currentStep) {
         case 1:
+          return "33%";
+        case 1.5:
           return "33%";
         case 2:
           return "66%";
@@ -142,11 +207,7 @@ export default {
 .progress-bar {
   &__wrap {
     @extend .container;
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    right: 0;
-    z-index: 100;
+    position: relative;
   }
 
   &__bar {
@@ -156,6 +217,10 @@ export default {
     background-color: rgba(#fff, 0.3);
     position: relative;
     z-index: 10;
+
+    @include media-breakpoint-down(sm) {
+      width: 75%;
+    }
   }
 
   &__progress {
@@ -199,6 +264,11 @@ export default {
     justify-content: center;
     align-items: center;
 
+    @include media-breakpoint-down(md) {
+      width: 45px;
+      height: 45px;
+    }
+
     svg path {
       fill-opacity: 1;
       opacity: 1;
@@ -206,10 +276,18 @@ export default {
 
     &--prev {
       left: 0;
+
+      @include media-breakpoint-down(md) {
+        left: 5px;
+      }
     }
 
     &--next {
       right: 0;
+
+      @include media-breakpoint-down(md) {
+        right: 5px;
+      }
     }
 
     &:disabled {

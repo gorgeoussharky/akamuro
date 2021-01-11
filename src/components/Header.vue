@@ -163,7 +163,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
 
 .header {
   padding: rem(10px 0);
@@ -203,7 +203,7 @@ export default {
   &__header-menu {
     margin: auto;
 
-    @media (max-width: 598px) {
+    @include media-breakpoint-down(sm) {
       display: flex;
       position: fixed;
       left: 0;
@@ -223,7 +223,7 @@ export default {
     position: relative;
     padding: rem(7px 10px);
 
-    @media (max-width: 598px) {
+    @include media-breakpoint-down(sm) {
       font-size: rem(18px);
       color: rgba(#fff, 0.8);
       padding: rem(7px 32px);
@@ -269,7 +269,11 @@ export default {
     position: absolute;
     right: 150px;
 
-    @media (max-width: 598px) {
+    @include media-breakpoint-down(md) {
+      right: 100px;
+    }
+
+    @include media-breakpoint-down(sm) {
       position: static;
     }
   }
@@ -340,7 +344,11 @@ export default {
     background: transparent;
     display: block;
 
-    @media (max-width: 598px) {
+    @include media-breakpoint-down(md) {
+       padding: rem(7px 22px);
+    }
+
+    @include media-breakpoint-down(sm) {
       font-size: rem(18px);
     }
 

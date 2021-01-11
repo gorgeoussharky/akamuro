@@ -1,14 +1,8 @@
 <template>
   <main class="publisher h-100">
-    <div
-      class="publisher__wrap h-100"
-      :class="zoomed ? 'publisher__wrap--zoomed' : null"
-    >
+    <div class="publisher__wrap h-100" :class="wrapClasses">
       <div class="publisher__container h-100">
-        <div
-          class="publisher__samurai"
-          :class="zoomed ? 'publisher__samurai--zoomed' : null"
-        >
+        <div class="publisher__samurai" :class="samuraiClasses">
           <img
             src="@/assets/img/samurai-publisher.png"
             alt=""
@@ -23,7 +17,7 @@
 
         <transition name="sectionFade">
           <div
-            v-if="step == 1"
+            v-if="step == 1 || step == 1.5"
             class="publisher__advantages advantages"
             :class="!zoomed ? 'publisher__advantages--visible' : null"
           >
@@ -37,7 +31,10 @@
           </div>
         </transition>
 
-        <div class="publisher__progress-bar progress-bar">
+        <div
+          class="publisher__progress-bar progress-bar"
+          :style="step == 1.5 ? 'transform : translateX(100%)' : null"
+        >
           <ProgressBar v-model="step" />
         </div>
       </div>
@@ -131,9 +128,20 @@ export default {
       }
     },
   },
-  methods: {
-    log: function (event) {
-      console.log(event);
+  computed: {
+    wrapClasses: function () {
+      return {
+        "publisher__wrap--zoomed": this.zoomed,
+        "publisher__wrap--shifted": this.step == 1.5,
+      };
+    },
+    samuraiClasses: function () {
+      return {
+        "publisher__samurai--zoomed": this.zoomed,
+        "publisher__samurai--hidden":
+          (this.isMobile() && this.step == 2) ||
+          (this.isTablet() && this.step == 2),
+      };
     },
   },
   components: {
@@ -145,11 +153,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/grid";
+@import "~@/assets/scss/variables";
 
 @keyframes rotate {
   from {
@@ -167,9 +171,34 @@ export default {
     flex-direction: column;
   }
 
+  &__progress-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: 1s;
+
+    @include media-breakpoint-down(md) {
+      bottom: 40px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 50%;
+      margin: 0;
+      bottom: 60px;
+    }
+  }
+
   &__wrap {
     position: relative;
     padding: rem(80px 0);
+    min-height: 100vh;
+
+    @include media-breakpoint-down(sm) {
+      width: 200%;
+      transition: 1s;
+    }
 
     &::before {
       content: "";
@@ -183,8 +212,13 @@ export default {
       transition: 2s;
       transform-origin: center;
       background-position: center;
+      background-size: cover;
       z-index: -1;
       filter: grayscale(0.85) sepia(0.1);
+
+      @include media-breakpoint-down(md) {
+        filter: none;
+      }
     }
 
     &--zoomed {
@@ -192,7 +226,13 @@ export default {
         background-size: 150%;
         transition: 2s;
         filter: none;
+        background-size: cover;
       }
+    }
+
+    &--shifted {
+      transform: translateX(-50%);
+      transition: 1s;
     }
   }
 
@@ -212,6 +252,15 @@ export default {
     &--zoomed {
       transform: scale(1.7);
       transition: 2s;
+
+      @include media-breakpoint-down(sm) {
+        transform: scale(1.3) translateX(-33%);
+      }
+    }
+
+    &--hidden {
+      opacity: 0;
+      transition: 2s;
     }
 
     img {
@@ -228,6 +277,10 @@ export default {
       animation: rotate 2.5s ease-in-out 1.5s infinite;
       animation-direction: alternate;
     }
+
+    @include media-breakpoint-down(sm) {
+      left: -20px;
+    }
   }
 
   &__advantages {
@@ -242,11 +295,15 @@ export default {
     top: 0;
     bottom: 0;
 
+    @include media-breakpoint-only(md) {
+      top: -110px;
+    }
+
     &::after {
       content: "";
       left: 0;
       top: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       position: absolute;
       transition: 2s;
@@ -282,7 +339,7 @@ export default {
       content: "";
       left: 0;
       top: 0;
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       position: absolute;
       transition: 2s;
@@ -293,6 +350,11 @@ export default {
         rgba(0, 0, 0, 0.5) 25%,
         rgba(0, 0, 0, 0) 100%
       );
+
+      @include media-breakpoint-down(md) {
+        background: rgba(0, 0, 0, 0.8);
+        transition: 1s;
+      }
     }
   }
 }

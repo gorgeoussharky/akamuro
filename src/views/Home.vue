@@ -97,7 +97,7 @@ export default {
 
 .frontpage {
   &__wrap {
-    min-height: 100vh;
+    height: 100vh;
     background-size: cover;
     padding-top: rem(45px);
     display: flex;

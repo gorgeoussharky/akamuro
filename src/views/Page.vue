@@ -40,7 +40,7 @@ export default {
     background-repeat: no-repeat;
     background-size: contain;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       background-position: top right;
     }
   }
@@ -48,6 +48,7 @@ export default {
   &__container {
     display: flex;
     align-items: center;
+    height: 100vh;
   }
 
   &__article {
@@ -59,7 +60,7 @@ export default {
     overflow-y: scroll;
     padding: rem(55px 100px);
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       max-width: unset;
       padding: 0;
       padding-top: rem(125px);

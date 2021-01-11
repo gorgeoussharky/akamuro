@@ -3,6 +3,7 @@
     :class="{ full }"
     class="image-compare"
     @mousemove.prevent="onMouseMove"
+    @touchmove.prevent="onMouseMove"
     :style="isMobile() && disabled ? 'opacity: 0' : 'opacity: 1'"
   >
     <!-- @click.prevent="onMouseMove($event, true)" -->
@@ -39,6 +40,7 @@
       class="handle"
       :class="disabled ? 'disabled' : null"
       @mousedown.prevent="onMouseDownHandle"
+      @touchmove.prevent="onMouseDownHandle"
     >
       <template>
         <span
@@ -303,8 +305,8 @@ export default {
         if (event && this.allowNextFrame && (this.isDragging || isDragging)) {
           this.allowNextFrame = false;
 
-          let pageX = event.pageX;
-          let pageY = event.pageY;
+          var pageX = event.pageX;
+          var pageY = event.pageY;
 
           if (event.targetTouches) {
             pageX = event.targetTouches[0].pageX;
@@ -344,10 +346,10 @@ export default {
 
         var right_border =
           this.$el.getBoundingClientRect().right -
-          (this.$el.getBoundingClientRect().right * 10) / 100;
+          (this.$el.getBoundingClientRect().right * 20) / 100;
         var left_border =
           this.$el.getBoundingClientRect().left +
-          (this.$el.getBoundingClientRect().right * 10) / 100;
+          (this.$el.getBoundingClientRect().right * 20) / 100;
 
         if (posX >= right_border) {
           this.$emit("reachedRight");
@@ -501,12 +503,8 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    isMobile: function () {
-      if (window.matchMedia("(max-width: 598px)").matches) {
-        return true;
-      } else {
-        return false;
-      }
+    log: function (event) {
+      console.log(event);
     },
   },
 };

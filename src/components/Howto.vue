@@ -1,16 +1,16 @@
 <template>
-    <div class="how-to__content container h-100">
-      <h1 class="how-to__heading">
-        {{ title }}
-      </h1>
-      <div class="how-to__steps-wrap">
-        <ul class="how-to__steps">
-          <li class="how-to__step" v-for="(listItem, key) in list" :key="key">
-            <div class="how-to__step-number">0{{ key + 1 }}</div>
-            <div class="how-to__step-description" v-html="listItem.text"></div>
-          </li>
-        </ul>
-      </div>
+  <div class="how-to__content container h-100">
+    <h1 class="how-to__heading">
+      {{ title }}
+    </h1>
+    <div class="how-to__steps-wrap">
+      <ul class="how-to__steps">
+        <li class="how-to__step" v-for="(listItem, key) in list" :key="key">
+          <div class="how-to__step-number">0{{ key + 1 }}</div>
+          <div class="how-to__step-description" v-html="listItem.text"></div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -34,18 +34,34 @@ export default {
     },
   },
   mounted: function () {
-    setTimeout(() => {
-      document
-        .querySelector(".how-to__heading")
-        .classList.add("how-to__heading--slide-in");
-    }, 5000);
+    if (this.isMobile() || this.isTablet()) {
+      setTimeout(() => {
+        document
+          .querySelector(".how-to__heading")
+          .classList.add("how-to__heading--slide-in");
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        document
+          .querySelector(".how-to__heading")
+          .classList.add("how-to__heading--slide-in");
+      }, 5000);
+    }
   },
   updated: function () {
-    setTimeout(() => {
-      document
-        .querySelector(".how-to__heading")
-        .classList.add("how-to__heading--slide-in");
-    }, 5000);
+    if (this.isMobile() || this.isTablet()) {
+      setTimeout(() => {
+        document
+          .querySelector(".how-to__heading")
+          .classList.add("how-to__heading--slide-in");
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        document
+          .querySelector(".how-to__heading")
+          .classList.add("how-to__heading--slide-in");
+      }, 5000);
+    }
   },
   beforeDestroy: function () {
     document
@@ -77,6 +93,16 @@ export default {
   }
 }
 
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes slideItemLeft {
   from {
     transform: translateX(-50vw);
@@ -102,28 +128,46 @@ export default {
 }
 
 .how-to {
-  &__steps-wrap {
-    animation: slide 2s ease-out 3s;
-    animation-fill-mode: forwards;
-    opacity: 0;
-  }
-
   &__heading {
     font-size: rem(40px);
     color: #fff;
     max-width: 390px;
     line-height: rem(48px);
-    margin-top: rem(-100px);
     opacity: 0;
     transform: translateX(-50vw);
     transition-duration: 1.5s;
     transition-timing-function: ease-out;
+
+    position: absolute;
+    top: -170px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-down(md) {
+      font-size: rem(60px);
+      margin-top: 0;
+      line-height: 1.4;
+      max-width: 70%;
+      transition-duration: 1s;
+      position: static;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: rem(26px);
+      max-width: 260px;
+      line-height: rem(32px);
+    }
 
     &--slide-in {
       transform: translateX(0);
       opacity: 1;
       transition-duration: 1.5s;
       transition-timing-function: ease-out;
+
+      @include media-breakpoint-down(md) {
+        transition-duration: 1s;
+      }
     }
 
     &--slide-out {
@@ -131,6 +175,10 @@ export default {
       opacity: 0;
       transition-duration: 1.5s;
       transition-timing-function: ease-out;
+
+      @include media-breakpoint-down(md) {
+        transition-duration: 1s;
+      }
     }
   }
 
@@ -152,6 +200,25 @@ export default {
     padding: rem(40px);
     padding-bottom: rem(110px);
     z-index: 1;
+    animation: slide 2s ease-out 3s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+
+    @include media-breakpoint-down(md) {
+      animation: fade 1s ease-out 3s;
+      animation-fill-mode: forwards;
+      padding: 0;
+      padding-left: rem(40px);
+      padding-bottom: rem(100px);
+      background: transparent;
+      top: 30vh;
+      bottom: unset;
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding-left: rem(20px);
+      padding-bottom: rem(80px);
+    }
 
     &::before {
       content: "";
@@ -163,6 +230,22 @@ export default {
       right: 0;
       top: 0;
       margin: auto;
+
+      @include media-breakpoint-down(md) {
+        width: 4px;
+        height: 100%;
+        right: unset;
+        left: 74px;
+        background: linear-gradient(
+          180deg,
+          #ffffff 0.01%,
+          rgba(255, 255, 255, 0) 75%
+        );
+      }
+
+      @include media-breakpoint-down(sm) {
+        left: 24px;
+      }
     }
   }
 
@@ -173,12 +256,23 @@ export default {
     padding: 0;
     display: flex;
     color: #fff;
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+    }
   }
 
   &__step {
     margin: rem(0 20px);
     position: relative;
     opacity: 0;
+
+    @include media-breakpoint-down(md) {
+      padding-left: rem(30px);
+      display: flex;
+      margin: 0;
+      margin-bottom: 32px;
+    }
 
     &::before {
       content: "";
@@ -189,6 +283,12 @@ export default {
       transform: rotate(-45deg);
       background: #ffffff;
       box-shadow: 0px 0px 4px #fabc32, 0px 0px 12px #fabc32;
+
+      @include media-breakpoint-down(md) {
+        top: 10px;
+        left: 0;
+        box-shadow: 0px 0px 4px #32a3ce, 0px 0px 12px #32a3ce;
+      }
     }
 
     &:first-of-type {
@@ -210,6 +310,11 @@ export default {
       &::before {
         left: 0;
       }
+
+      @include media-breakpoint-down(md) {
+        animation: slideItemLeft 1s ease-out 0s;
+        animation-fill-mode: forwards;
+      }
     }
 
     &:nth-of-type(3),
@@ -217,6 +322,13 @@ export default {
       text-align: right;
       animation: slideItemRight 1.5s ease-out 5s;
       animation-fill-mode: forwards;
+
+      @include media-breakpoint-down(md) {
+        animation: slideItemLeft 1s ease-out 0s;
+        animation-fill-mode: forwards;
+        text-align: left;
+        margin-left: 0;
+      }
 
       &::before {
         right: 0;
@@ -227,10 +339,27 @@ export default {
       font-size: rem(20px);
       font-family: "Oswald", sans-serif;
       margin-bottom: rem(18px);
+      line-height: 1;
+
+      @include media-breakpoint-down(md) {
+        font-size: rem(40px);
+        margin: 0;
+        margin-right: 15px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        font-size: rem(16px);
+      }
     }
 
     &-description {
       max-width: 215px;
+      line-height: rem(18px);
+
+      @include media-breakpoint-only(md) {
+        font-size: rem(20px);
+        line-height: 1.3;
+      }
     }
   }
 }
