@@ -49,33 +49,28 @@ export default {
     }
   },
   updated: function () {
-    if (this.isMobile() || this.isTablet()) {
-      setTimeout(() => {
-        document
-          .querySelector(".how-to__heading")
-          .classList.add("how-to__heading--slide-in");
-      }, 2000);
-    } else {
-      setTimeout(() => {
-        document
-          .querySelector(".how-to__heading")
-          .classList.add("how-to__heading--slide-in");
-      }, 5000);
-    }
+    var heading = document.querySelector(".how-to__heading");
+    if (heading != null)
+      if (this.isMobile() || this.isTablet()) {
+        setTimeout(() => {
+          heading.classList.add("how-to__heading--slide-in");
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          heading.classList.add("how-to__heading--slide-in");
+        }, 5000);
+      }
   },
   beforeDestroy: function () {
-    document
-      .querySelector(".how-to__heading")
-      .classList.remove("how-to__heading--slide-in");
-    document
-      .querySelector(".how-to__heading")
-      .classList.add("how-to__heading--slide-out");
+    var heading = document.querySelector(".how-to__heading");
+    if (heading != null) heading.classList.remove("how-to__heading--slide-in");
+    heading.classList.add("how-to__heading--slide-out");
   },
 };
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";

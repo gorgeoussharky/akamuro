@@ -1,7 +1,10 @@
 <template>
   <div class="form__group form__group--checkbox">
     <input type="checkbox" class="form__control" :name="id" :id="id" />
-    <label :for="id" class="form__label" v-html="label">{{ label }}</label>
+    <label :for="id" class="form__label"
+      ><router-link to="/public">Terms and conditions</router-link>
+      /<router-link to="/policy"> Privacy policy </router-link>
+    </label>
   </div>
 </template>
 
@@ -26,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
 
 .form {
   &__group {

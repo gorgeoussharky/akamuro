@@ -28,7 +28,7 @@
                     name="type"
                     value="publisher"
                     class="type-switcher__control"
-                    :checked="type == 'publisher'"
+                    :checked="currentType == 'publisher'"
                     @change="changeType($event.target.value)"
                   />
                   <label
@@ -45,7 +45,7 @@
                     name="type"
                     value="advertiser"
                     class="type-switcher__control"
-                    :checked="type == 'advertiser'"
+                    :checked="currentType == 'advertiser'"
                     @change="changeType($event.target.value)"
                   />
                   <label
@@ -85,7 +85,6 @@
             <div class="signup-form__footer">
               <FormGroupCheckbox
                 id="policy"
-                label='Terms and conditions / <a href="">Privacy policy</a>'
               />
               <button class="form__btn">Submit</button>
             </div>
@@ -94,7 +93,7 @@
           <transition name="formfade">
             <div
               class="signup-form__samurai"
-              v-if="type == 'advertiser'"
+              v-if="currentType == 'advertiser'"
               key="advertiser"
             >
               <img
@@ -111,7 +110,7 @@
 
             <div
               class="signup-form__samurai"
-              v-else-if="type == 'publisher'"
+              v-else-if="currentType == 'publisher'"
               key="publisher"
             >
               <img
@@ -131,7 +130,7 @@
             class="signup-form__progress-bar progress-bar"
             v-if="!isMobile()"
           >
-            <ProgressBar :step="3" :type="type" />
+            <ProgressBar :step="3" :type="currentType" />
           </div>
         </div>
       </div>
@@ -151,6 +150,11 @@ export default {
     ProgressBar,
     FormGroupCheckbox,
   },
+  data() {
+    return {
+      currentType: this.type
+    }
+  },
   props: {
     type: {
       type: String,
@@ -159,7 +163,7 @@ export default {
   },
   methods: {
     changeType(type) {
-      this.type = type;
+      this.currentType = type;
       formType.$emit("typeChanged", type);
     },
   },
@@ -190,18 +194,25 @@ export default {
 
     @include media-breakpoint-down(md) {
       padding-bottom: rem(70px);
+      min-height: 100vh;
+      height: auto;
     }
   }
 
   &__progress-bar {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     left: 0;
     right: 0;
     z-index: 100;
     transition: 1s;
 
     @include media-breakpoint-down(md) {
+      bottom: 60px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 50%;
       margin: 0;
       bottom: 60px;
     }

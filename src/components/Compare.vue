@@ -52,7 +52,7 @@
     </div>
 
     <div
-      class="image-compare__range range"
+      class="image-compare__range range container"
       :class="disabled ? 'disabled' : null"
     >
       <div class="range__left">
@@ -346,10 +346,10 @@ export default {
 
         var right_border =
           this.$el.getBoundingClientRect().right -
-          (this.$el.getBoundingClientRect().right * 20) / 100;
+          (this.$el.getBoundingClientRect().right * 30) / 100;
         var left_border =
           this.$el.getBoundingClientRect().left +
-          (this.$el.getBoundingClientRect().right * 20) / 100;
+          (this.$el.getBoundingClientRect().right * 30) / 100;
 
         if (posX >= right_border) {
           this.$emit("reachedRight");
@@ -511,7 +511,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
+
 
 @keyframes pulsate {
   from {
@@ -659,7 +660,7 @@ img {
   &-icon {
     position: absolute;
     left: 50%;
-    bottom: 20px;
+    bottom: 8px;
     width: 34px;
     height: 35px;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='7' viewBox='0 0 28 7' fill='none'%3E%3Cstyle%3E.a%7Bfill:white;stroke-width:0.2;stroke:white;%7D%3C/style%3E%3Cpath d='M27 4L27 4 24.2 6.8C24.2 6.8 24.2 6.8 24.2 6.8L24.2 6.8 24.1 6.7 27 4ZM27 4C27.1 3.9 27.1 3.7 27 3.6L27 3.6M27 4L27 3.6M27 3.6L24.2 0.8 27 3.6ZM24 0.7C24.1 0.7 24.2 0.7 24.2 0.8L24 0.7ZM24 0.7C23.9 0.7 23.8 0.7 23.8 0.8 23.7 0.9 23.7 1.1 23.8 1.2L26.3 3.8 24 0.7Z' class='a'/%3E%3Cpath d='M1.2 3.7L1.2 3.7 3.8 0.7C3.8 0.7 3.8 0.7 3.8 0.7L3.8 0.7 3.9 0.8 1.2 3.7ZM1.2 3.7C1 3.8 1.1 4 1.2 4.1L1.2 4.1M1.2 3.7L1.2 4.1M1.2 4.1L4.1 6.7 1.2 4.1ZM4.4 6.8C4.3 6.8 4.2 6.8 4.1 6.7L4.4 6.8ZM4.4 6.8C4.5 6.8 4.5 6.7 4.6 6.7 4.7 6.5 4.7 6.3 4.6 6.2L1.8 3.8 4.4 6.8Z' class='a'/%3E%3Ccircle cx='14' cy='3.7' r='3' fill='white'/%3E%3C/svg%3E");
@@ -678,7 +679,7 @@ img {
 
 .image-compare__range {
   position: absolute;
-  bottom: 53px;
+  bottom: 42px;
   width: 100%;
   z-index: 10;
   display: flex;

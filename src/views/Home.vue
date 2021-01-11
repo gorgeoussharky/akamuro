@@ -80,10 +80,6 @@ export default {
         this.cookies = false;
       }
     },
-    log: function () {
-      console.log("test");
-      /* router.push('home') */
-    },
     switchPage: function (page) {
       router.push(page);
     },
@@ -92,8 +88,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
 @import "~@/assets/scss/variables";
+
 
 .frontpage {
   &__wrap {

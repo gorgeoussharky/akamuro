@@ -178,14 +178,14 @@ export default {
 
   &__progress-bar {
     position: absolute;
-    bottom: 30px;
+    bottom: 40px;
     left: 0;
     right: 0;
     z-index: 100;
     transition: 1s;
 
     @include media-breakpoint-down(md) {
-      bottom: 40px;
+      bottom: 60px;
     }
 
     @include media-breakpoint-down(sm) {
@@ -217,25 +217,25 @@ export default {
       transition: 2s;
       transform-origin: center;
       background-position: center;
-      background-size: 100%;
+      background-size: cover;
       z-index: -1;
       filter: grayscale(0.85) sepia(0.1);
+      transform: none;
 
       @include media-breakpoint-down(md) {
         background-position: right;
         filter: none;
-        background-size: cover;
       }
     }
 
     &--zoomed {
       &::before {
-        background-size: 150%;
         transition: 2s;
         filter: none;
-        
+        transform: scale(1.4);
+
         @include media-breakpoint-down(md) {
-          background-size: cover;
+          transform: none;
         }
       }
     }

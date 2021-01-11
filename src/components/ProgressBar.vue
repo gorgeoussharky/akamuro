@@ -2,7 +2,6 @@
   <div class="progress-bar__wrap">
     <button
       class="progress-bar__btn progress-bar__btn--prev"
-      :disabled="currentStep < 1.5"
       @click="decrementStep()"
     >
       <svg
@@ -84,6 +83,7 @@ export default {
   data() {
     return {
       currentStep: this.step,
+      timeout: false,
     };
   },
   props: {
@@ -98,32 +98,41 @@ export default {
   },
   mounted: function () {
     if (!this.isMobile()) {
-      let timeout;
-      window.addEventListener("wheel", (event) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          if (event.deltaY > 0) {
-            this.incrementStep();
-          } else if (event.deltaY < 0) {
-            this.decrementStep();
-          }
-        }, 550);
-      });
+      window.addEventListener("wheel", (event) => this.scrollHandler(event));
     } else {
-      let timeout;
-      window.addEventListener("touchmove", (event) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-          if (event.touches[0].screenY > 0) {
-            this.incrementStep();
-          } else if (event.touches[0].screenY < 0) {
-            this.decrementStep();
-          }
-        }, 550);
-      });
+      window.addEventListener("touchmove", (event) => this.touchHandler(event));
+    }
+  },
+  beforeDestroy: function () {
+    if (!this.isMobile()) {
+      window.removeEventListener("wheel", (event) => this.scrollHandler(event));
+    } else {
+      window.removeEventListener("touchmove", (event) =>
+        this.touchHandler(event)
+      );
     }
   },
   methods: {
+    touchHandler: function (event) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        if (event.touches[0].screenY > 0) {
+          this.incrementStep();
+        } else if (event.touches[0].screenY < 0) {
+          this.decrementStep();
+        }
+      }, 1000);
+    },
+    scrollHandler: function (event) {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        if (event.deltaY > 0) {
+          this.incrementStep();
+        } else if (event.deltaY < 0) {
+          this.decrementStep();
+        }
+      }, 1000);
+    },
     returnToPage: function () {
       switch (this.type) {
         case "advertiser":
@@ -133,17 +142,21 @@ export default {
           router.push({ name: "Publisher", params: { currentStep: 2 } });
           break;
         default:
-          router.push("/");
+          break;
       }
     },
     incrementStep: function () {
       if (this.isMobile()) {
-        if (this.currentStep == 1) {
-          this.currentStep = 1.5;
-        } else if (this.currentStep == 1.5) {
-          this.currentStep = 2;
-        } else {
-          this.currentStep++;
+        switch (this.currentStep) {
+          case 1:
+            this.currentStep = 1.5;
+            break;
+          case 1.5:
+            this.currentStep = 2;
+            break;
+          default:
+            this.currentStep++;
+            break;
         }
       } else {
         if (this.currentStep != 3) {
@@ -153,22 +166,34 @@ export default {
     },
     decrementStep: function () {
       if (this.isMobile()) {
-        if (this.currentStep == 2) {
-          this.currentStep = 1.5;
-        } else if (this.currentStep == 1.5) {
-          this.currentStep = 1;
-        } else if (this.currentStep == 3) {
-          this.returnToPage();
-        } else {
-          this.currentStep--;
+        switch (this.currentStep) {
+          case 3:
+            this.returnToPage();
+            break;
+          case 2:
+            this.currentStep = 1.5;
+            break;
+          case 1.5:
+            this.currentStep = 1;
+            break;
+          case 1:
+            router.push("/");
+            break;
+          default:
+            this.currentStep--;
+            break;
         }
       } else {
-        if (this.currentStep == 3) {
-          this.returnToPage();
-        } else if (this.currentStep < 2) {
-          router.push("/");
-        } else {
-          this.currentStep--;
+        switch (this.currentStep) {
+          case 3:
+            this.returnToPage();
+            break;
+          case 1:
+            router.push("/");
+            break;
+          default:
+            this.currentStep--;
+            break;
         }
       }
     },
@@ -198,7 +223,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~sass-rem/rem";
+@import "~@/assets/scss/variables";
+
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -275,19 +301,11 @@ export default {
     }
 
     &--prev {
-      left: 0;
-
-      @include media-breakpoint-down(md) {
-        left: 5px;
-      }
+      left: 5px;
     }
 
     &--next {
-      right: 0;
-
-      @include media-breakpoint-down(md) {
-        right: 5px;
-      }
+      right: 5px;
     }
 
     &:disabled {

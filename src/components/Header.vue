@@ -37,7 +37,9 @@
             </ul>
 
             <div class="header__sign-in" v-if="isMobile()">
-              <a href="" class="header__link">Sign In Advertiser</a>
+              <button class="header__link" @click.prevent="showModal = true">
+                Sign In Advertiser
+              </button>
             </div>
 
             <div class="header__sign-up" v-if="isMobile()">
@@ -101,7 +103,9 @@
 
         <transition name="formfade">
           <div class="header__sign-in" v-if="isAdvertiseForm && !isMobile()">
-            <a href="" class="header__link">Sign In</a>
+            <button class="header__link" @click.prevent="showModal = true">
+              Sign In
+            </button>
           </div>
         </transition>
 
@@ -117,20 +121,27 @@
         </div>
       </div>
     </div>
+
+    <transition name="modalFade">
+      <Modal v-if="showModal" @closed="showModal = false" />
+    </transition>
   </header>
 </template>
 
 <script>
 import { formType } from "@/global/registerFormType.js";
 import router from "@/router/index";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "Header",
   props: ["page"],
+  components: { Modal },
   data() {
     return {
       isAdvertiseForm: false,
       showMobileMenu: true,
+      showModal: false,
     };
   },
   methods: {
@@ -156,6 +167,9 @@ export default {
       }
     },
     $route() {
+      if (this.isMobile()) this.showMobileMenu = false;
+    },
+    showModal: function () {
       if (this.isMobile()) this.showMobileMenu = false;
     },
   },
@@ -215,6 +229,8 @@ export default {
       justify-content: center;
       background-color: #000;
       transition: 350ms;
+      background-image: url("~@/assets/img/bg/bg-deco.png");
+      background-position: right;
     }
   }
 
@@ -345,7 +361,7 @@ export default {
     display: block;
 
     @include media-breakpoint-down(md) {
-       padding: rem(7px 22px);
+      padding: rem(7px 22px);
     }
 
     @include media-breakpoint-down(sm) {
@@ -385,5 +401,18 @@ export default {
       }
     }
   }
+}
+
+.modalFade-enter-active,
+.modalFade-leave-active {
+  transition: opacity 500ms;
+
+  @include media-breakpoint-down(sm) {
+  transition: opacity 100ms;
+  }
+}
+.modalFade-enter,
+.modalFade-leave-to {
+  opacity: 0;
 }
 </style>
