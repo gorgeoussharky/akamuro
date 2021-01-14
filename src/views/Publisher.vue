@@ -47,6 +47,7 @@ import Advantages from "@/components/Advantages";
 import ProgressBar from "@/components/ProgressBar";
 import HowTo from "@/components/Howto";
 import router from "@/router/index";
+import { formType } from "@/global/registerFormType.js";
 
 export default {
   data() {
@@ -124,6 +125,7 @@ export default {
   watch: {
     step: function (val) {
       if (val == 3) {
+        formType.$emit("typeChanged", "publisher");
         router.push({ name: "Registration", params: { type: "publisher" } });
       }
     },
@@ -249,9 +251,13 @@ export default {
     transition: 2s;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50px;
     right: 0;
     z-index: 2;
+
+    @include media-breakpoint-down(md) {
+      left: 0;
+    }
 
     &--zoomed {
       transform: scale(1.7);
@@ -297,10 +303,14 @@ export default {
     align-items: center;
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: -10px;
+
+    @media (min-width: 1440px) {
+      bottom: 60px;
+    }
 
     @include media-breakpoint-only(md) {
-      top: -110px;
+      bottom: 110px;
     }
 
     &::after {
@@ -315,9 +325,9 @@ export default {
       z-index: -1;
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.6) 15%,
-        rgba(0, 0, 0, 0) 50%,
-        rgba(0, 0, 0, 0.6) 85%
+        rgba(0, 0, 0, 0.65) 35%,
+        rgba(0, 0, 0, 0) 55%,
+        rgba(0, 0, 0, 0.65) 70%
       );
     }
 

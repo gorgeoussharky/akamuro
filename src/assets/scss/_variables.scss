@@ -1,8 +1,26 @@
 $primary: #528edb;
 $accent: #9F132C;
+$grid-gutter-width: 90px !default;
 
 @import "~sass-rem/rem";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~@/assets/scss/buttons";
+
+@include media-breakpoint-down(sm) {
+    .container, .container-fluid {
+        padding-left: 22px  !important;
+        padding-right: 22px  !important;
+    }
+
+    .row:not(.no-gutters) {
+        margin-right: -22px  !important;
+        margin-left: -22px  !important;
+      }
+      .row:not(.no-gutters) > .col,
+      .row:not(.no-gutters) > [class*="col-"] {
+        padding-right: 22px !important;
+        padding-left: 22px  !important;
+      }
+}

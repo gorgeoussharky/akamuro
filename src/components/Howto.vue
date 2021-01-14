@@ -1,5 +1,5 @@
 <template>
-  <div class="how-to__content container h-100">
+  <div class="how-to__content container-fluid h-100">
     <h1 class="how-to__heading">
       {{ title }}
     </h1>
@@ -134,7 +134,7 @@ export default {
     transition-timing-function: ease-out;
 
     position: absolute;
-    top: -170px;
+    top: -80px;
     bottom: 0;
     display: flex;
     align-items: center;
@@ -192,7 +192,7 @@ export default {
       rgba(0, 0, 0, 0.19) 35%,
       rgba(0, 0, 0, 0.62) 100%
     );
-    padding: rem(40px);
+    padding: rem(40px 45px);
     padding-bottom: rem(110px);
     z-index: 1;
     animation: slide 2s ease-out 3s;
@@ -245,7 +245,7 @@ export default {
   }
 
   &__steps {
-    @extend .container;
+    @extend .container-fluid;
     margin: auto;
     list-style: none;
     padding: 0;
@@ -258,9 +258,17 @@ export default {
   }
 
   &__step {
-    margin: rem(0 20px);
+    margin: 0 auto;
     position: relative;
     opacity: 0;
+
+    @media (max-width: 1500px) {
+      margin: rem(0 20px);
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin: rem(0 5px);
+    }
 
     @include media-breakpoint-down(md) {
       padding-left: rem(30px);
@@ -303,7 +311,7 @@ export default {
       animation: slideItemLeft 1.5s ease-out 5s;
       animation-fill-mode: forwards;
       &::before {
-        left: 0;
+        left: 3px;
       }
 
       @include media-breakpoint-down(md) {
@@ -326,7 +334,7 @@ export default {
       }
 
       &::before {
-        right: 0;
+        right: 3px;
       }
     }
 

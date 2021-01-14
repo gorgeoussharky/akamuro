@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="container">
+    <div class="container-fluid">
       <div class="header__wrap">
         <router-link to="/" class="header__logo"> Akamuro </router-link>
 
@@ -102,7 +102,7 @@
         </button>
 
         <transition name="formfade">
-          <div class="header__sign-in" v-if="isAdvertiseForm && !isMobile()">
+          <div class="header__sign-in" v-if="isPublisherForm && !isMobile()">
             <button class="header__link" @click.prevent="showModal = true">
               Sign In
             </button>
@@ -139,33 +139,21 @@ export default {
   components: { Modal },
   data() {
     return {
-      isAdvertiseForm: false,
+      isPublisherForm: false,
       showMobileMenu: true,
       showModal: false,
     };
   },
   methods: {
     toForm: function () {
-      formType.$emit("typeChanged", "advertiser");
-      router.push({ name: "Registration", params: { type: "advertiser" } });
+      formType.$emit("typeChanged", "publisher");
+      router.push({ name: "Registration", params: { type: "publisher" } });
     },
   },
   mounted() {
-    formType.$on("typeChanged", (type) => {
-      if (type == "advertiser") {
-        this.isAdvertiseForm = true;
-      } else {
-        this.isAdvertiseForm = false;
-      }
-    });
     if (this.isMobile()) this.showMobileMenu = false;
   },
   watch: {
-    page: function (val) {
-      if (val != "Registration") {
-        this.isAdvertiseForm = false;
-      }
-    },
     $route() {
       if (this.isMobile()) this.showMobileMenu = false;
     },
@@ -283,7 +271,7 @@ export default {
 
   &__sign-in {
     position: absolute;
-    right: 150px;
+    right: 130px;
 
     @include media-breakpoint-down(md) {
       right: 100px;
@@ -292,6 +280,10 @@ export default {
     @include media-breakpoint-down(sm) {
       position: static;
     }
+  }
+
+  &__sign-up {
+    transform: translateX(10px);
   }
 
   &__toggler {

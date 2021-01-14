@@ -1,7 +1,7 @@
 <template>
   <main class="page h-100">
     <div class="page__wrap">
-      <div class="container page__container">
+      <div class="container-fluid page__container">
         <article class="page__article">
           <h1 class="page__heading">{{ title }}</h1>
 
@@ -52,7 +52,7 @@ export default {
   }
 
   &__article {
-    max-width: 935px;
+    max-width: 80%;
     border: 1px solid #3c3c3c;
     border-radius: rem(15px);
     margin: auto;

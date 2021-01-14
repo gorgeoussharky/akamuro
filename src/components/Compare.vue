@@ -7,28 +7,41 @@
     :style="isMobile() && disabled ? 'opacity: 0' : 'opacity: 1'"
   >
     <!-- @click.prevent="onMouseMove($event, true)" -->
-    <transition name="fade">
+<!--     <transition name="fade">
       <img class="image-compare__pre-img" v-if="greyed" :src="preImg" alt="" />
-    </transition>
+    </transition> -->
 
     <div
-      :style="{ width: imgPosX + 'px' }"
+      :style="{ width: imgPosX + 55 + 'px' }"
       class="wrapper"
       @mousedown.prevent="onMouseDownImage"
     >
       <!-- a-img -->
-      <img :src="mutableAfter" :style="dimensions" alt="after" />
+      <img :src="mutableAfter" :style="dimensions" alt="after" class="image-compare__bg" :class="greyed ? 'image-compare__bg--greyed' : null" />
+      <img
+        :src="mutableAfter_2"
+        :style="dimensions_samurai_before"
+        class="image-compare__samurai"
+        
+        alt="after"
+      />
     </div>
-    <div
-      class="image-compare__edge-blur"
-      :style="{ left: imgPosX - 5 + 'px' }"
-    ></div>
 
     <!-- b-img -->
     <img
       :src="mutableBefore"
       :style="dimensions"
       alt="before"
+      @mousedown.prevent="onMouseDownImage"
+      class="image-compare__bg"
+      :class="greyed ? 'image-compare__bg--greyed' : null"
+    />
+
+    <img
+      :src="mutableBefore_2"
+      :style="dimensions_samurai_after"
+      alt="before"
+      class="image-compare__samurai"
       @mousedown.prevent="onMouseDownImage"
     />
 
@@ -52,7 +65,7 @@
     </div>
 
     <div
-      class="image-compare__range range container"
+      class="image-compare__range range container-fluid"
       :class="disabled ? 'disabled' : null"
     >
       <div class="range__left">
@@ -149,6 +162,14 @@ export default {
       type: String,
       default: "https://image-compare.netlify.com/assets/after.jpg",
     },
+    before_2: {
+      type: String,
+      default: "https://image-compare.netlify.com/assets/before.jpg",
+    },
+    after_2: {
+      type: String,
+      default: "https://image-compare.netlify.com/assets/after.jpg",
+    },
     preImg: {
       type: String,
       default: "",
@@ -200,6 +221,8 @@ export default {
       mutableZoom: 1,
       mutableBefore: this.before,
       mutableAfter: this.after,
+      mutableBefore_2: this.before_2,
+      mutableAfter_2: this.after_2,
       greyed: true,
       showAfter: true,
       hideAfter: false,
@@ -223,6 +246,28 @@ export default {
         width: `${this.width}px`,
         height: this.full ? `${this.height}px` : "auto",
         transform: `scale(${zoom}) translate(${this.shiftX}px, ${this.shiftY}px)`,
+      };
+    },
+    dimensions_samurai_before() {
+      const zoom = parseFloat(this.mutableZoom.toFixed(2));
+
+      return {
+        width: `${this.width}px`,
+        height: this.full ? `${this.height}px` : "auto",
+        transform: `scale(${zoom}) translate(${this.shiftX + 30}px, ${
+          this.shiftY
+        }px)`,
+      };
+    },
+    dimensions_samurai_after() {
+      const zoom = parseFloat(this.mutableZoom.toFixed(2));
+
+      return {
+        width: `${this.width}px`,
+        height: this.full ? `${this.height}px` : "auto",
+        transform: `scale(${zoom}) translate(${this.shiftX + 43}px, ${
+          this.shiftY
+        }px)`,
       };
     },
     paddingTotal() {
@@ -273,6 +318,11 @@ export default {
     initCompare() {
       this.greyed = false;
       this.$emit("initiated");
+    },
+    stopCompare() {
+      console.log("stop");
+      this.greyed = true;
+      this.$emit("paused");
     },
     // mouse
     onMouseDownHandle() {
@@ -513,7 +563,6 @@ export default {
 <style scoped lang="scss">
 @import "~@/assets/scss/variables";
 
-
 @keyframes pulsate {
   from {
     transform: translate(-50%, -50%) scale(0.8);
@@ -529,6 +578,19 @@ export default {
   position: relative;
   overflow: hidden;
   margin: 0;
+
+  &__samurai {
+    object-fit: contain !important;
+  }
+
+  &__bg {
+    transition: 2s filter;
+    filter: none;
+    &--greyed {
+      filter: grayscale(1) brightness(0.35);
+      transition: 2s filter;
+    }
+  }
 }
 
 .after-name,
@@ -624,6 +686,11 @@ img {
   width: 100%;
   transform: translateZ(0);
   will-change: width;
+  -webkit-mask-image: -webkit-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 90%,
+    rgba(0, 0, 0, 0) 100%
+  );
 
   &::after {
     content: "";
@@ -655,7 +722,7 @@ img {
   z-index: 100;
   transform: translateX(-50%) translateZ(0);
   will-change: left;
-  transition: 300ms;
+  transition: 300ms transform;
 
   &-icon {
     position: absolute;
@@ -698,31 +765,21 @@ img {
   z-index: 2;
 }
 
-.image-compare__edge-blur {
-  /*  position: absolute;
-  width: 5px;
-  height: 100%;
-  z-index: 10;
-  backdrop-filter: blur(5px);
-  filter: blur(5px);
-  background-color: #000;
-  opacity: 0.5; */
-}
-
 .range {
   &::before {
     content: "";
     background-color: #fff;
     opacity: 0.3;
     height: 4px;
-    width: 90%;
+    width: calc(100% - 145px);
     margin: auto;
+    border-radius: 4px;
     position: absolute;
     left: 0;
     right: 0;
 
     @media (max-width: 598px) {
-      width: calc(80% - 30px);
+      width: calc(100% - 115px);
     }
   }
 
@@ -731,11 +788,11 @@ img {
     color: #fff;
     position: absolute;
     top: -40px;
-    left: 5%;
+    left: 85px;
 
     @media (max-width: 598px) {
       font-size: rem(18px);
-      left: 15px;
+      left: 22px;
     }
 
     svg {
@@ -755,11 +812,11 @@ img {
     color: #fff;
     position: absolute;
     top: -40px;
-    right: 5%;
+    right: 85px;
 
     @media (max-width: 598px) {
       font-size: rem(18px);
-      right: 15px;
+      right: 22px;
     }
 
     svg {

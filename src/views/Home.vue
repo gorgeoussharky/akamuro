@@ -1,7 +1,7 @@
 <template>
   <main class="frontpage">
     <div class="frontpage__wrap">
-      <div class="container frontpage__container">
+      <div class="container-fluid frontpage__container">
         <Notice @accepted="acceptCookies()" />
 
         <div class="frontpage__content">
@@ -33,8 +33,11 @@
           :preImg="greyed"
           :before="before"
           :after="after"
+          :before_2="before_samurai"
+          :after_2="after_samurai"
           full
           @initiated="content = false"
+          @paused="content = true"
           @reachedRight="switchPage('advertiser')"
           @reachedLeft="switchPage('publisher')"
         >
@@ -57,8 +60,10 @@ export default {
   },
   data() {
     return {
-      before: require("@/assets/img/bg/advertiser-bg-full.jpg"),
-      after: require("@/assets/img/bg/publisher-bg-full.jpg"),
+      before: require("@/assets/img/bg/advertiser-bg.jpg"),
+      after: require("@/assets/img/bg/publisher-bg.jpg"),
+      before_samurai: require("@/assets/img/samurai-advertiser-stand.png"),
+      after_samurai: require("@/assets/img/samurai-publisher-stand.png"),
       greyed: require("@/assets/img/bg/greyed-bg.jpg"),
       content: true,
       cookies: true,
@@ -89,7 +94,6 @@ export default {
 
 <style lang="scss">
 @import "~@/assets/scss/variables";
-
 
 .frontpage {
   &__wrap {
@@ -130,16 +134,17 @@ export default {
   }
 
   &__content {
-    max-width: 315px;
+    max-width: 290px;
     z-index: 10;
     color: #fff;
+    margin-top: rem(-120px);
 
     &-separator {
       height: 3px;
       background: linear-gradient(
         89.99deg,
         #ffffff 0.01%,
-        rgba(255, 255, 255, 0) 67.35%
+        rgba(255, 255, 255, 0) 22.35%
       );
       width: 70vw;
       position: absolute;

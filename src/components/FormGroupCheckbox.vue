@@ -16,10 +16,6 @@ export default {
       type: String,
       required: true,
     },
-    label: {
-      type: String,
-      required: true,
-    },
     required: {
       type: Boolean,
       default: false,

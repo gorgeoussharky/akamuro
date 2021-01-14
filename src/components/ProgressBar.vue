@@ -97,31 +97,92 @@ export default {
     },
   },
   mounted: function () {
+    var publisher = document.querySelector(".publisher"),
+      advertiser = document.querySelector(".adpage"),
+      form = document.querySelector(".signup-form");
     if (!this.isMobile()) {
-      window.addEventListener("wheel", (event) => this.scrollHandler(event));
+      publisher
+        ? publisher.addEventListener("wheel", (event) =>
+            this.scrollHandler(event)
+          )
+        : null;
+      advertiser
+        ? advertiser.addEventListener("wheel", (event) =>
+            this.scrollHandler(event)
+          )
+        : null;
+      form
+        ? form.addEventListener("wheel", (event) => this.scrollHandler(event))
+        : null;
     } else {
-      window.addEventListener("touchmove", (event) => this.touchHandler(event));
+      publisher
+        ? publisher.addEventListener("touchmove", (event) =>
+            this.touchHandler(event)
+          )
+        : null;
+      advertiser
+        ? advertiser.addEventListener("touchmove", (event) =>
+            this.touchHandler(event)
+          )
+        : null;
+      form
+        ? form.addEventListener("touchmove", (event) =>
+            this.touchHandler(event)
+          )
+        : null;
     }
   },
-  beforeDestroy: function () {
+  destroy: function () {
+    var publisher = document.querySelector(".publisher"),
+      advertiser = document.querySelector(".adpage"),
+      form = document.querySelector(".signup-form");
     if (!this.isMobile()) {
-      window.removeEventListener("wheel", (event) => this.scrollHandler(event));
+      publisher
+        ? publisher.removeEventListener("wheel", (event) =>
+            this.scrollHandler(event)
+          )
+        : null;
+      advertiser
+        ? advertiser.removeEventListener("wheel", (event) =>
+            this.scrollHandler(event)
+          )
+        : null;
+      form
+        ? form.removeEventListener("wheel", (event) =>
+            this.scrollHandler(event)
+          )
+        : null;
     } else {
-      window.removeEventListener("touchmove", (event) =>
-        this.touchHandler(event)
-      );
+      publisher
+        ? publisher.removeEventListener("touchmove", (event) =>
+            this.touchHandler(event)
+          )
+        : null;
+      advertiser
+        ? advertiser.removeEventListener("touchmove", (event) =>
+            this.touchHandler(event)
+          )
+        : null;
+      form
+        ? form.removeEventListener("touchmove", (event) =>
+            this.touchHandler(event)
+          )
+        : null;
     }
   },
   methods: {
     touchHandler: function (event) {
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => {
-        if (event.touches[0].screenY > 0) {
-          this.incrementStep();
-        } else if (event.touches[0].screenY < 0) {
-          this.decrementStep();
-        }
-      }, 1000);
+      var count = 0;
+      if (count == 0) {
+        setTimeout(() => {
+          if (event.touches[0].screenY > 0) {
+            this.incrementStep();
+          } else if (event.touches[0].screenY < 0) {
+            this.decrementStep();
+          }
+        }, 400);
+        count++;
+      }
     },
     scrollHandler: function (event) {
       clearTimeout(this.timeout);
@@ -131,7 +192,7 @@ export default {
         } else if (event.deltaY < 0) {
           this.decrementStep();
         }
-      }, 1000);
+      }, 400);
     },
     returnToPage: function () {
       switch (this.type) {
@@ -232,17 +293,18 @@ export default {
 
 .progress-bar {
   &__wrap {
-    @extend .container;
+    @extend .container-fluid;
     position: relative;
   }
 
   &__bar {
-    width: 95%;
+    width: calc(100% - 55px);
     height: 4px;
     margin: auto;
     background-color: rgba(#fff, 0.3);
     position: relative;
     z-index: 10;
+    border-radius: 4px;
 
     @include media-breakpoint-down(sm) {
       width: 75%;
@@ -301,11 +363,11 @@ export default {
     }
 
     &--prev {
-      left: 5px;
+      left: rem(35px);
     }
 
     &--next {
-      right: 5px;
+      right: rem(35px);
     }
 
     &:disabled {

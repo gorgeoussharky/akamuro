@@ -14,7 +14,7 @@
         </div>
       </transition>
 
-      <div class="container">
+      <div class="container-fluid">
         <div class="signup-form__content">
           <form class="signup-form__form form">
             <div class="signup-form__header">

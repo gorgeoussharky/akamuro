@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-xl container-fluid advantages__container">
     <div class="advantages__wrap">
       <div class="advantages__bg">
         <svg
@@ -140,6 +140,12 @@ export default {
 @import "~@/assets/scss/variables";
 
 .advantages {
+  &__container {
+    width: 100%;
+    padding: rem(0 45px);
+    max-width: 1140px;
+  }
+
   &__list {
     list-style: none;
     padding: 0;
@@ -162,10 +168,15 @@ export default {
       grid-row-gap: 18px;
       transform: translateY(-5px);
     }
+
+    @include media-breakpoint-down(md) {
+      height: auto;
+    }
   }
 
   &__wrap {
     position: relative;
+    overflow: hidden;
   }
 
   &__bg {

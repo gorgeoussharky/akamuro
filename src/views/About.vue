@@ -1,7 +1,7 @@
 <template>
   <div class="about h-100">
     <div class="about__wrap">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-xl-4 col-lg-5">
             <section class="about__block about__block--left">
@@ -42,7 +42,7 @@
             </section>
           </div>
 
-          <div class="col-xl-8 col-lg-7">
+          <div class="col-lg-7">
             <section class="about__block about__block--right">
               <h1 class="about__heading">Contact</h1>
 
@@ -222,7 +222,7 @@
 
     &::before {
       content: "";
-      width: calc(50% + 220px);
+      width: 72%;
       margin-left: auto;
       height: 100%;
       background: #1c1c1c;
@@ -271,8 +271,8 @@
       width: 100%;
       background: linear-gradient(
         89.99deg,
-        #ffffff 0.01%,
-        rgba(255, 255, 255, 0) 67.35%
+        #ffffff 10.01%,
+        rgba(255, 255, 255, 0) 100%
       );
       display: block;
       height: 3px;

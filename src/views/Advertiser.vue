@@ -255,9 +255,13 @@ export default {
     transition: 2s;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50px;
     right: 0;
     z-index: 2;
+
+    @include media-breakpoint-down(md) {
+      left: 0;
+    }
 
     &--zoomed {
       transform: scale(1.7);
@@ -323,11 +327,17 @@ export default {
       transition: 2s;
       opacity: 0;
       z-index: -1;
-      background: linear-gradient(
+      /*       background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.6) 15%,
         rgba(0, 0, 0, 0) 50%,
         rgba(0, 0, 0, 0.6) 85%
+      ); */
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.65) 35%,
+        rgba(0, 0, 0, 0) 55%,
+        rgba(0, 0, 0, 0.65) 70%
       );
     }
 
