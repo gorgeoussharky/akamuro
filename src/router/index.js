@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Page from '../views/Page.vue';
+import Offer from '../views/Offer.vue';
 
 Vue.use(VueRouter)
 
@@ -115,6 +116,11 @@ const routes = [{
       `
     }
   },
+  {
+    path: '/offer',
+    Name: 'Offers',
+    component: Offer
+  }
 ]
 
 const router = new VueRouter({

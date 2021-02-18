@@ -1,5 +1,8 @@
 <template>
-  <main class="signup-form h-100">
+  <main
+    class="signup-form"
+    :style="{ minHeight: this.FixWebkitHeightBug + 'px' }"
+  >
     <div class="signup-form__wrap">
       <transition name="formfade">
         <div class="signup-form__bg" key="publisher" v-if="type == 'publisher'">
@@ -83,9 +86,7 @@
             </div>
 
             <div class="signup-form__footer">
-              <FormGroupCheckbox
-                id="policy"
-              />
+              <FormGroupCheckbox id="policy" />
               <button class="form__btn">Submit</button>
             </div>
           </form>
@@ -152,8 +153,8 @@ export default {
   },
   data() {
     return {
-      currentType: this.type
-    }
+      currentType: this.type,
+    };
   },
   props: {
     type: {
@@ -192,10 +193,18 @@ export default {
     display: flex;
     align-items: center;
 
+    @include media-breakpoint-down(lg) {
+      padding-top: rem(30px);
+    }
+
     @include media-breakpoint-down(md) {
       padding-bottom: rem(70px);
       min-height: 100vh;
       height: auto;
+    }
+
+    @include media-breakpoint-down(sm) {
+        padding-top: rem(65px);
     }
   }
 

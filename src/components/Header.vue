@@ -4,18 +4,13 @@
       <div class="header__wrap">
         <router-link to="/" class="header__logo"> Akamuro </router-link>
 
-        <transition name="fade">
-          <nav class="header__header-menu header-menu" v-show="showMobileMenu">
+        <transition name="menuFade">
+          <nav
+            class="header__header-menu header-menu"
+            v-show="isMobileBig() ? showMobileMenu : true"
+            :class="pageTransition ? 'header__header-menu--transition' : null"
+          >
             <ul class="header-menu__list">
-              <li class="header-menu__item">
-                <router-link
-                  to="/advertiser"
-                  active-class="header-menu__link--active"
-                  class="header-menu__link"
-                >
-                  Advertiser
-                </router-link>
-              </li>
               <li class="header-menu__item">
                 <router-link
                   to="/publisher"
@@ -27,6 +22,15 @@
               </li>
               <li class="header-menu__item">
                 <router-link
+                  to="/advertiser"
+                  active-class="header-menu__link--active"
+                  class="header-menu__link"
+                >
+                  Advertiser
+                </router-link>
+              </li>
+              <li class="header-menu__item">
+                <router-link
                   to="/about-us"
                   active-class="header-menu__link--active"
                   class="header-menu__link"
@@ -34,11 +38,21 @@
                   About us
                 </router-link>
               </li>
+
+              <li class="header-menu__item">
+                <router-link
+                  to="/offer"
+                  active-class="header-menu__link--active"
+                  class="header-menu__link"
+                >
+                  Offer
+                </router-link>
+              </li>
             </ul>
 
             <div class="header__sign-in" v-if="isMobile()">
               <button class="header__link" @click.prevent="showModal = true">
-                Sign In Advertiser
+                Sign In Publisher
               </button>
             </div>
 
@@ -102,14 +116,14 @@
         </button>
 
         <transition name="formfade">
-          <div class="header__sign-in" v-if="isPublisherForm && !isMobile()">
+          <div class="header__sign-in" v-if="isPublisherForm && !isMobileBig()">
             <button class="header__link" @click.prevent="showModal = true">
               Sign In
             </button>
           </div>
         </transition>
 
-        <div class="header__sign-up" v-if="!isMobile()">
+        <div class="header__sign-up" v-if="!isMobileBig()">
           <button
             href="/register"
             class="header__link"
@@ -140,8 +154,9 @@ export default {
   data() {
     return {
       isPublisherForm: false,
-      showMobileMenu: true,
+      showMobileMenu: false,
       showModal: false,
+      pageTransition: false,
     };
   },
   methods: {
@@ -150,12 +165,15 @@ export default {
       router.push({ name: "Registration", params: { type: "publisher" } });
     },
   },
-  mounted() {
-    if (this.isMobile()) this.showMobileMenu = false;
-  },
   watch: {
     $route() {
-      if (this.isMobile()) this.showMobileMenu = false;
+      if (this.isMobile()) {
+        this.pageTransition = true;
+        setTimeout(() => {
+          this.showMobileMenu = false;
+        }, 350);
+        this.pageTransition = false;
+      }
     },
     showModal: function () {
       if (this.isMobile()) this.showMobileMenu = false;
@@ -195,6 +213,7 @@ export default {
     font-family: "Oswald", sans-serif;
     font-size: rem(20px);
     color: #fff;
+    z-index: 100;
 
     &:hover {
       color: #fff;
@@ -204,9 +223,18 @@ export default {
 
   &__header-menu {
     margin: auto;
+    transform: translateX(35px);
+
+    &--transition {
+      .header-menu__link,
+      .header__link {
+        opacity: 0;
+      }
+    }
 
     @include media-breakpoint-down(sm) {
       display: flex;
+      transform: none;
       position: fixed;
       left: 0;
       top: 0;
@@ -284,6 +312,10 @@ export default {
 
   &__sign-up {
     transform: translateX(10px);
+
+    @include media-breakpoint-down(sm) {
+      transform: none;
+    }
   }
 
   &__toggler {
@@ -321,7 +353,7 @@ export default {
     display: flex;
     align-items: center;
 
-    @media (max-width: 598px) {
+    @include media-breakpoint-down(xs) {
       flex-direction: column;
     }
   }
@@ -329,7 +361,7 @@ export default {
   &__item {
     margin: rem(0 10px);
 
-    @media (max-width: 598px) {
+    @include media-breakpoint-down(xs) {
       margin: 0;
       margin-bottom: rem(35px);
     }
@@ -400,11 +432,24 @@ export default {
   transition: opacity 500ms;
 
   @include media-breakpoint-down(sm) {
-  transition: opacity 100ms;
+    transition: opacity 100ms;
   }
 }
 .modalFade-enter,
 .modalFade-leave-to {
+  opacity: 0;
+}
+
+.menuFade-enter-active {
+  transition: opacity 0.5s;
+}
+
+.menuFade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.menuFade-enter,
+.menuFade-leave-to {
   opacity: 0;
 }
 </style>

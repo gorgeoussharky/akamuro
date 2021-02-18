@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="footer__wrap">
         <div class="footer__title">Akamuro network</div>
-        <div class="footer__copyright">Copyright 2020</div>
+        <div class="footer__copyright">Copyright 2021</div>
       </div>
     </div>
   </footer>

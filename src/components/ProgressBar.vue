@@ -97,10 +97,10 @@ export default {
     },
   },
   mounted: function () {
-    var publisher = document.querySelector(".publisher"),
-      advertiser = document.querySelector(".adpage"),
-      form = document.querySelector(".signup-form");
     if (!this.isMobile()) {
+      var publisher = document.querySelector(".publisher"),
+        advertiser = document.querySelector(".adpage"),
+        form = document.querySelector(".signup-form");
       publisher
         ? publisher.addEventListener("wheel", (event) =>
             this.scrollHandler(event)
@@ -114,29 +114,13 @@ export default {
       form
         ? form.addEventListener("wheel", (event) => this.scrollHandler(event))
         : null;
-    } else {
-      publisher
-        ? publisher.addEventListener("touchmove", (event) =>
-            this.touchHandler(event)
-          )
-        : null;
-      advertiser
-        ? advertiser.addEventListener("touchmove", (event) =>
-            this.touchHandler(event)
-          )
-        : null;
-      form
-        ? form.addEventListener("touchmove", (event) =>
-            this.touchHandler(event)
-          )
-        : null;
     }
   },
   destroy: function () {
-    var publisher = document.querySelector(".publisher"),
-      advertiser = document.querySelector(".adpage"),
-      form = document.querySelector(".signup-form");
     if (!this.isMobile()) {
+      var publisher = document.querySelector(".publisher"),
+        advertiser = document.querySelector(".adpage"),
+        form = document.querySelector(".signup-form");
       publisher
         ? publisher.removeEventListener("wheel", (event) =>
             this.scrollHandler(event)
@@ -152,38 +136,9 @@ export default {
             this.scrollHandler(event)
           )
         : null;
-    } else {
-      publisher
-        ? publisher.removeEventListener("touchmove", (event) =>
-            this.touchHandler(event)
-          )
-        : null;
-      advertiser
-        ? advertiser.removeEventListener("touchmove", (event) =>
-            this.touchHandler(event)
-          )
-        : null;
-      form
-        ? form.removeEventListener("touchmove", (event) =>
-            this.touchHandler(event)
-          )
-        : null;
     }
   },
   methods: {
-    touchHandler: function (event) {
-      var count = 0;
-      if (count == 0) {
-        setTimeout(() => {
-          if (event.touches[0].screenY > 0) {
-            this.incrementStep();
-          } else if (event.touches[0].screenY < 0) {
-            this.decrementStep();
-          }
-        }, 400);
-        count++;
-      }
-    },
     scrollHandler: function (event) {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
@@ -364,10 +319,18 @@ export default {
 
     &--prev {
       left: rem(35px);
+
+      @include media-breakpoint-down(md) {
+        left: rem(10px);
+      }
     }
 
     &--next {
       right: rem(35px);
+
+      @include media-breakpoint-down(md) {
+        right: rem(10px);
+      }
     }
 
     &:disabled {

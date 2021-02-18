@@ -1,13 +1,14 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="orientation">
     <Header ref="header" :page="page" />
     <div class="content">
-      <transition name="fade" mode="out-in">
+      <transition name="pageFade" mode="out-in">
         <router-view />
       </transition>
     </div>
     <Footer />
   </div>
+  <div id="app" class="lanscape" v-else>Please rotate your device</div>
 </template>
 
 
@@ -19,7 +20,11 @@ import { formType } from "@/global/registerFormType.js";
 
 export default {
   components: { Header, Footer },
-
+  data() {
+    return {
+      orientation: true,
+    };
+  },
   methods: {
     colorize: function () {
       this.greyed = false;
@@ -30,9 +35,30 @@ export default {
       if (val != "Registration") {
         this.$refs.header.isPublisherForm = false;
       }
+      if (val == "Publisher") {
+        this.$refs.header.isPublisherForm = true;
+      }
     },
   },
   mounted() {
+    if (this.isMobileBig()) {
+      if (window.orientation == 0) {
+        this.orientation = true;
+      } else {
+        this.orientation = false;
+      }
+
+      window.addEventListener("orientationchange", () => {
+        location.reload();
+
+        if (window.orientation == 0) {
+          this.orientation = true;
+        } else {
+          this.orientation = false;
+        }
+      });
+    }
+
     formType.$on("typeChanged", (type) => {
       if (type == "publisher") {
         this.$refs.header.isPublisherForm = true;
@@ -54,7 +80,6 @@ export default {
 @import "~@/assets/scss/variables";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/grid";
-@import "~@/assets/scss/fonts";
 @import "~@/assets/scss/base";
 
 body {
@@ -71,7 +96,27 @@ body {
 }
 
 #app {
-  min-height: 100vh;
   position: relative;
+  overflow: hidden;
+}
+
+.lanscape {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 36px;
+  height: 100vh;
+}
+
+.pageFade-enter-active,
+.pageFade-leave-active {
+  transition: opacity 1s;
+}
+
+.pageFade-enter,
+.pageFade-leave-to {
+  opacity: 0;
 }
 </style>

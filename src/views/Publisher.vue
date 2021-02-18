@@ -1,8 +1,16 @@
 <template>
   <main class="publisher h-100">
-    <div class="publisher__wrap h-100" :class="wrapClasses">
+    <div
+      class="publisher__wrap h-100"
+      :class="wrapClasses"
+      :style="{ height: this.FixWebkitHeightBug + 'px' }"
+    >
       <div class="publisher__container h-100">
-        <div class="publisher__samurai" :class="samuraiClasses">
+        <div
+          class="publisher__samurai"
+          :class="samuraiClasses"
+          :style="{ height: this.FixWebkitHeightBug + 'px' }"
+        >
           <img
             src="@/assets/img/samurai-publisher.png"
             alt=""
@@ -117,7 +125,7 @@ export default {
     if (this.step == 1) {
       setTimeout(() => {
         this.zoomed = false;
-      }, 3400);
+      }, 1400);
     } else {
       this.zoomed = false;
     }
@@ -143,6 +151,7 @@ export default {
         "publisher__samurai--hidden":
           (this.isMobile() && this.step == 2) ||
           (this.isTablet() && this.step == 2),
+        "publisher__samurai--shifted": this.step == 1.5,
       };
     },
   },
@@ -188,14 +197,13 @@ export default {
     @include media-breakpoint-down(sm) {
       width: 50%;
       margin: 0;
-      bottom: 60px;
+      bottom: 50px;
     }
   }
 
   &__wrap {
     position: relative;
     padding: rem(80px 0);
-    min-height: 100vh;
 
     @include media-breakpoint-down(sm) {
       width: 200%;
@@ -248,15 +256,15 @@ export default {
     margin: auto;
     transform-origin: top;
     transform: none;
-    transition: 2s;
+    transition: 2s transform, 500ms left;
     position: absolute;
     top: 0;
-    left: 50px;
+    left: 0;
     right: 0;
     z-index: 2;
 
-    @include media-breakpoint-down(md) {
-      left: 0;
+    @include media-breakpoint-down(xs) {
+      left: -25px;
     }
 
     &--zoomed {
@@ -264,13 +272,19 @@ export default {
       transition: 2s;
 
       @include media-breakpoint-down(sm) {
-        transform: scale(1.3) translateX(-33%);
+        transform: scale(1.3) translateX(-43vw);
+        left: 0;
       }
     }
 
     &--hidden {
       opacity: 0;
       transition: 2s;
+    }
+
+    &--shifted {
+      left: -15px;
+      transition: 500ms;
     }
 
     img {
@@ -287,10 +301,6 @@ export default {
       animation: rotate 2.5s ease-in-out 1.5s infinite;
       animation-direction: alternate;
     }
-
-    @include media-breakpoint-down(sm) {
-      left: -20px;
-    }
   }
 
   &__advantages {
@@ -304,6 +314,7 @@ export default {
     position: absolute;
     top: 0;
     bottom: -10px;
+    transform: translateX(-20px);
 
     @media (min-width: 1440px) {
       bottom: 60px;
@@ -313,11 +324,15 @@ export default {
       bottom: 110px;
     }
 
+    @include media-breakpoint-down(md) {
+      transform: none;
+    }
+
     &::after {
       content: "";
       left: 0;
       top: 0;
-      width: 100%;
+          width: calc(100% + 20px);
       height: 100vh;
       position: absolute;
       transition: 2s;
@@ -329,6 +344,19 @@ export default {
         rgba(0, 0, 0, 0) 55%,
         rgba(0, 0, 0, 0.65) 70%
       );
+
+      @include media-breakpoint-down(md) {
+        width: 100%;
+      }
+
+      @include media-breakpoint-down(xs) {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.65) 27.5%,
+          rgba(0, 0, 0, 0) 45%,
+          rgba(0, 0, 0, 0.65) 85%
+        );
+      }
     }
 
     &--visible {
@@ -342,8 +370,8 @@ export default {
 
       .advantages__bg rect {
         transform: scale(1);
-        transition: 2s;
-        transition-delay: 2.5s;
+        transition: 1.75s;
+        transition-delay: 2s;
       }
     }
   }
@@ -375,7 +403,7 @@ export default {
 
 .sectionFade-enter-active,
 .sectionFade-leave-active {
-  transition: opacity 2.5s;
+  transition: opacity 1.5s;
 }
 .sectionFade-enter,
 .sectionFade-leave-to {

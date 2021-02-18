@@ -67,6 +67,8 @@ export default {
     @include media-breakpoint-down(sm) {
       height: 100%;
       padding: rem(22px);
+      border-radius: 0;
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       justify-content: center;

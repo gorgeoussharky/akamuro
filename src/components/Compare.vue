@@ -7,22 +7,27 @@
     :style="isMobile() && disabled ? 'opacity: 0' : 'opacity: 1'"
   >
     <!-- @click.prevent="onMouseMove($event, true)" -->
-<!--     <transition name="fade">
+    <!--     <transition name="fade">
       <img class="image-compare__pre-img" v-if="greyed" :src="preImg" alt="" />
     </transition> -->
 
     <div
-      :style="{ width: imgPosX + 55 + 'px' }"
+      :style="wrapperDimensions"
       class="wrapper"
       @mousedown.prevent="onMouseDownImage"
     >
       <!-- a-img -->
-      <img :src="mutableAfter" :style="dimensions" alt="after" class="image-compare__bg" :class="greyed ? 'image-compare__bg--greyed' : null" />
+      <img
+        :src="mutableAfter"
+        :style="dimensions"
+        alt="after"
+        class="image-compare__bg"
+        :class="greyed ? 'image-compare__bg--greyed' : null"
+      />
       <img
         :src="mutableAfter_2"
         :style="dimensions_samurai_before"
         class="image-compare__samurai"
-        
         alt="after"
       />
     </div>
@@ -53,7 +58,7 @@
       class="handle"
       :class="disabled ? 'disabled' : null"
       @mousedown.prevent="onMouseDownHandle"
-      @touchmove.prevent="onMouseDownHandle"
+      @touchmove.prevent="touchCompareAction()"
     >
       <template>
         <span
@@ -66,10 +71,13 @@
 
     <div
       class="image-compare__range range container-fluid"
-      :class="disabled ? 'disabled' : null"
+      :class="[disabled ? 'disabled' : null]"
     >
-      <div class="range__left">
-        Pubisher
+      <div
+        class="range__left"
+        @click.prevent="!disabled ? $emit('reachedLeft') : null"
+      >
+        Publisher
         <svg
           width="24"
           height="11"
@@ -107,7 +115,10 @@
           />
         </svg>
       </div>
-      <div class="range__right">
+      <div
+        class="range__right"
+        @click.prevent="!disabled ? $emit('reachedRight') : null"
+      >
         Advertiser
         <svg
           width="24"
@@ -230,6 +241,13 @@ export default {
     };
   },
   computed: {
+    wrapperDimensions() {
+      return {
+        width: this.isMobile()
+          ? this.imgPosX + 5 + "px"
+          : this.imgPosX + 25 + "px",
+      };
+    },
     afterLabel() {
       return this.afterName || this.labels.after;
     },
@@ -251,24 +269,44 @@ export default {
     dimensions_samurai_before() {
       const zoom = parseFloat(this.mutableZoom.toFixed(2));
 
-      return {
-        width: `${this.width}px`,
-        height: this.full ? `${this.height}px` : "auto",
-        transform: `scale(${zoom}) translate(${this.shiftX + 30}px, ${
-          this.shiftY
-        }px)`,
-      };
+      if (this.isMobile()) {
+        return {
+          width: `${this.width}px`,
+          height: this.full ? `${this.height}px` : "auto",
+          transform: `scale(${zoom}) translate(${this.shiftX + 15}px, ${
+            this.shiftY
+          }px)`,
+        };
+      } else {
+        return {
+          width: `${this.width}px`,
+          height: this.full ? `${this.height}px` : "auto",
+          transform: `scale(${zoom}) translate(${this.shiftX + 30}px, ${
+            this.shiftY
+          }px)`,
+        };
+      }
     },
     dimensions_samurai_after() {
       const zoom = parseFloat(this.mutableZoom.toFixed(2));
 
-      return {
-        width: `${this.width}px`,
-        height: this.full ? `${this.height}px` : "auto",
-        transform: `scale(${zoom}) translate(${this.shiftX + 43}px, ${
-          this.shiftY
-        }px)`,
-      };
+      if (this.isMobile()) {
+        return {
+          width: `${this.width}px`,
+          height: this.full ? `${this.height}px` : "auto",
+          transform: `scale(${zoom}) translate(${this.shiftX + 25}px, ${
+            this.shiftY
+          }px)`,
+        };
+      } else {
+        return {
+          width: `${this.width}px`,
+          height: this.full ? `${this.height}px` : "auto",
+          transform: `scale(${zoom}) translate(${this.shiftX + 43}px, ${
+            this.shiftY
+          }px)`,
+        };
+      }
     },
     paddingTotal() {
       return this.padding.left + this.padding.right;
@@ -328,6 +366,10 @@ export default {
     onMouseDownHandle() {
       this.$emit("movement");
       this.isDraggingHandle = true;
+    },
+    touchCompareAction() {
+      this.initCompare();
+      this.onMouseDownHandle();
     },
     onMouseDownImage() {
       if (this.isDraggable) {
@@ -393,13 +435,23 @@ export default {
 
         this.imgPosX = imgPosX;
         this.posX = posX;
+        var right_border, left_border;
 
-        var right_border =
-          this.$el.getBoundingClientRect().right -
-          (this.$el.getBoundingClientRect().right * 30) / 100;
-        var left_border =
-          this.$el.getBoundingClientRect().left +
-          (this.$el.getBoundingClientRect().right * 30) / 100;
+        if (this.isMobile()) {
+          right_border =
+            this.$el.getBoundingClientRect().right -
+            (this.$el.getBoundingClientRect().right * 15) / 100;
+          left_border =
+            this.$el.getBoundingClientRect().left +
+            (this.$el.getBoundingClientRect().right * 15) / 100;
+        } else {
+          right_border =
+            this.$el.getBoundingClientRect().right -
+            (this.$el.getBoundingClientRect().right * 30) / 100;
+          left_border =
+            this.$el.getBoundingClientRect().left +
+            (this.$el.getBoundingClientRect().right * 30) / 100;
+        }
 
         if (posX >= right_border) {
           this.$emit("reachedRight");
@@ -688,7 +740,7 @@ img {
   will-change: width;
   -webkit-mask-image: -webkit-linear-gradient(
     0deg,
-    rgba(255, 255, 255, 1) 90%,
+    rgba(255, 255, 255, 1) 95%,
     rgba(0, 0, 0, 0) 100%
   );
 
@@ -789,6 +841,7 @@ img {
     position: absolute;
     top: -40px;
     left: 85px;
+    cursor: pointer;
 
     @media (max-width: 598px) {
       font-size: rem(18px);
@@ -813,6 +866,7 @@ img {
     position: absolute;
     top: -40px;
     right: 85px;
+    cursor: pointer;
 
     @media (max-width: 598px) {
       font-size: rem(18px);

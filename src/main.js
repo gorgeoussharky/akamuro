@@ -7,9 +7,23 @@ Vue.config.productionTip = false
 Vue.use(Vue2TouchEvents)
 
 Vue.mixin({
+  computed: {
+    FixWebkitHeightBug() {
+
+      var height = window.innerHeight;
+      return height;
+    }
+  },
   methods: {
     isMobile: function () {
       if (window.matchMedia("(max-width: 599px)").matches) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isMobileBig: function () {
+      if (window.matchMedia("(max-width: 800px)").matches) {
         return true;
       } else {
         return false;
@@ -21,7 +35,7 @@ Vue.mixin({
       } else {
         return false;
       }
-    }
+    },
   },
 })
 

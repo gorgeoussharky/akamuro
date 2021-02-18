@@ -39,13 +39,13 @@ export default {
         document
           .querySelector(".how-to__heading")
           .classList.add("how-to__heading--slide-in");
-      }, 2000);
+      }, 1000);
     } else {
       setTimeout(() => {
         document
           .querySelector(".how-to__heading")
           .classList.add("how-to__heading--slide-in");
-      }, 5000);
+      }, 1750);
     }
   },
   updated: function () {
@@ -54,11 +54,11 @@ export default {
       if (this.isMobile() || this.isTablet()) {
         setTimeout(() => {
           heading.classList.add("how-to__heading--slide-in");
-        }, 2000);
+        }, 1000);
       } else {
         setTimeout(() => {
           heading.classList.add("how-to__heading--slide-in");
-        }, 5000);
+        }, 1750);
       }
   },
   beforeDestroy: function () {
@@ -130,7 +130,7 @@ export default {
     line-height: rem(48px);
     opacity: 0;
     transform: translateX(-50vw);
-    transition-duration: 1.5s;
+    transition-duration: 2s;
     transition-timing-function: ease-out;
 
     position: absolute;
@@ -157,7 +157,7 @@ export default {
     &--slide-in {
       transform: translateX(0);
       opacity: 1;
-      transition-duration: 1.5s;
+      transition-duration: 1.25s;
       transition-timing-function: ease-out;
 
       @include media-breakpoint-down(md) {
@@ -168,7 +168,7 @@ export default {
     &--slide-out {
       transform: translateX(0);
       opacity: 0;
-      transition-duration: 1.5s;
+      transition-duration: 1.25s;
       transition-timing-function: ease-out;
 
       @include media-breakpoint-down(md) {
@@ -195,12 +195,12 @@ export default {
     padding: rem(40px 45px);
     padding-bottom: rem(110px);
     z-index: 1;
-    animation: slide 2s ease-out 3s;
+    animation: slide 1.25s ease-out 750ms;
     animation-fill-mode: forwards;
     opacity: 0;
 
     @include media-breakpoint-down(md) {
-      animation: fade 1s ease-out 3s;
+      animation: fade 1s ease-out 1s;
       animation-fill-mode: forwards;
       padding: 0;
       padding-left: rem(40px);
@@ -248,7 +248,7 @@ export default {
     @extend .container-fluid;
     margin: auto;
     list-style: none;
-    padding: 0;
+    padding: 0 !important;
     display: flex;
     color: #fff;
 
@@ -308,10 +308,14 @@ export default {
 
     &:nth-of-type(1),
     &:nth-of-type(2) {
-      animation: slideItemLeft 1.5s ease-out 5s;
+      animation: slideItemLeft 1.5s ease-out 1750ms;
       animation-fill-mode: forwards;
       &::before {
         left: 3px;
+
+        @include media-breakpoint-down(xs) {
+          left: 0;
+        }
       }
 
       @include media-breakpoint-down(md) {
@@ -323,7 +327,7 @@ export default {
     &:nth-of-type(3),
     &:nth-of-type(4) {
       text-align: right;
-      animation: slideItemRight 1.5s ease-out 5s;
+      animation: slideItemRight 1.5s ease-out 1750ms;
       animation-fill-mode: forwards;
 
       @include media-breakpoint-down(md) {
@@ -335,6 +339,10 @@ export default {
 
       &::before {
         right: 3px;
+
+        @include media-breakpoint-down(xs) {
+          left: 0;
+        }
       }
     }
 

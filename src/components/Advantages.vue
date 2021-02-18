@@ -94,32 +94,6 @@
           </li>
         </ul>
       </template>
-      <!-- <template v-else>
-        <ul class="advantages__list" v-if="advantagesStep == 1">
-          <li
-            class="advantages__item"
-            :key="key"
-            v-for="(listItem, key) in list.slice(0, 4)"
-          >
-            <h2 class="advantages__item-title">{{ listItem.title }}</h2>
-            <p class="advantages__item-description">
-              {{ listItem.description }}
-            </p>
-          </li>
-        </ul>
-        <ul class="advantages__list"  v-if="advantagesStep == 1.5">
-          <li
-            class="advantages__item"
-            :key="key"
-            v-for="(listItem, key) in list.slice(4, 7)"
-          >
-            <h2 class="advantages__item-title">{{ listItem.title }}</h2>
-            <p class="advantages__item-description">
-              {{ listItem.description }}
-            </p>
-          </li>
-        </ul>
-      </template> -->
     </div>
   </div>
 </template>
@@ -169,7 +143,7 @@ export default {
       transform: translateY(-5px);
     }
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       height: auto;
     }
   }
@@ -187,14 +161,27 @@ export default {
     @include media-breakpoint-down(md) {
       top: 25px;
       left: -180px;
+
       svg {
         height: 350px;
       }
     }
 
+    @include media-breakpoint-down(xs) {
+      left: -205px;
+    }
+
+    @media (max-width: 420px) {
+      left: -165px;
+    }
+
+    @media (max-width: 385px) {
+      left: -205px;
+    }
+
     rect {
       transform: scale(0.05);
-      transition: 2s;
+      transition: 1.75s;
       transform-origin: center -20px;
       transition-timing-function: ease-in-out;
     }
@@ -225,6 +212,10 @@ export default {
 
       @include media-breakpoint-down(md) {
         max-width: 170px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        max-width: 200px;
       }
     }
   }

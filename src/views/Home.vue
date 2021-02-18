@@ -1,6 +1,6 @@
 <template>
   <main class="frontpage">
-    <div class="frontpage__wrap">
+    <div class="frontpage__wrap" :style="{ height: this.FixWebkitHeightBug + 'px' }">
       <div class="container-fluid frontpage__container">
         <Notice @accepted="acceptCookies()" />
 
@@ -70,13 +70,6 @@ export default {
     };
   },
   methods: {
-    isMobile: function () {
-      if (window.matchMedia("(max-width: 598px)").matches) {
-        return true;
-      } else {
-        return false;
-      }
-    },
     acceptCookies: function () {
       if (this.isMobile()) {
         this.cookies = false;
@@ -138,18 +131,24 @@ export default {
     z-index: 10;
     color: #fff;
     margin-top: rem(-120px);
+    position: relative;
 
     &-separator {
       height: 3px;
       background: linear-gradient(
         89.99deg,
         #ffffff 0.01%,
-        rgba(255, 255, 255, 0) 22.35%
+        rgba(255, 255, 255, 0) 100%
       );
-      width: 70vw;
+      width: calc(100% + 45px);
       position: absolute;
-      left: 0;
+      left: -45px;
       transform: translateY(-15px);
+
+      @include media-breakpoint-down(sm) {
+        left: -22px;
+        width: calc(100% + 22px);
+      }
     }
   }
 
@@ -164,6 +163,7 @@ export default {
 .fade-leave-active {
   transition: opacity 2s;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;

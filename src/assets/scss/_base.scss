@@ -40,3 +40,20 @@ html {
         overflow-y: auto;
     }
 }
+
+body {
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #3a3a3a;
+        border-radius: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #1b1b1b;
+        border-radius: 0px 14px 14px 0px;
+    }
+}
