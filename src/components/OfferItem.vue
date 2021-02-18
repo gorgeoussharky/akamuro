@@ -27,19 +27,22 @@
         <div class="offer-item__meta-item">AR: {{ offer.meta.ar }}</div>
       </div>
       <div class="offer-item__type">{{ offer.target }}</div>
-      <div
+      <a
+        href="https://network.akamuro.com/v2/sign/in"
+        target="_blank"
+        rel="nofollow"
         class="offer-item__link-wrap"
         @mouseover="notice = true"
         @mouseout="notice = false"
       >
-        <a href="" class="offer-item__link">
+        <div class="offer-item__link">
           <img src="@/assets/img/lock.svg" alt="" />
           Условия
-        </a>
+        </div>
         <div class="offer-item__locked" v-show="notice">
           Что бы посмотреть условия оффера, вам нужно зарегистрироваться
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </template>

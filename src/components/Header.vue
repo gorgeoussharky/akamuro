@@ -11,43 +11,16 @@
             :class="pageTransition ? 'header__header-menu--transition' : null"
           >
             <ul class="header-menu__list">
-              <li class="header-menu__item">
-                <router-link
-                  to="/publisher"
-                  active-class="header-menu__link--active"
-                  class="header-menu__link"
-                >
-                  Publisher
-                </router-link>
-              </li>
-              <li class="header-menu__item">
-                <router-link
-                  to="/advertiser"
-                  active-class="header-menu__link--active"
-                  class="header-menu__link"
-                >
-                  Advertiser
-                </router-link>
-              </li>
-              <li class="header-menu__item">
-                <router-link
-                  to="/about-us"
-                  active-class="header-menu__link--active"
-                  class="header-menu__link"
-                >
-                  About us
-                </router-link>
-              </li>
+              <MenuItem
+                link="/publisher"
+                label="Publisher"
+                :parent="true"
+                :sublinks="[{ label: 'Offer', link: '/offer' }]"
+              />
 
-              <li class="header-menu__item">
-                <router-link
-                  to="/offer"
-                  active-class="header-menu__link--active"
-                  class="header-menu__link"
-                >
-                  Offer
-                </router-link>
-              </li>
+              <MenuItem link="/advertiser" label="Advertiser" />
+
+              <MenuItem link="/about-us" label="About us" />
             </ul>
 
             <div class="header__sign-in" v-if="isMobile()">
@@ -145,12 +118,13 @@
 <script>
 import { formType } from "@/global/registerFormType.js";
 import router from "@/router/index";
-import Modal from "@/components/Modal.vue";
+import Modal from "./Modal.vue";
+import MenuItem from "./MenuItem.vue";
 
 export default {
   name: "Header",
   props: ["page"],
-  components: { Modal },
+  components: { Modal, MenuItem },
   data() {
     return {
       isPublisherForm: false,
@@ -355,74 +329,6 @@ export default {
 
     @include media-breakpoint-down(xs) {
       flex-direction: column;
-    }
-  }
-
-  &__item {
-    margin: rem(0 10px);
-
-    @include media-breakpoint-down(xs) {
-      margin: 0;
-      margin-bottom: rem(35px);
-    }
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-
-  &__link {
-    color: rgba(#fff, 0.8);
-    font-size: rem(14px);
-    padding: rem(7px 32px);
-    position: relative;
-    transition: 250ms;
-    background: transparent;
-    display: block;
-
-    @include media-breakpoint-down(md) {
-      padding: rem(7px 22px);
-    }
-
-    @include media-breakpoint-down(sm) {
-      font-size: rem(18px);
-    }
-
-    &::after {
-      content: "";
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      position: absolute;
-      background: linear-gradient(to right, #9f132c 2px, transparent 2px) 0 0,
-        linear-gradient(to right, #9f132c 2px, transparent 2px) 0 100%,
-        linear-gradient(to left, #9f132c 2px, transparent 2px) 100% 0,
-        linear-gradient(to left, #9f132c 2px, transparent 2px) 100% 100%,
-        linear-gradient(to bottom, #9f132c 2px, transparent 2px) 0 0,
-        linear-gradient(to bottom, #9f132c 2px, transparent 2px) 100% 0,
-        linear-gradient(to top, #9f132c 2px, transparent 2px) 0 100%,
-        linear-gradient(to top, #9f132c 2px, transparent 2px) 100% 100%;
-      background-size: 7px 7px;
-      transition: 750ms;
-      background-repeat: no-repeat;
-      opacity: 0;
-    }
-
-    &:hover {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    &--active {
-      &::after {
-        opacity: 1;
-        transition: 750ms;
-      }
     }
   }
 }
