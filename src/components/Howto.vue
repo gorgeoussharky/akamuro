@@ -364,7 +364,7 @@ export default {
     }
 
     &-description {
-      max-width: 215px;
+      max-width: 200px;
       line-height: rem(18px);
 
       @include media-breakpoint-only(md) {

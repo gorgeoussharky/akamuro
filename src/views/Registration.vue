@@ -61,34 +61,143 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-md-6">
-                <FormGroup id="advert" label="Advert Mame *" :required="true" />
+            <template v-if="currentType == 'publisher'">
+              <div class="row">
+                <div class="col-md-6">
+                  <FormGroup
+                    id="name"
+                    label="Name*"
+                    :required="true"
+                    :maxlength="30"
+                    v-model="form.name"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="email"
+                    label="Email"
+                    type="email"
+                    :required="true"
+                    :maxlength="30"
+                    v-model="form.email"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="pw"
+                    label="Password*"
+                    type="password"
+                    :required="true"
+                    :minlength="8"
+                    :maxlength="30"
+                    v-model="form.pw"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="repeat_pw"
+                    label="Repeat Password*"
+                    type="password"
+                    :required="true"
+                    :minlength="8"
+                    :maxlength="30"
+                    v-model="form.repeatPw"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="skype"
+                    label="Skype"
+                    :maxlength="30"
+                    v-model="form.skype"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="tg"
+                    label="Telegram"
+                    :minlength="5"
+                    :maxlength="30"
+                    v-model="form.tg"
+                  />
+                </div>
+                <div class="col-12">
+                  <FormGroup
+                    id="message"
+                    type="textarea"
+                    :maxlength="300"
+                    label="Additional info"
+                    v-model="form.message"
+                  />
+                </div>
               </div>
-              <div class="col-md-6">
-                <FormGroup id="cat" label="Category " />
-              </div>
-              <div class="col-md-6">
-                <FormGroup id="site" label="Site" />
-              </div>
-              <div class="col-md-6">
-                <FormGroup id="name" label="Personal Name" />
-              </div>
-              <div class="col-md-6">
-                <FormGroup id="tel" label="Phone" />
-              </div>
-              <div class="col-md-6">
-                <FormGroup id="position" label="Position" />
-              </div>
-              <div class="col-12">
-                <FormGroup id="message" label="Additional comments" />
-              </div>
-            </div>
 
-            <div class="signup-form__footer">
-              <FormGroupCheckbox id="policy" />
-              <button class="form__btn">Submit</button>
-            </div>
+              <div class="signup-form__footer">
+                <FormGroupCheckbox id="policy" :required="true" />
+                <button class="form__btn" :disabled="disabled">Register</button>
+              </div>
+            </template>
+
+            <template v-if="currentType == 'advertiser'">
+              <div class="row">
+                <div class="col-md-6">
+                  <FormGroup
+                    id="company"
+                    label="Company*"
+                    :required="true"
+                    :maxlength="30"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="email"
+                    label="Email*"
+                    type="email"
+                    :required="true"
+                    :maxlength="30"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="site"
+                    label="Site*"
+                    :required="true"
+                    :maxlength="30"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="country"
+                    label="Country (GEO)"
+                    :required="true"
+                    :maxlength="30"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup id="skype" label="Skype" :maxlength="30" />
+                </div>
+                <div class="col-md-6">
+                  <FormGroup
+                    id="tg"
+                    label="Telegram"
+                    :minlength="5"
+                    :maxlength="30"
+                  />
+                </div>
+                <div class="col-12">
+                  <FormGroup
+                    id="message"
+                    type="textarea"
+                    :maxlength="300"
+                    label="Additional info"
+                  />
+                </div>
+              </div>
+              <div class="signup-form__footer">
+                <FormGroupCheckbox id="policy" :required="true" />
+                <button class="form__btn" :disabled="disabled">Submit</button>
+              </div>
+            </template>
           </form>
 
           <transition name="formfade">
@@ -154,12 +263,37 @@ export default {
   data() {
     return {
       currentType: this.type,
+      form: {
+        name: null,
+        email: null,
+        skype: null,
+        pw: null,
+        repeatPW: null,
+        tg: null,
+        message: null,
+      },
     };
   },
   props: {
     type: {
       type: String,
       default: "advertiser",
+    },
+  },
+  computed: {
+    disabled() {
+      var values = this.form;
+      var invalid = true;
+      Object.values(values).forEach((value) => {
+        console.log(value);
+        if (value) {
+          invalid = false;
+        } else {
+          invalid = true;
+        }
+      });
+
+      return invalid;
     },
   },
   methods: {
@@ -204,7 +338,7 @@ export default {
     }
 
     @include media-breakpoint-down(sm) {
-        padding-top: rem(65px);
+      padding-top: rem(65px);
     }
   }
 
@@ -324,6 +458,11 @@ export default {
       @extend %btn-accent;
       padding: rem(12px 55px);
       margin-left: auto;
+
+      &:disabled {
+        filter: grayscale(1);
+        cursor: not-allowed;
+      }
 
       @include media-breakpoint-down(md) {
         margin-left: 0;

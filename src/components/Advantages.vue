@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="container-xl container-fluid advantages__container">
     <div class="advantages__wrap">
@@ -103,7 +105,7 @@ export default {
   name: "Advantages",
   props: {
     list: {
-      type: Array || Object,
+      type: Object,
       required: true,
     },
   },
@@ -208,7 +210,7 @@ export default {
       font-size: rem(14px);
       opacity: 0.8;
       margin-bottom: 0;
-      max-width: 285px;
+      max-width: 225px;
 
       @include media-breakpoint-down(md) {
         max-width: 170px;

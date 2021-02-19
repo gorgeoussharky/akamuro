@@ -1,6 +1,12 @@
 <template>
   <div class="form__group form__group--checkbox">
-    <input type="checkbox" class="form__control" :name="id" :id="id" />
+    <input
+      type="checkbox"
+      class="form__control"
+      :name="id"
+      :id="id"
+      :required="required"
+    />
     <label :for="id" class="form__label"
       ><router-link to="/public">Terms and conditions</router-link>
       /<router-link to="/policy"> Privacy policy </router-link>
@@ -21,6 +27,7 @@ export default {
       default: false,
     },
   },
+
 };
 </script>
 

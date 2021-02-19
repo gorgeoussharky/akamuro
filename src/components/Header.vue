@@ -1,3 +1,24 @@
+<i18n>
+{
+  "en": {
+    "publisher": "Publisher",
+    "advertiser": "Advertiser",
+    "offers": "Offers",
+    "aboutus": "About us",
+    "signin": "Log In",
+    "registration": "Registration"
+  },
+  "vn":  {
+    "publisher": "Nhà xuất bản",
+    "advertiser": "Nhà quảng cáo",
+    "offers": "Đối tác",
+    "aboutus": "Về chúng tô",
+    "signin": "Đăng nhập",
+    "registration": "Đăng ký"
+  }
+}
+</i18n>
+
 <template>
   <header class="header">
     <div class="container-fluid">
@@ -11,21 +32,18 @@
             :class="pageTransition ? 'header__header-menu--transition' : null"
           >
             <ul class="header-menu__list">
-              <MenuItem
-                link="/publisher"
-                label="Publisher"
-                :parent="true"
-                :sublinks="[{ label: 'Offer', link: '/offer' }]"
-              />
+              <MenuItem link="/publisher" :label="$t('publisher')" />
 
-              <MenuItem link="/advertiser" label="Advertiser" />
+              <MenuItem link="/advertiser" :label="$t('advertiser')" />
 
-              <MenuItem link="/about-us" label="About us" />
+              <MenuItem link="/offer" :label="$t('offers')" />
+
+              <MenuItem link="/about-us" :label="$t('aboutus')" />
             </ul>
 
             <div class="header__sign-in" v-if="isMobile()">
               <button class="header__link" @click.prevent="showModal = true">
-                Sign In Publisher
+                {{ $t("signin") }}
               </button>
             </div>
 
@@ -36,11 +54,14 @@
                 :class="page == 'Registration' ? 'header__link--active' : null"
                 @click="toForm()"
               >
-                Registration
+                {{ $t("registration") }}
               </button>
             </div>
+
           </nav>
         </transition>
+
+        <LangSwitcher class="header__lang-switcher" v-if="isMobile()" />
 
         <button
           class="header__toggler"
@@ -89,9 +110,9 @@
         </button>
 
         <transition name="formfade">
-          <div class="header__sign-in" v-if="isPublisherForm && !isMobileBig()">
+          <div class="header__sign-in" v-if="!isMobileBig()">
             <button class="header__link" @click.prevent="showModal = true">
-              Sign In
+              {{ $t("signin") }}
             </button>
           </div>
         </transition>
@@ -103,9 +124,11 @@
             :class="page == 'Registration' ? 'header__link--active' : null"
             @click="toForm()"
           >
-            Registration
+            {{ $t("registration") }}
           </button>
         </div>
+
+        <LangSwitcher class="header__lang-switcher" v-if="!isMobile()" />
       </div>
     </div>
 
@@ -119,12 +142,13 @@
 import { formType } from "@/global/registerFormType.js";
 import router from "@/router/index";
 import Modal from "./Modal.vue";
+import LangSwitcher from "./LangSwitcher.vue";
 import MenuItem from "./MenuItem.vue";
 
 export default {
   name: "Header",
   props: ["page"],
-  components: { Modal, MenuItem },
+  components: { Modal, MenuItem, LangSwitcher },
   data() {
     return {
       isPublisherForm: false,
@@ -292,9 +316,17 @@ export default {
     }
   }
 
+  &__lang-switcher {
+    @include media-breakpoint-down(sm) {
+        margin-left: auto;
+    }
+
+  }
+
   &__toggler {
-    margin-left: auto;
+    margin-left: rem(20px);
     z-index: 10;
+    
 
     svg line {
       transform-origin: center;

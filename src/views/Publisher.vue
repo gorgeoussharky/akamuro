@@ -1,3 +1,108 @@
+<i18n>
+{
+  "en": {
+    "advantages": [
+        {
+          "title": "Fast payouts",
+          "description": "Payments on request from 2 times a month"
+        },
+        {
+          "title": "Wide target audience",
+          "description": "Any gender from 21 to 55 years old with the minimum wage"
+        },
+        {
+          "title": "Flexible hold terms",
+          "description": "Regular partners can withdraw money faster"
+        },
+        {
+          "title": "Stable demand",
+          "description": "Offers least sensitive to the crisis"
+        },
+        {
+          "title": "Expert support",
+          "description": "Experience of our team over 10 years"
+        },
+        {
+          "title": "Legal advertising",
+          "description": "Easy moderation and the ability to work with large platforms"
+        },
+        {
+          "title": "Individual conditions",
+          "description": "Every webmaster has the opportunity to earn more"
+        },
+        {
+          "title": "A relatively young market",
+          "description": "Lack of high competition"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Have an understanding with which traffic source to work"
+        },
+        {
+          "text": "Register with the Akamuro Affiliate Network"
+        },
+        {
+          "text": "Choose the most interesting offer"
+        },
+        {
+          "text": "Drive high-quality traffic and get the best profit"
+        }
+      ]
+  },
+  "vn": {
+    "advantages": [
+        {
+          "title": "Thanh toán nhanh",
+          "description": "Thanh toán theo yêu cầu từ 2 lần một tháng"
+        },
+        {
+          "title": "Đối tượng mục tiêu rộng",
+          "description": "Mọi giới từ 21 đến 55 tuổi với mức lương tối thiểu"
+        },
+        {
+          "title": "Điều khoản giữ linh hoạt",
+          "description": "Publisher hợp tác thường xuyên cùng Akamuro có thể rút tiền nhanh hơn"
+        },
+        {
+          "title": "Nhu cầu ổn định",
+          "description": "Cung cấp ít nhạy cảm nhất với cuộc khủng hoảng"
+        },
+        {
+          "title": "Hỗ trợ cao cấp",
+          "description": "Kinh nghiệm team của chúng tôi hơn 10 năm"
+        },
+        {
+          "title": "Quảng cáo hợp pháp",
+          "description": "Kiểm duyệt dễ dàng và khả năng làm việc với các nền tảng lớn"
+        },
+        {
+          "title": "Điều kiện cá nhân",
+          "description": "Publisher có cơ hội kiếm tiền nhiều hơn"
+        },
+        {
+          "title": "Thị trường tương đối trẻ",
+          "description": "Thiếu sự cạnh tranh cao"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hiểu rõ về nguồn lưu lượng truy cập"
+        },
+        {
+          "text": "Đăng ký vào Akamuro"
+        },
+        {
+          "text": "Chọn offer thú vị nhất"
+        },
+        {
+          "text": "Đổ traffic có chất lượng và nhận hoa hồng"
+        }
+      ]
+  }
+}
+</i18n>
+
 <template>
   <main class="publisher h-100">
     <div
@@ -61,57 +166,6 @@ export default {
   data() {
     return {
       zoomed: true,
-      advantages: [
-        {
-          title: "Fast payouts",
-          description: "Выплаты по запросу от 2 раз в месяц",
-        },
-        {
-          title: "Wide target audience",
-          description:
-            "Любой пол от 21 до 55 лет с минимальным уровнем зарплаты",
-        },
-        {
-          title: "Flexible hold terms",
-          description: "Постоянные партнеры могут выводить деньги быстрее ",
-        },
-        {
-          title: "Stable demand",
-          description:
-            "Финансовая тематика наименее чувствительна к сезонности и кризису",
-        },
-        {
-          title: "Expert support",
-          description: "Опыт работы нашей команды более 10 лет",
-        },
-        {
-          title: "White theme",
-          description:
-            "Простая модерация и возможность работы с крупными площадками",
-        },
-        {
-          title: "Individual conditions",
-          description: "Каждый вебмастер имеет возможность зарабатывать больше",
-        },
-        {
-          title: "Low competition",
-          description: "Отсутствие высокой конкуренции",
-        },
-      ],
-      steps: [
-        {
-          text: "Иметь понимание с каким источником трафика работать",
-        },
-        {
-          text: "Зарегистрироваться в Akamuro affiliate network",
-        },
-        {
-          text: "Выбрать наиболее интересный оффер",
-        },
-        {
-          text: "Приводить качественный трафик и получать самый лучший профит",
-        },
-      ],
       step: this.currentStep,
     };
   },
@@ -139,6 +193,12 @@ export default {
     },
   },
   computed: {
+    advantages() {
+      return this.$i18n.messages[this.$i18n.locale].advantages;
+    },
+    steps() {
+      return this.$i18n.messages[this.$i18n.locale].steps;
+    },
     wrapClasses: function () {
       return {
         "publisher__wrap--zoomed": this.zoomed,
@@ -332,7 +392,7 @@ export default {
       content: "";
       left: 0;
       top: 0;
-          width: calc(100% + 20px);
+      width: calc(100% + 20px);
       height: 100vh;
       position: absolute;
       transition: 2s;

@@ -1,13 +1,30 @@
+<i18n>
+{
+  "en": {
+    "heading": "Akamuro Network",
+    "text": "Akamuro is a cost per target actions network, bringing together partners from all over the world. We provide you with hundreds of the best offers, analytics and unique tools optimized specifically for the European and Asian affiliate marketing."
+  },
+  "vn": {
+    "heading": "Akamuro Network",
+    "text": "Akamuro - là mạng chi phí cho mỗi hành động mục tiêu, tập hợp các đối tác từ khắp nơi trên thế giới. Chúng tôi cung cấp cho bạn hàng trăm offer, phân tích tốt nhất và các công cụ độc đáo được tối ưu hóa đặc biệt cho thị trường Affiliate marketing Châu Âu và Châu Á."
+  }
+}
+</i18n>
+
+
 <template>
   <main class="frontpage">
-    <div class="frontpage__wrap" :style="{ height: this.FixWebkitHeightBug + 'px' }">
+    <div
+      class="frontpage__wrap"
+      :style="{ height: this.FixWebkitHeightBug + 'px' }"
+    >
       <div class="container-fluid frontpage__container">
         <Notice @accepted="acceptCookies()" />
 
         <div class="frontpage__content">
           <transition name="fade">
             <h1 class="frontpage__heading" v-if="content">
-              Akamuro Affiliate Network
+              {{ $t("heading") }}
             </h1>
           </transition>
 
@@ -17,10 +34,7 @@
 
           <transition name="fade">
             <p class="frontpage__text" v-if="content">
-              is a cost per action financial affiliate network, bringing
-              together partners from all over the world. We provide you with
-              hundreds of the best offers, analytics and unique tools optimized
-              specifically for the European and Asian financial markets.
+               {{ $t("text") }}
             </p>
           </transition>
         </div>
@@ -178,3 +192,4 @@ export default {
   left: 100vw;
 }
 </style>
+

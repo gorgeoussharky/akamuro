@@ -1,3 +1,108 @@
+<i18n>
+{
+  "en": {
+    "advantages": [
+        {
+          "title": "New webmasters",
+          "description": "Each network can lead to 15% of unique webmasters"
+        },
+        {
+          "title": "New clients",
+          "description": "Webmasters attract new users to your product"
+        },
+        {
+          "title": "Lack of risks",
+          "description": "Our clients pay only for targeted actions"
+        },
+        {
+          "title": "Legal traffic source",
+          "description": "Webmasters use only effective traffic sources"
+        },
+        {
+          "title": "Expert support",
+          "description": "Our team has over 10 years of experience"
+        },
+        {
+          "title": "No fraud",
+          "description": "We carefully check the quality of the traffic provided"
+        },
+        {
+          "title": "Fast start",
+          "description": "Integration to our system takes approximately 30 minutes"
+        },
+        {
+          "title": "Volume scaling",
+          "description": "There is always an opportunity to receive even more high-quality traffic"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Working in the financial segment - banks and microfinance organizations"
+        },
+        {
+          "text": "Create a description and conditions of the offer"
+        },
+        {
+          "text": "Send a request to: <a href='mailto:offers@akamuro.com'>offers@akamuro.com</a>"
+        },
+        {
+          "text": "Start getting clients and pay only for the result"
+        }
+      ]
+  },
+  "vn": {
+    "advantages": [
+        {
+          "title": "Publisher mới",
+          "description": "Mỗi mạng có thể dẫn đến 15% quản trị viên web duy nhất"
+        },
+        {
+          "title": "Khách hàng mới",
+          "description": "Publisher thu hút người dùng mới đến với sản phẩm của bạn"
+        },
+        {
+          "title": "Không có rủi ro",
+          "description": "Khách hàng của chúng tôi chỉ trả tiền cho các hành động được nhắm mục tiêu"
+        },
+        {
+          "title": "Nguồn lưu lượng hợp pháp",
+          "description": "Publisher chỉ sử dụng các nguồn lưu lượng có hiệu quả"
+        },
+        {
+          "title": "Hỗ trợ cao cấp",
+          "description": "Đội ngũ của chúng tôi có hơn 10 năm kinh nghiệm"
+        },
+        {
+          "title": "Không có fraud",
+          "description": "Chúng tôi kiểm tra cẩn thận chất lượng traffic được cung cấp từ các publisher"
+        },
+        {
+          "title": "Tích hợp nhanh",
+          "description": "Tích hợp vào hệ thống của chúng tôi mất khoảng 30 phút"
+        },
+        {
+          "title": "Tăng âm lượng lead",
+          "description": "Luôn nhận được nhiều traffic chất lượng cao"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Làm việc trong mảng tài chính - ngân hàng và các công ty tài chín"
+        },
+        {
+          "text": "Tạo điều kiện và đề nghị hợp tác"
+        },
+        {
+          "text": "Gửi yêu cầu tới: <a href='mailto:offers@akamuro.com'>offers@akamuro.com</a>"
+        },
+        {
+          "text": "Bắt đầu nhận khách hàng và chỉ thanh toán theo kết quả"
+        }
+      ]
+  }
+}
+</i18n>
+
 <template>
   <main class="adpage">
     <div
@@ -61,60 +166,6 @@ export default {
   data() {
     return {
       zoomed: true,
-      advantages: [
-        {
-          title: "New webmasters",
-          description:
-            "Каждая сеть способна привести до 15% уникальных вебмастеров",
-        },
-        {
-          title: "New clients",
-          description: "Вебмастера приводят новых пользователей на ваш продукт",
-        },
-        {
-          title: "Lack of risks",
-          description: "Наши клиенты платят только за целевые действия",
-        },
-        {
-          title: "White traffic sources",
-          description:
-            "Вебмастера используют только эффективные источники трафика",
-        },
-        {
-          title: "Expert support",
-          description: "Опыт работы нашей команды более 10 лет",
-        },
-        {
-          title: "No fraud",
-          description:
-            "Мы внимательно проверяем качество предоставляемого трафика",
-        },
-        {
-          title: "Fast start",
-          description: "Интеграция к нашей системой занимает примерно 30 минут",
-        },
-        {
-          title: "Scaling volumes",
-          description:
-            "Всегда есть возможность получать ещё больше качественного трафика",
-        },
-      ],
-      steps: [
-        {
-          text:
-            "Работать в финансовом сегменте - банки и микрофинансовые организации",
-        },
-        {
-          text: "Сформировать описание и условия работы оффера",
-        },
-        {
-          text:
-            'Отправить заявку на <a href="mailto:offers@akamuro.com">offers@akamuro.com</a>',
-        },
-        {
-          text: "Начать получать клиентов и платить только за результат",
-        },
-      ],
       step: this.currentStep,
     };
   },
@@ -142,6 +193,12 @@ export default {
     },
   },
   computed: {
+    advantages() {
+      return this.$i18n.messages[this.$i18n.locale].advantages;
+    },
+    steps() {
+      return this.$i18n.messages[this.$i18n.locale].steps;
+    },
     wrapClasses: function () {
       return {
         "adpage__wrap--zoomed": this.zoomed,
@@ -270,7 +327,6 @@ export default {
 
     @include media-breakpoint-down(xs) {
       left: -25px;
-
     }
 
     &--zoomed {

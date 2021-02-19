@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
@@ -15,11 +16,13 @@
     "vue": "^2.6.11",
     "vue-autosuggest": "^2.2.0",
     "vue-compare-image": "^0.2.0",
+    "vue-i18n": "^8.17.3",
     "vue-router": "^3.2.0",
     "vue-select": "^3.11.2",
     "vue2-touch-events": "^3.1.0"
   },
   "devDependencies": {
+    "@intlify/vue-i18n-loader": "^1.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "^4.5.9",
@@ -30,6 +33,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
+    "vue-cli-plugin-i18n": "~1.0.1",
     "vue-image-compare2": "^1.0.0",
     "vue-template-compiler": "^2.6.11"
   },
