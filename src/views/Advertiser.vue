@@ -48,7 +48,8 @@
         {
           "text": "Start getting clients and pay only for the result"
         }
-      ]
+      ],
+      "advantagesTitle": "How to become Akamuro Advertiser"
   },
   "vn": {
     "advantages": [
@@ -98,7 +99,8 @@
         {
           "text": "Bắt đầu nhận khách hàng và chỉ thanh toán theo kết quả"
         }
-      ]
+      ],
+      "advantagesTitle": "Cách trở thành Advertiser"
   }
 }
 </i18n>
@@ -140,7 +142,7 @@
 
         <transition name="sectionFade">
           <div class="adpage__how-to how-to h-100" v-if="step == 2">
-            <HowTo title="How to become Akamuro advertiser" :list="steps" />
+            <HowTo :title="$t('advantagesTitle')" :list="steps" />
           </div>
         </transition>
 

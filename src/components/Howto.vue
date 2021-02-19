@@ -6,7 +6,7 @@
     <div class="how-to__steps-wrap">
       <ul class="how-to__steps">
         <li class="how-to__step" v-for="(listItem, key) in list" :key="key">
-          <div class="how-to__step-number">0{{ key + 1 }}</div>
+          <div class="how-to__step-number">0{{ parseInt(key) + 1  }}</div>
           <div class="how-to__step-description" v-html="listItem.text"></div>
         </li>
       </ul>
@@ -29,7 +29,7 @@ export default {
       default: "How to",
     },
     list: {
-      type: Array || Object,
+      type: Object,
       reqired: true,
     },
   },

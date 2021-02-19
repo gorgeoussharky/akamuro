@@ -1,3 +1,16 @@
+<i18n>
+{
+  "en": {
+    "publisher": "Publisher",
+    "advertiser": "Advertiser"
+  },
+  "vn":  {
+    "publisher": "Nhà xuất bản",
+    "advertiser": "Nhà quảng cáo"
+  }
+}
+</i18n>
+
 <template>
   <figure
     :class="{ full }"
@@ -77,7 +90,7 @@
         class="range__left"
         @click.prevent="!disabled ? $emit('reachedLeft') : null"
       >
-        Publisher
+      {{ $t('publisher') }}
         <svg
           width="24"
           height="11"
@@ -119,7 +132,7 @@
         class="range__right"
         @click.prevent="!disabled ? $emit('reachedRight') : null"
       >
-        Advertiser
+        {{ $t('advertiser') }}
         <svg
           width="24"
           height="11"

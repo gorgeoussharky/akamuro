@@ -48,7 +48,8 @@
         {
           "text": "Drive high-quality traffic and get the best profit"
         }
-      ]
+      ],
+      "advantagesTitle": "How to become Akamuro Publisher"
   },
   "vn": {
     "advantages": [
@@ -61,28 +62,28 @@
           "description": "Mọi giới từ 21 đến 55 tuổi với mức lương tối thiểu"
         },
         {
-          "title": "Điều khoản giữ linh hoạt",
-          "description": "Publisher hợp tác thường xuyên cùng Akamuro có thể rút tiền nhanh hơn"
+          "title": "Duyệt nhanh",
+          "description": "Sau khi được duyệt bạn có thể gửi yêu câu Pay cho AM và nhận tiền luôn"
         },
         {
-          "title": "Nhu cầu ổn định",
-          "description": "Cung cấp ít nhạy cảm nhất với cuộc khủng hoảng"
+          "title": "Chương trình giới thiệu 5%",
+          "description": "Hãy mời publisher khác kiếm tiền cùng Akamuro và nhận thêm 5% hoa hồng"
         },
         {
           "title": "Hỗ trợ cao cấp",
           "description": "Kinh nghiệm team của chúng tôi hơn 10 năm"
         },
         {
-          "title": "Quảng cáo hợp pháp",
-          "description": "Kiểm duyệt dễ dàng và khả năng làm việc với các nền tảng lớn"
+          "title": "Nhiều lựa chọn offer",
+          "description": "Bạn có thể chọn offer hợp lý theo traffic của bạn"
         },
         {
           "title": "Điều kiện cá nhân",
           "description": "Publisher có cơ hội kiếm tiền nhiều hơn"
         },
         {
-          "title": "Thị trường tương đối trẻ",
-          "description": "Thiếu sự cạnh tranh cao"
+          "title": "%CVR - cao",
+          "description": "Phần trăm cvr <br> có thể đến 20%"
         }
       ],
       "steps": [
@@ -98,7 +99,8 @@
         {
           "text": "Đổ traffic có chất lượng và nhận hoa hồng"
         }
-      ]
+      ],
+      "advantagesTitle": "Cách trở thành Publisher"
   }
 }
 </i18n>
@@ -140,7 +142,7 @@
 
         <transition name="sectionFade">
           <div class="publisher__how-to how-to h-100" v-if="step == 2">
-            <HowTo title="How to become Akamuro Publisher" :list="steps" />
+            <HowTo :title="$t('advantagesTitle')" :list="steps" />
           </div>
         </transition>
 

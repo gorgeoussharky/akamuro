@@ -23,7 +23,7 @@
         <div class="offer-item__meta-item">СR: {{ offer.meta.cr }}</div>
       </div>
       <div class="offer-item__meta">
-        <div class="offer-item__meta-item">EPL: {{ offer.meta.epl }}</div>
+        <div class="offer-item__meta-item">EPС: {{ offer.meta.epl }}</div>
         <div class="offer-item__meta-item">AR: {{ offer.meta.ar }}</div>
       </div>
       <div class="offer-item__type">{{ offer.target }}</div>

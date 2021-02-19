@@ -90,8 +90,7 @@
             v-for="(listItem, key) in list"
           >
             <h2 class="advantages__item-title">{{ listItem.title }}</h2>
-            <p class="advantages__item-description">
-              {{ listItem.description }}
+            <p class="advantages__item-description" v-html="listItem.description">
             </p>
           </li>
         </ul>
@@ -210,7 +209,7 @@ export default {
       font-size: rem(14px);
       opacity: 0.8;
       margin-bottom: 0;
-      max-width: 225px;
+      max-width: 235px;
 
       @include media-breakpoint-down(md) {
         max-width: 170px;
