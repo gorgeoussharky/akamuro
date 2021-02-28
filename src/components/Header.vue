@@ -186,7 +186,7 @@ export default {
 .header {
   padding: rem(10px 0);
   padding-bottom: rem(20px);
-  position: absolute;
+  position: fixed;
   width: 100%;
   z-index: 20;
   background: linear-gradient(

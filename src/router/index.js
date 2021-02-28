@@ -344,7 +344,214 @@ const routes = [{
     props: {
       title: 'Privacy policy',
       content: `
-        <p>This Privacy Policy explains how (UAB "Lidso finansai", legal entity code 305241175) (hereinafter – “Akamuro”, “us”, “our”) processes your personal data when you register to Akamuro as a publisher, visit our website and contact us in any other way, as well as explains how this data is used and what rights you have.</p>
+      <p>
+      This Privacy Policy explains how (UAB "Lidso finansai", legal entity code 305241175)(hereinafter – “Akamuro”, “us”,
+      “our”) processes your personal data when youregister to Akamuro as a publisher, visit our website and contact us in
+      any
+      other way,as well as explains how this data is used and what rights you have.
+  </p>
+  
+  <h2>
+      PERSONAL DATA WE PROCESS
+  </h2>
+  
+  <p>
+      In order to provide our services and the possibility for the publishers to register onAkamuro platform, contact us,
+      receive commission and subscribe to our marketinge-mails, we require certain personal data.
+  </p>
+  
+  <p>
+      We collect and process the following personal data, which you provide:
+  </p>
+  
+  <ul>
+      <li>Name and last name;</li>
+      <li>Country;</li>
+      <li>Telephone number;</li>
+      <li>Skype name;</li>
+      <li>IP address;</li>
+      <li>E-mail address;</li>
+      <li>Banking details.</li>
+  </ul>
+  
+  <p>
+      We may receive your personal data from our website (the used device, type ofbrowser, Geo IP, time and date of site
+      visit). For more information see our CookiePolicy.
+  </p>
+  
+  <p>
+      We also process any information that you provide to Akamuro when youcommunicate with us using our contact e-mail
+      address or reaching out to yourpersonal manager or in any other way.
+  </p>
+  
+  <h2>
+      PURPOSE OF PROCESSING
+  </h2>
+  
+  <p>
+      We process the above-mentioned data for the following purposes:
+  </p>
+  
+  <ul>
+      <li>Name,</li>
+      <li>last name,</li>
+      <li>country,</li>
+      <li>telephone number,</li>
+      <li>skype name,</li>
+      <li>e-mail address</li>
+  </ul>
+  
+  <p>
+      are processed to register a new publisher in our platform, communicate with thepublisher, ensure customer service
+      and support and provide the possibility to use ourservices and receive commission
+  </p>
+  
+  <p>
+      Banking details are processed for the purpose to make payment transactions, if apublisher is entitled to receive
+      commission in accordance with our Terms andConditions;
+  </p>
+  
+  <p>
+      IP address and site data are processed for analytical purposes in order to improveclients’ experience when visiting
+      our website and using the affiliate program;
+  </p>
+  
+  <p>
+      If you have signed up to receive our marketing e-mails, we will process your e-mailaddress in order to send you such
+      communication
+  </p>
+  
+  <h2>
+      LEGAL BASIS FOR PROCESSING
+  </h2>
+  
+  <p>
+      We process personal data in accordance with the applicable data protection laws,including Regulation (EU) 2016/679
+      of the European Parliament and of the Council of27 April 2016 on the protection of natural persons with regard to
+      the processing ofpersonal data and on the free movement of such data, and repealing Directive95/46/EC (“GDPR”).
+  </p>
+  
+  <p>
+      The legal basis for processing data is:
+  </p>
+  
+  <ul>
+      <li>
+          Your consent – if you have signed up to our marketing e-mails, we willprocess this information on the basis of
+          your consent (Article 6(1)(a) ofGDPR). Once you revoke your consent, we will immediately remove you fromour
+          mailing list;
+      </li>
+  
+      <li>
+          Our contractual obligations – in order to register as a publisher on Akamuroplatform, you have to agree to our
+          Terms and Conditions, which form a legallybinding contract to which you become a party to (Article 6(1)(b) of
+          GDPR);
+      </li>
+  
+      <li>
+          Our legal obligation – we will process your data in order to comply with legalobligations imposed on us by
+          applicable law, such as financial and taxreporting obligations or when we have to respond to legal process
+          (Article6(1)(c) of GDPR);
+      </li>
+  
+      <li>
+          Our legitimate interests – we process your personal data for our legitimateinterests, for example, to provide
+          our services, defend our legal interests,promote our services with direct marketing as well as analysis and
+          research toimprove our services and publisher’s experience (Article 6(1)(f) of GDPR).
+      </li>
+  
+  </ul>
+  
+  <p>
+      Sharing of personal data with third parties
+  </p>
+  
+  <p>
+      We may share your personal data with third-party service providers, who provide uswith such services as hosting and
+      server services, communication, e-mail or othercontent delivery services, payment processing services, IT and
+      financial or legaladvisors (“Service Providers”).
+  </p>
+  
+  <p>
+      Akamuro platform may contain content and links to other websites that are operatedby third parties. Akamuro does not
+      control these third-party websites (includingwhether or not they store cookies) and this Privacy Policy does not
+      apply to them.Please consult the relevant third-party website to find out how that site collects anduses your
+      information and to establish whether and for what purpose they usecookies.
+  </p>
+  
+  <p>
+      Akamuro encourages publishers to process the personal data of their users(publisher’s website users, whose personal
+      data may be processed) in accordancewith the applicable personal data protection laws, especially GDPR.
+      Publishersshould provide on their website a GDPR compliant privacy policy and cookie policy,which, among other
+      issues, would provide information regarding the cookies that areplaced by the publisher and Akamuro onto user’s
+      computers when a user viewspublisher’s webpage and clicks on a publisher affiliate link as well as indicate howthe
+      user may opt-out of such use of his or her personal data.
+  </p>
+  
+  <h2>YOUR RIGHTS</h2>
+  
+  <p>
+      You have certain rights regarding the processing of your personal data and inaccordance with the GDPR. You can
+      request information on your personal data thatwe process, request to correct or amend it, you have the right to data
+      portability and
+      right to data deletion. Please note that we will retain some of your data to exercise ordefend our legal rights or
+      enforce our Terms and Conditions.
+  </p>
+  
+  <p>
+      If we process your data in order to send you our newsletter, you can at any timeunsubscribe to these e-mails by
+      using
+      the unsubscribe link or adjusting the settingsin your Akamuro profile.
+  </p>
+  
+  <p>
+      Furthermore, if you believe that we have unlawfully processed your personal data,you have the right to submit a
+      complaint to our contact information provided below, orto your respective data protection supervisory authority.
+  </p>
+  
+  <p>
+      The provision of your personal data is a requirement necessary to enter into acontract with Akamuro.
+  </p>
+  
+  <h2>
+      DATA RETENTION AND PROTECTION
+  </h2>
+  
+  <p>
+      We will retain your personal data as long as it is required for the purposes stated inthis Privacy Policy, namely,
+      for the fulfillment of our contractual obligations andprotection of our legitimate interests and defense against
+      legal claims according withthe applicable law.
+  </p>
+  
+  <p>
+      You can at any time delete your profile by contacting your personal Akamuromanager and we will delete your personal
+      data. We may only keep a certainminimum amount of your personal data if it will be required by applicable law
+      (forexample, data on commission payments and your transaction history).
+  </p>
+  
+  <p>
+      We highly value our data security and use appropriate technical measures to ensuredata security and protection. All
+      our customer personal data is stored in protectedservers and only accessed by authorized personnel, who are bound by
+      confidentialityrequirements.
+  </p>
+  
+  <h2>
+      CHANGES TO THIS PRIVACY POLICY
+  </h2>
+  
+  <p>
+      We reserve the right to change or amend this Privacy Policy from time to time.Updated Privacy Policy will enter into
+      force and will apply from the moment it hasbeen uploaded to our webpage.
+  </p>
+  
+  <h2>
+      CONTACT INFORMATION
+  </h2>
+  
+  <p>
+      If you have any questions in relation to your personal data or this Privacy Policy, youcan contact us at <a href="mailto:partners@akamuro.com">partners@akamuro.com</a> or using our skype contact –live:.cid.dc1db02d7400ae62 or telegram @akamuro or contact your
+      personalmanager.
+  </p>
       `
     }
   },

@@ -1,8 +1,25 @@
+<i18n>
+{
+  "en": {
+    "conditions": "Conditions",
+    "notice": "You need to register to view the conditions"
+  },
+  "vn":  {
+    "conditions": "Điều kiện",
+    "notice": "Để xem điều kiện offer, bạn phải đăng ký"
+  }
+}
+</i18n>
+
+
 <template>
   <div class="offer-item">
     <div class="offer-item__wrap">
       <div class="offer-item__logo">
-        <img :src="offer.logo" :alt="offer.title" />
+        <img
+          :src="require(`@/assets/img/offers/${offer.logo}`)"
+          :alt="offer.title"
+        />
       </div>
       <div class="offer-item__info">
         <div class="offer-item__title">{{ offer.title }}</div>
@@ -19,12 +36,17 @@
         </div>
       </div>
       <div class="offer-item__meta">
-        <div class="offer-item__meta-item">EPS: {{ offer.meta.eps }}</div>
-        <div class="offer-item__meta-item">СR: {{ offer.meta.cr }}</div>
+        <div class="offer-item__meta-item" v-if="offer.meta.EPL == '-'">
+          EPL: <img src="@/assets/img/lock.svg" alt="" />
+        </div>
+        <div class="offer-item__meta-item" v-else>
+          EPL: {{ offer.meta.EPL }}
+        </div>
+        <div class="offer-item__meta-item">СR: {{ offer.meta.CR }}</div>
       </div>
       <div class="offer-item__meta">
-        <div class="offer-item__meta-item">EPС: {{ offer.meta.epl }}</div>
-        <div class="offer-item__meta-item">AR: {{ offer.meta.ar }}</div>
+        <div class="offer-item__meta-item">EPС: {{ offer.meta.EPC }}</div>
+        <div class="offer-item__meta-item">AR: {{ offer.meta.AR }}</div>
       </div>
       <div class="offer-item__type">{{ offer.target }}</div>
       <a
@@ -37,10 +59,10 @@
       >
         <div class="offer-item__link">
           <img src="@/assets/img/lock.svg" alt="" />
-          Условия
+          {{ $t("conditions") }}
         </div>
         <div class="offer-item__locked" v-show="notice">
-          Что бы посмотреть условия оффера, вам нужно зарегистрироваться
+         {{ $t("notice") }}
         </div>
       </a>
     </div>

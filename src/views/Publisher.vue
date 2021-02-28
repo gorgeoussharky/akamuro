@@ -79,11 +79,11 @@
         },
         {
           "title": "Điều kiện cá nhân",
-          "description": "Publisher có cơ hội kiếm tiền nhiều hơn"
+          "description": "Publisher có cơ hội kiếm <br> tiền nhiều hơn"
         },
         {
           "title": "%CVR - cao",
-          "description": "Phần trăm cvr <br> có thể đến 20%"
+          "description": "Phần trăm cvr có thể đến 20%"
         }
       ],
       "steps": [
@@ -402,9 +402,9 @@ export default {
       z-index: -1;
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.65) 35%,
+        rgba(0, 0, 0, 0.75) 35%,
         rgba(0, 0, 0, 0) 55%,
-        rgba(0, 0, 0, 0.65) 70%
+        rgba(0, 0, 0, 0.75) 70%
       );
 
       @include media-breakpoint-down(md) {
@@ -414,9 +414,9 @@ export default {
       @include media-breakpoint-down(xs) {
         background: linear-gradient(
           90deg,
-          rgba(0, 0, 0, 0.65) 27.5%,
+          rgba(0, 0, 0, 0.75) 27.5%,
           rgba(0, 0, 0, 0) 45%,
-          rgba(0, 0, 0, 0.65) 85%
+          rgba(0, 0, 0, 0.75) 85%
         );
       }
     }
@@ -451,7 +451,7 @@ export default {
       z-index: -1;
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.5) 25%,
+        rgba(0, 0, 0, 0.75) 25%,
         rgba(0, 0, 0, 0) 100%
       );
 

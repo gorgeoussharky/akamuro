@@ -1,0 +1,293 @@
+[{
+        "logo": "moneycat.png",
+        "country": "Vietnam",
+        "title": "Money Cat",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,04 $",
+            "CR": "2,73 %",
+            "EPL": "-",
+            "AR": "97,43 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "cash24.png",
+        "country": "Vietnam",
+        "title": "Cash24",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,07 $",
+            "CR": "7,63 %",
+            "EPL": "-",
+            "AR": "70 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "doctor_dong.png",
+        "country": "Vietnam",
+        "title": "Doctor Dong",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,09 $",
+            "CR": "1,80 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "tienoi.png",
+        "country": "Vietnam",
+        "title": "Tien Oi",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,02 $",
+            "CR": "8,0 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPL"
+    },
+    {
+        "logo": "oncredit.png",
+        "country": "Vietnam",
+        "title": "OnCredit",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,17 $",
+            "CR": "10,61 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "vayvnd.png",
+        "country": "Vietnam",
+        "title": "VayVND",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,03 $",
+            "CR": "7,25 %",
+            "EPL": "-",
+            "AR": "28,86 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "olp.png",
+        "country": "Philippines",
+        "title": "Online Loans",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,03 $",
+            "CR": "2,12 %",
+            "EPL": "-",
+            "AR": "25 %"
+        },
+        "target": "CPI"
+    },
+    {
+        "logo": "moneycat.png",
+        "country": "Philippines",
+        "title": "Money Cat",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,07 $",
+            "CR": "0,21 %",
+            "EPL": "-",
+            "AR": "23.30%"
+        },
+        "target": "CPS"
+    },
+    {
+        "logo": "atmonline.png",
+        "country": "Vietnam",
+        "title": "ATM Online",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,18 $",
+            "CR": "10,16 %",
+            "EPL": "-",
+            "AR": "99,58 %"
+        },
+        "target": "CPQL"
+
+    },
+    {
+        "logo": "moneycat.png",
+        "country": "Philippines",
+        "title": "Money Cat",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,005 $",
+            "CR": "0,07 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "tima.png",
+        "country": "Vietnam",
+        "title": "Tima",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,04 $",
+            "CR": "25,51 %",
+            "EPL": "-",
+            "AR": "2,32 %"
+        },
+        "target": "CPS"
+
+    },
+    {
+        "logo": "moneyman.png",
+        "country": "Mexico",
+        "title": "Money Man",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,49 $",
+            "CR": "29,45 %",
+            "EPL": "1,66 $",
+            "AR": "7,55 %"
+        },
+        "target": "CPS"
+
+    },
+    {
+        "logo": "vamo.png",
+        "country": "Vietnam",
+        "title": "Vamo",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0.28 $",
+            "CR": "5,45 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPS"
+    },
+    {
+        "logo": "robocash.png",
+        "country": "Philippines",
+        "title": "Robocash",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,07 $",
+            "CR": "1,27 %",
+            "EPL": "-",
+            "AR": "57,14 %"
+        },
+        "target": "CPS"
+
+    },
+    {
+        "logo": "cashx.png",
+        "country": "Sri Lanka",
+        "title": "CashX",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,11 $",
+            "CR": "1,35 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPS"
+    },
+    {
+        "logo": "mrcash.png",
+        "country": "Vietnam",
+        "title": "Mr.Cash",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,30 $",
+            "CR": "51,65 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "webvay.png",
+        "country": "Vietnam",
+        "title": "WebVay",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,17 $",
+            "CR": "4,25 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPS"
+    },
+    {
+        "logo": "moneycat.png",
+        "country": "Vietnam",
+        "title": "Money Cat",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,03 $",
+            "CR": "0,73 %",
+            "EPL": "-",
+            "AR": "97,43 %"
+        },
+        "target": "CPS"
+
+    },
+    {
+        "logo": "lotusloan.png",
+        "country": "Sri Lanka",
+        "title": "Lotus Loan",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,02 $",
+            "CR": "1,24 %",
+            "EPL": "-",
+            "AR": "99,59 %"
+        },
+        "target": "CPQL"
+    },
+    {
+        "logo": "robocash.png",
+        "country": "Philippines",
+        "title": "Robocash",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,01 $",
+            "CR": "0,22 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPQL"
+
+    },
+    {
+        "logo": "tamo.png",
+        "country": "Vietnam",
+        "title": "Tamo",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,09 $",
+            "CR": "2,47 %",
+            "EPL": "-",
+            "AR": "100 %"
+        },
+        "target": "CPS"
+    },
+    {
+        "logo": "senmo.png",
+        "country": "Vietnam",
+        "title": "Senmo",
+        "category": "Loans",
+        "meta": {
+            "EPC": "0,09 $",
+            "CR": "8,92 %",
+            "EPL": "1,11 $",
+            "AR": "9,98 %"
+        },
+        "target": "CPS"
+    }
+]

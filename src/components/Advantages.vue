@@ -90,8 +90,10 @@
             v-for="(listItem, key) in list"
           >
             <h2 class="advantages__item-title">{{ listItem.title }}</h2>
-            <p class="advantages__item-description" v-html="listItem.description">
-            </p>
+            <p
+              class="advantages__item-description"
+              v-html="listItem.description"
+            ></p>
           </li>
         </ul>
       </template>
@@ -170,6 +172,10 @@ export default {
 
     @include media-breakpoint-down(xs) {
       left: -205px;
+
+      svg {
+        height: 285px;
+      }
     }
 
     @media (max-width: 420px) {
@@ -217,6 +223,10 @@ export default {
 
       @include media-breakpoint-down(sm) {
         max-width: 200px;
+      }
+
+      @include media-breakpoint-down(xs) {
+        max-width: 240px;
       }
     }
   }

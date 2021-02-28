@@ -1,7 +1,7 @@
 <i18n>
 {
   "en": {
-    "heading": "Top offers, best conditions, fast payments - everything for your work",
+    "heading": "Top offers, best conditions, fast payments - everything for your profit",
     "special": "Special offer",
     "request": "Special conditions",
     "subheading": "The best offers for you",
@@ -15,7 +15,9 @@
     "category": "Category",
     "country": "Country",
     "target":"Target",
-    "search": "Search"
+    "search": "Search",
+    "request_label": "Enter your favorite offer into this window. You can specify the name of the offer, a link to the offer and any useful information",
+    "special_label": "You can request a payout increase in exchange for quality traffic"
   },
   "vn":  {
     "heading": "Offer tốt nhất, tỉ lệ cao, thanh toán nhanh - mọi thứ dành cho publisher",
@@ -32,7 +34,9 @@
     "category": "Thể loại",
     "country": "Quốc gia",
     "target":"Mô hình",
-    "search": "Tìm kiếm"
+    "search": "Tìm kiếm",
+    "request_label": "Tên offer bạn yêu cầu. Bạn có thể điền tên offer, link dẫn đến offer và bất kì thông tin về offer.",
+    "special_label": "Bạn có thể yêu cầu tăng tỷ lệ hoa hồng nếu traffic của bạn có chất lượng cao"
   }
 }
 </i18n>
@@ -43,33 +47,33 @@
     <div class="offer-page__wrap">
       <div class="container-xl">
         <h1 class="offer-page__heading">
-          {{ $t('heading') }}
+          {{ $t("heading") }}
         </h1>
 
-        <div class="offer-page__type-switcher type-switcher">
-          <div class="type-switcher__group">
+        <div class="offer-page__offer-switcher offer-switcher">
+          <div class="offer-switcher__group">
             <input
               id="special"
               type="radio"
               value="special"
-              class="type-switcher__control"
+              class="offer-switcher__control"
               v-model="utility.type"
             />
-            <label for="special" class="type-switcher__label">
-               {{ $t('special') }}
+            <label for="special" class="offer-switcher__label">
+              {{ $t("special") }}
             </label>
           </div>
-          <div class="type-switcher__group">
+          <div class="offer-switcher__group">
             <input
               id="request"
               type="radio"
               name="type"
               value="request"
               v-model="utility.type"
-              class="type-switcher__control"
+              class="offer-switcher__control"
             />
-            <label for="request" class="type-switcher__label">
-              {{ $t('request') }}
+            <label for="request" class="offer-switcher__label">
+              {{ $t("request") }}
             </label>
           </div>
         </div>
@@ -80,19 +84,22 @@
         >
           <div class="offer-form__group">
             <label for="offer" class="offer-form__label">
-              Введите в это окно свой любимый оффер. Вы можете указать название
-              оффера, ссылку на оффер и любую полезную информацию
+              {{ $t("request_label") }}
             </label>
 
             <textarea
               id="offer"
-              name="offer_custon"
+              v-model="form.temp_value"
               class="offer-form__control"
-              placeholder="Введите в это окно свой любимый оффер. Вы можете указать название оффера, ссылку на оффер и любую полезную информацию"
+              :placeholder="$t('request_label')"
             ></textarea>
 
-            <button class="offer-form__btn" @click="submitForm()">
-              Отправить
+            <button
+              :disabled="!form.offer"
+              class="offer-form__btn"
+              @click="submitForm('Special condition')"
+            >
+              Submit
             </button>
           </div>
         </div>
@@ -101,26 +108,41 @@
           class="offer-page__offer-form offer-form"
           v-if="utility.type == 'special'"
         >
-          <div class="offer-form__group">
+          <div
+            class="offer-form__group"
+            :style="{ opacity: form.success ? 0 : 1 }"
+          >
             <label for="offer" class="offer-form__label">
-              Введите в это окно свой любимый оффер. Вы можете указать название
-              оффера, ссылку на оффер и любую полезную информацию
+              {{ $t("special_label") }}
             </label>
 
             <textarea
               id="offer"
-              name="offer_custon"
+              v-model="form.temp_value"
               class="offer-form__control"
-              placeholder="Введите в это окно свой любимый оффер. Вы можете указать название оффера, ссылку на оффер и любую полезную информацию"
+              :placeholder="$t('special_label')"
+              @input="checkInput()"
             ></textarea>
 
-            <button class="offer-form__btn" @click="submitForm()">
-              Отправить
+            <div class="offer-form__error" v-show="form.error">
+              {{ form.notice }}
+            </div>
+
+            <button
+              :disabled="!form.offer"
+              class="offer-form__btn"
+              @click.prevent="submitForm('Special offer')"
+            >
+              Submit
             </button>
+          </div>
+
+          <div class="offer-form__success" v-if="form.success">
+            Thank you. We will contact you soon
           </div>
         </div>
 
-        <h2 class="offer-page__subheading">{{ $t('subheading') }}</h2>
+        <h2 class="offer-page__subheading">{{ $t("subheading") }}</h2>
         <div class="offer-page__filters filters">
           <div class="filters__wrap filters__wrap--sm" v-if="isMobileBig()">
             <div class="filters__group">
@@ -325,7 +347,7 @@
                     stroke-linejoin="round"
                   />
                 </svg>
-                {{ $t('reset') }}
+                {{ $t("reset") }}
               </button>
             </div>
           </div>
@@ -395,112 +417,14 @@ export default {
         ],
         targets: ["CPA", "CPL", "CPI", "CPS", "CPQL"],
       },
-      offers: [
-        {
-          logo: require("@/assets/img/offers/offer1.png"),
-          title: "Forward bank",
-          category: "Кредитные истории",
-          country: "Россия",
-          meta: {
-            eps: "-",
-            cr: "30,23%",
-            epl: "-",
-            ar: "-",
-          },
-          target: "CPS",
-        },
-        {
-          logo: require("@/assets/img/offers/offer2.png"),
-          title: "CCloan Украина",
-          category: "E-commerce",
-          country: "Индонезия",
-          meta: {
-            eps: "24.27 rub",
-            cr: "1,65 %",
-            epl: "1475.71 rub",
-            ar: "100%",
-          },
-          target: "CPL",
-        },
-        {
-          logo: require("@/assets/img/offers/offer4.png"),
-          title: "Carry Cash",
-          category: "Credit service",
-          country: "Филиппины",
-          meta: {
-            eps: "28.21 rub",
-            cr: "18,80 %",
-            epl: "150 rub",
-            ar: "100%",
-          },
-          target: "CPL",
-        },
-        {
-          logo: require("@/assets/img/offers/offer3.png"),
-          title: "Alfa-Bank",
-          category: "Gambling",
-          country: "Мексика",
-          meta: {
-            eps: "35.20 rub",
-            cr: "8.09%",
-            epl: "434.04 rub",
-            ar: "17,91%",
-          },
-          target: "CPS",
-        },
-        {
-          logo: require("@/assets/img/offers/offer1.png"),
-          title: "Forward bank",
-          category: "Кредитные истории",
-          country: "Россия",
-          meta: {
-            eps: "-",
-            cr: "30,23%",
-            epl: "-",
-            ar: "-",
-          },
-          target: "CPS",
-        },
-        {
-          logo: require("@/assets/img/offers/offer2.png"),
-          title: "CCloan Украина",
-          category: "Bank",
-          country: "Испания",
-          meta: {
-            eps: "24.27 rub",
-            cr: "1,65 %",
-            epl: "1475.71 rub",
-            ar: "100%",
-          },
-          target: "CPL",
-        },
-        {
-          logo: require("@/assets/img/offers/offer4.png"),
-          title: "Carry Cash",
-          category: "Credit service",
-          country: "Филиппины",
-          meta: {
-            eps: "28.21 rub",
-            cr: "18,80 %",
-            epl: "150 rub",
-            ar: "100%",
-          },
-          target: "CPL",
-        },
-        {
-          logo: require("@/assets/img/offers/offer3.png"),
-          title: "Alfa-Bank",
-          category: "Bank",
-          country: "Филиппины",
-          meta: {
-            eps: "35.20 rub",
-            cr: "8.09%",
-            epl: "434.04 rub",
-            ar: "17,91%",
-          },
-          target: "CPQL",
-        },
-      ],
+      form: {
+        temp_value: "",
+        offer: null,
+        error: false,
+        notice: "",
+        success: false,
+      },
+      offers: [],
       filters: {
         category: "",
         country: "",
@@ -530,9 +454,29 @@ export default {
         this.filters[key] = null;
       });
     },
-    submitForm() {
+    checkInput() {
+      var value = this.form.temp_value;
+      // eslint-disable-next-line no-useless-escape
+      var special = /[!@#$%^&*()+\-=\[\]{};'"\\|,<>\/?]+/;
+      if (value.length > 2) {
+        if (special.test(value)) {
+          this.form.error = true;
+          this.form.notice = "Please don't use special symbols (@$!%*?&#)";
+        } else {
+          this.form.error = false;
+          this.form.offer = value;
+        }
+      } else {
+        this.form.error = false;
+        this.form.offer = null;
+      }
+    },
+    submitForm(type) {
       axios
-        .post("http://akamuro.crazytest.studio/process.php", this.filters.name)
+        .post("/backend/process_offer.php", {
+          type: type,
+          offer: this.form.offer,
+        })
         .then((res) => {
           console.log(res);
         })
@@ -540,7 +484,7 @@ export default {
           console.log(error);
         })
         .finally(() => {
-          //Perform action in always
+          this.form.success = true;
         });
     },
   },
@@ -600,6 +544,10 @@ export default {
   },
   mounted() {
     document.documentElement.style.overflow = "auto";
+
+    axios.get("/data/offers.json").then((response) => {
+      this.offers = response.data;
+    });
   },
   destroyed() {
     document.documentElement.style.overflow = "hidden";
@@ -643,8 +591,8 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
       left: 0;
       top: 0;
       width: 100%;
-      height: 100%;
-      position: absolute;
+      height: 100vh;
+      position: fixed;
       background-image: url("~@/assets/img/bg/advertiser-bg.jpg");
       background-size: 100%;
       transition: 2s;
@@ -652,7 +600,7 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
       background-position: center;
       background-size: cover;
       z-index: -1;
-      opacity: 0.15;
+      opacity: 0.1;
       filter: grayscale(0.85) sepia(0.1);
       transform: none;
     }
@@ -685,7 +633,7 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
     }
   }
 
-  &__type-switcher {
+  &__offer-switcher {
     display: flex;
     align-items: center;
     margin-bottom: rem(20px);
@@ -697,6 +645,7 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
 
   &__offer-form {
     margin-bottom: rem(45px);
+    position: relative;
   }
 
   &__subheading {
@@ -766,16 +715,43 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
     font-weight: 500;
     font-size: rem(12px);
 
+    &::after {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 85% 100%, 0% 100%);
+    }
+
+    &:disabled {
+      filter: grayscale(1);
+      cursor: not-allowed;
+    }
+
     @include media-breakpoint-down(sm) {
       margin-left: 0;
     }
   }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  &__success {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+  }
 }
 
-.type-switcher {
+.offer-switcher {
   &__group {
     &:nth-of-type(odd) {
-      /*       .type-switcher__label {
+      /*       .offer-switcher__label {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 70%);
 
         &::after {
@@ -785,7 +761,7 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
     }
 
     &:nth-of-type(even) {
-      /*       .type-switcher__label {
+      /*       .offer-switcher__label {
         clip-path: polygon(0 100%, 0 0, 100% 0, 100% 70%, 90% 100%);
 
         &::after {
@@ -802,7 +778,7 @@ $vs-component-placeholder-color: rgba(255, 255, 255, 0.61);
     opacity: 0;
 
     &:checked {
-      ~ .type-switcher__label {
+      ~ .offer-switcher__label {
         color: #fff;
         /*         font-weight: 600; */
         transition: 250ms;

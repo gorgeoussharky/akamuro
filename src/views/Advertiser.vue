@@ -416,9 +416,9 @@ export default {
       ); */
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.65) 35%,
+        rgba(0, 0, 0, 0.8) 35%,
         rgba(0, 0, 0, 0) 55%,
-        rgba(0, 0, 0, 0.65) 70%
+        rgba(0, 0, 0, 0.8) 70%
       );
 
       @include media-breakpoint-down(md) {
@@ -428,9 +428,9 @@ export default {
       @include media-breakpoint-down(xs) {
         background: linear-gradient(
           90deg,
-          rgba(0, 0, 0, 0.65) 27.5%,
+          rgba(0, 0, 0, 0.75) 27.5%,
           rgba(0, 0, 0, 0) 45%,
-          rgba(0, 0, 0, 0.65) 85%
+          rgba(0, 0, 0, 0.75) 85%
         );
       }
     }
@@ -465,7 +465,7 @@ export default {
       z-index: -1;
       background: linear-gradient(
         90deg,
-        rgba(0, 0, 0, 0.5) 25%,
+        rgba(0, 0, 0, 0.75) 25%,
         rgba(0, 0, 0, 0) 100%
       );
 

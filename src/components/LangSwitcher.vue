@@ -27,7 +27,7 @@ export default {
       langs: [
         {
           code: "en",
-          flag: require("@/assets/img/flags/ru.svg"),
+          flag: require("@/assets/img/flags/en.svg"),
         },
         {
           code: "vn",

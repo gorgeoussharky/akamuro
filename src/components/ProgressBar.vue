@@ -96,7 +96,7 @@ export default {
       default: "",
     },
   },
-  mounted: function () {
+  /* mounted: function () {
     if (!this.isMobile()) {
       var publisher = document.querySelector(".publisher"),
         advertiser = document.querySelector(".adpage"),
@@ -137,7 +137,7 @@ export default {
           )
         : null;
     }
-  },
+  }, */
   methods: {
     scrollHandler: function (event) {
       clearTimeout(this.timeout);

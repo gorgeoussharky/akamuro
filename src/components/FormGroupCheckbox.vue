@@ -6,6 +6,7 @@
       :name="id"
       :id="id"
       :required="required"
+      @change="$emit('input', $event.target.checked)"
     />
     <label :for="id" class="form__label"
       ><router-link to="/public">Terms and conditions</router-link>

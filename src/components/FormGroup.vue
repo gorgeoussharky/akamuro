@@ -67,14 +67,20 @@ export default {
       type: String,
       default: "text",
     },
+    currentPw: {
+      type: String,
+      required: false,
+    }
   },
   methods: {
     checkInput(name) {
       var value = this.inputValue;
+      // eslint-disable-next-line no-useless-escape
+      var special = /[!@#$%^&*()+\-=\[\]{};'"\\|,<>\/?]+/;
       if (value.length > 2) {
         switch (name) {
           case "name":
-            if (value.match(/[а-яА-ЯЁё0-9]/i)) {
+            if (/[а-яА-ЯЁё0-9]+/i.test(value)) {
               this.error = true;
               this.notice = "Only A-Z letters";
             } else {
@@ -84,7 +90,7 @@ export default {
             break;
 
           case "email":
-            if (!value.match(/[@.]/i)) {
+            if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value)) {
               this.error = true;
               this.notice = "Please enter correct email";
             } else {
@@ -94,8 +100,9 @@ export default {
             break;
 
           case "pw":
-            if (!value.match(/^[0-9a-zA-Z]+$/)) {
+            if (value.length < 8) {
               this.error = true;
+              this.notice = "Min. 8 letters";    
             } else {
               this.error = false;
               this.$emit("input", value);
@@ -103,8 +110,9 @@ export default {
             break;
 
           case "repeat_pw":
-            if (!value.match(/^[0-9a-zA-Z]+$/)) {
+            if (value != this.currentPw) {
               this.error = true;
+              this.notice = "Passwords don't match";
             } else {
               this.error = false;
               this.$emit("input", value);
@@ -112,7 +120,10 @@ export default {
             break;
 
           case "tg":
-            if (!value.match(/^[0-9a-zA-Z_]+$/)) {
+            if (value.length < 8) {
+              this.error = true;
+              this.notice = "Min. 5 letters";
+            } else if (special.test(value)) {
               this.error = true;
               this.notice = "Please enter correct Telegram account";
             } else {
@@ -122,7 +133,7 @@ export default {
             break;
 
           case "company":
-            if (!value.match(/^[0-9a-zA-Zа-яА-ЯЁё]+$/)) {
+            if (special.test(value)) {
               this.error = true;
               this.notice = "Please enter correct company name";
             } else {
@@ -131,8 +142,18 @@ export default {
             }
             break;
 
+          case "skype":
+            if (special.test(value)) {
+              this.error = true;
+              this.notice = "Please enter correct skype account";
+            } else {
+              this.error = false;
+              this.$emit("input", value);
+            }
+            break;
+
           case "site":
-            if (!value.match(/^[a-zA-Zа-я.:/]+$/)) {
+            if (special.test(value)) {
               this.error = true;
               this.notice = "Please enter correct site url";
             } else {
@@ -142,9 +163,19 @@ export default {
             break;
 
           case "country":
-            if (!value.match(/^[0-9a-zA-Z_]+$/)) {
+            if (special.test(value)) {
               this.error = true;
-              this.notice = "Please enter correct site url";
+              this.notice = "Please enter correct country";
+            } else {
+              this.error = false;
+              this.$emit("input", value);
+            }
+            break;
+
+          case "message":
+            if (special.test(value)) {
+              this.error = true;
+              this.notice = "Please don't use special symbols (@$!%*?&#)";
             } else {
               this.error = false;
               this.$emit("input", value);

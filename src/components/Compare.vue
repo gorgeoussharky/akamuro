@@ -71,6 +71,7 @@
       class="handle"
       :class="disabled ? 'disabled' : null"
       @mousedown.prevent="onMouseDownHandle"
+      @mouseup.prevent="onMouseUpHandle"
       @touchmove.prevent="touchCompareAction()"
     >
       <template>
@@ -90,7 +91,7 @@
         class="range__left"
         @click.prevent="!disabled ? $emit('reachedLeft') : null"
       >
-      {{ $t('publisher') }}
+        {{ $t("publisher") }}
         <svg
           width="24"
           height="11"
@@ -132,7 +133,7 @@
         class="range__right"
         @click.prevent="!disabled ? $emit('reachedRight') : null"
       >
-        {{ $t('advertiser') }}
+        {{ $t("advertiser") }}
         <svg
           width="24"
           height="11"
@@ -370,7 +371,7 @@ export default {
       this.greyed = false;
       this.$emit("initiated");
     },
-    stopCompare() {
+    pauseCompare() {
       console.log("stop");
       this.greyed = true;
       this.$emit("paused");
@@ -379,6 +380,24 @@ export default {
     onMouseDownHandle() {
       this.$emit("movement");
       this.isDraggingHandle = true;
+    },
+    onMouseUpHandle() {
+      this.isDraggingHandle = false;
+      
+      var right_border =
+        this.$el.getBoundingClientRect().right -
+        this.$el.getBoundingClientRect().right / 2 +
+        100;
+      var left_border =
+        this.$el.getBoundingClientRect().right -
+        this.$el.getBoundingClientRect().right / 2 -
+        100;
+
+      if (this.posX >= right_border) {
+        this.$emit("reachedRight");
+      } else if (this.posX <= left_border) {
+        this.$emit("reachedLeft");
+      }
     },
     touchCompareAction() {
       this.initCompare();
@@ -448,29 +467,6 @@ export default {
 
         this.imgPosX = imgPosX;
         this.posX = posX;
-        var right_border, left_border;
-
-        if (this.isMobile()) {
-          right_border =
-            this.$el.getBoundingClientRect().right -
-            (this.$el.getBoundingClientRect().right * 15) / 100;
-          left_border =
-            this.$el.getBoundingClientRect().left +
-            (this.$el.getBoundingClientRect().right * 15) / 100;
-        } else {
-          right_border =
-            this.$el.getBoundingClientRect().right -
-            (this.$el.getBoundingClientRect().right * 30) / 100;
-          left_border =
-            this.$el.getBoundingClientRect().left +
-            (this.$el.getBoundingClientRect().right * 30) / 100;
-        }
-
-        if (posX >= right_border) {
-          this.$emit("reachedRight");
-        } else if (posX <= left_border) {
-          this.$emit("reachedLeft");
-        }
       }
 
       if (this.isDraggingImage) {
